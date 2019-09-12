@@ -5,7 +5,7 @@
 #include<string.h>
 
 
-#if 1
+#if 0
 //1.
 //给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
 //你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
@@ -214,3 +214,72 @@ int main()
 }
 #endif
 
+//26.给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
+//
+//不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。
+//
+//示例 1 :
+//
+//给定数组 nums = [1, 1, 2],
+//
+//函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。
+//
+//你不需要考虑数组中超出新长度后面的元素。
+
+#if 1
+
+int removeDuplicates(int* nums, int numsSize){
+	//if (numsSize == 0)
+	//{
+	//	return false;   //重要！！！
+	//}
+	int flag = nums[0];
+	int count = 1;
+	int i = 0;
+	for (i = 0; i < numsSize; i++)
+	{
+		if (flag != nums[i])
+		{
+			nums[count++] = nums[i];
+			flag = nums[i];
+		}
+	}
+	return count;
+	//int *p = nums;
+	//int *q_head = nums;
+	//int *q_end = nums;
+	//int sz = numsSize;
+	//while (*q_end != nums[numsSize])
+	//{
+	//	while (*q_head == *q_end)
+	//	{
+	//		q_end++;
+	//		sz--;
+	//	}
+	//	sz++;
+	//	p++;
+	//	*p = *q_end;
+	//	q_head = q_end;
+	//}
+	//p++;
+	//*p = *q_end;
+	//return sz;
+
+}
+
+
+int main()
+{
+	int arr[] = { 0,0,1,1, 1, 2 , 2, 3 ,3 , 4};
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	int ret = removeDuplicates(arr, sz);
+	printf("%d\n", ret);
+	int i = 0;
+	for (i = 0; i < ret; i++)
+	{
+		printf("%d", arr[i]);
+	}
+	printf("\n");
+	return 0;
+}
+#endif
