@@ -299,7 +299,7 @@ int main()
 //你不需要考虑数组中超出新长度后面的元素。
 
 
-#if 1
+#if 0
 
 int removeElement(int* nums, int numsSize, int val){
 	if (numsSize == 0)
@@ -334,3 +334,51 @@ int main()
 	return 0;
 }
 #endif
+
+//给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+//
+//你可以假设数组中无重复元素。
+//
+//示例 1:
+//
+//输入 : [1, 3, 5, 6], 5
+//输出 : 2
+
+#if 1
+int searchInsert(int* nums, int numsSize, int target){
+	//if (numsSize == 0)
+	//{
+	//	return false;
+	//}
+	int i = 0;
+	int flag = 0;
+	for (i = 0; i < numsSize; i++)
+	{
+		if (nums[i] == target)
+		{
+			return i;
+		}
+		if (target < nums[i])
+		{
+			return i;
+		}
+	}
+	return numsSize;
+
+}
+
+int main()
+{
+	int arr[] = { 1, 3, 5, 6 };
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	int ret = searchInsert(arr, sz, 7);
+	printf("%d\n", ret);
+	return 0;
+
+}
+#endif
+
+
+
+
+
