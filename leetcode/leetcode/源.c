@@ -386,12 +386,42 @@ int main()
 //输出 : 6
 // 解释 : 连续子数组 [4, -1, 2, 1] 的和最大，为 6。
 
+int maxSubArray(int* nums, int numsSize){
+	//if (numsSize == 0)
+	//{
+	//	return false;
+	//}
+	int sum = 0;
+	int i = 0;
+	int max = nums[0];
+	for (i = 0; i < numsSize; i++)
+	{
+		if (sum < 0)
+		{
+			sum = nums[i];
+		}
+		else
+		{
+			sum += nums[i];
+		}
+		if (max < sum)
+		{
+			max = sum;
+		}
+	}
+	return max;
+	
+}
 
 #if 1
 
 
 int main()
 {
+	int arr[] = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	int ret = maxSubArray(arr, sz);
+	printf("%d\n", ret);
 
 	return 0;
 }
