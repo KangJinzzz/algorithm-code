@@ -439,29 +439,27 @@ int main()
 
 #if 1
 int* plusOne(int* digits, int digitsSize, int* returnSize){
-	int *ret = (int *)malloc(sizeof(int)*digitsSize);
-	for (int i = 0; i < digitsSize; i++)
+	
+	int i = digitsSize - 1;
+	for (i = digitsSize - 1; i >= 0; i--)
 	{
-		ret[i] = digits[i];
-
-		if (i = digitsSize)
+		//判断最后一位是否小于9
+		if (digits[i] < 9)
 		{
-			ret[i] = digits[i] + 1;
+			digits[i]++;
+			return digits;
 		}
+		//不小于9置为0，等下次判断进位加1
+		digits[i] = 0;
+
 	}
-	return ret;
+	//每位都为9时，数组需要扩大一位并加1
+	returnSize = (int *)malloc(sizeof(int)*(digitsSize + 1));
+	returnSize[0] = 1;
+	return returnSize;
+
 }
-int main()
-{
-	int arr[] = { 1, 2, 3 };
-	int b[3] = { 0 };
-	plusOne(arr, 3, b);
-	for (int i = 0; i < 3; i++)
-	{
-		printf("%d ", b[i]);
-	}
-	return 0;
-}
+
 #endif
 
 
