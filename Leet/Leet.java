@@ -105,7 +105,16 @@ public class Leet{
         // left++;
         // }
         // return max;
-
+        int max = 0;
+        int maxValue = Integer.MAX_VALUE;
+        for(int i = 0; i < prices.length; i++) {
+            if(prices[i] < maxValue) {
+                maxValue = prices[i];
+            }else if (prices[i] - maxValue > max) {
+                max = prices[i] - maxValue;
+            }
+        }
+        return max;
     }
 }
 
