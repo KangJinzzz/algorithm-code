@@ -2,11 +2,10 @@ import java.util.Arrays;
 
 public class Leet{
     public static void main(String[] args) {
-        int[] nums1 = {1, 3, 5, 7};
-        int[] nums2 = {2, 4, 5, 6};
-        double ret = findMedianSortedArrays(nums1, nums2);
+        int[] arr = {7, 1, 5, 3, 6, 4};
+        System.out.println(maxProfit(arr));
         
-        System.out.println(ret);
+        
     }
 
 
@@ -73,7 +72,41 @@ public class Leet{
 
 
 
+    //118.给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。
+    // class Solution {
+    //     public List<List<Integer>> generate(int numRows) {
+            
+    //     }
+    // }
 
+
+
+    //121. 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
+    // 如果你最多只允许完成一笔交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。
+    // 注意你不能在买入股票前卖出股票。
+    // 示例 1:
+    // 输入: [7,1,5,3,6,4]
+    // 输出: 5
+    // 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
+    //     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格。
+
+    public static int maxProfit(int[] prices) {
+        // int left = 0;
+        // int right = prices.length - 1;
+        // int max = 0;
+        // while(left < right) {
+        //     while(left < right) {
+        //         if ((prices[right] - prices[left]) > max) {
+        //             max = prices[right] - prices[left];
+        //         }
+        //         right--;
+        // }
+        // right = prices.length - 1;
+        // left++;
+        // }
+        // return max;
+
+    }
 }
 
 
