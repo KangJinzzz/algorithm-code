@@ -1,5 +1,9 @@
 public class Test {
     public static void main(String[] args) {
+        int[] numbers = {0,1,2,3,4,5,6};
+        int length = numbers.length;
+        int[] duplication = new int[1];
+        System.out.println(duplicate(numbers, length, duplication));
 
     }
 
@@ -22,28 +26,29 @@ public class Test {
             }
         }
         return false;
-    }
 
-//    if(numbers == null || length <= 0) {
-//        return false;
-//    }
-//    int[] arr = new int[length];
-//            for (int i = 0; i < length; i++) {
-//        if(numbers[i] < 0 || numbers[i] > length - 1) {
+//        if(numbers == null || length <= 0) {
 //            return false;
 //        }
-//    }
-//        for(int i = 0; i < length; i++) {
-//        while(numbers[i] != i) {
-//            if(numbers[i] == numbers[numbers[i]]) {
-//                duplication[0] = numbers[i];
-//                return true;
+//        for (int i = 0; i < length; i++) {
+//            if(numbers[i] < 0 || numbers[i] > length - 1) {
+//                return false;
 //            }
-//            int temp = numbers[i];
-//            numbers[i] = numbers[temp];
-//            numbers[temp] = temp;
 //        }
-//    }
+//        for(int i = 0; i < length; i++) {
+//            while(numbers[i] != i) {
+//                if(numbers[i] == numbers[numbers[i]]) {
+//                    duplication[0] = numbers[i];
+//                    return true;
+//                }
+//                int temp = numbers[i];
+//                numbers[i] = numbers[temp];
+//                numbers[temp] = temp;
+//            }
+//        }
 //        return false;
+    }
+
+
 }
 
