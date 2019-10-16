@@ -72,6 +72,19 @@ public class Test {
         return false;
     }
 
+    //面试题5：替换空格
+    public String replaceSpace(StringBuffer str) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            if(str.charAt(i) == ' ') {
+                builder.append("%20");
+            } else {
+                builder.append(str.charAt(i));
+            }
+        }
+        String string = builder.toString();
+        return string;
+    }
 
 }
 
