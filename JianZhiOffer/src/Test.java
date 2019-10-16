@@ -7,7 +7,8 @@ public class Test {
 
     }
 
-    //面试题3：数组中重复的数字
+    //面试题3：
+    // 1.数组中重复的数字
     public static boolean duplicate(int numbers[],int length,int [] duplication) {
         if(numbers == null || length <= 0) {
                 return false;
@@ -47,6 +48,28 @@ public class Test {
 //            }
 //        }
 //        return false;
+    }
+
+    //面试题4：二维数组中的查找
+    public boolean Find(int target, int [][] array) {
+        if(array == null) {
+            return false;
+        }
+        int row = 0;
+        int col = array[0].length - 1;
+
+        while(row <= array.length - 1 && col >= 0) {
+            if(array[row][col] > target) {
+                col--;
+            }
+            else if(array[row][col] < target) {
+                row++;
+            }
+            else if(array[row][col] == target) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
