@@ -86,5 +86,10 @@ public class Test {
         return string;
     }
 
+    //面试题6：从尾到头打印链表
+    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+
+    }
+
 }
 
