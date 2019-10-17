@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Test {
     public static void main(String[] args) {
         int[] numbers = {0,1,2,3,4,5,6};
@@ -87,8 +89,14 @@ public class Test {
     }
 
     //面试题6：从尾到头打印链表
-    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
 
+    ArrayList list = new ArrayList();
+    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+        if(listNode != null) {
+            printListFromTailToHead(listNode.next);
+            list.add(listNode.val);
+        }
+        return list;
     }
 
 }
