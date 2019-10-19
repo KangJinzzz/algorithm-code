@@ -136,5 +136,14 @@ public class Test {
         }
         return c;
     }
+    //递归
+//        if(target == 1) {
+//           return 1;
+//        }
+//        if(target == 2) {
+//            return 2;
+//        }
+//        return JumpFloor(target - 1) + JumpFloor(target - 2);
+
 }
 
