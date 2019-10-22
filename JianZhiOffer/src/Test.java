@@ -145,5 +145,37 @@ public class Test {
 //        }
 //        return JumpFloor(target - 1) + JumpFloor(target - 2);
 
+    // 面试题11：旋转数组的的最小数字
+    public int minNumberInRotateArray(int [] array) {
+        if(array == null || array.length == 0) {
+            return 0;
+        }
+        int index1 = 0;
+        int index2 = array.length - 1;
+        int mid = (index1 + index2) / 2;
+        while(index1 < index2) {
+            if(index2 - index1 == 1) {
+                return array[index2];
+            }
+            //判断是否为  1111111  或  1011111 或 1111101 的情况，是则需要顺序查找
+            if(array[index1] == array[index2] && array[index1] == array[mid]) {
+                int resoult = array[index1];
+                for(int i = 1; i < array.length; i++) {
+                    if(resoult > array[i]) {
+                        return array[i];
+                    }
+                }
+                return resoult;
+            }
+            mid = (index1 + index2) / 2;
+            if(array[index1] > array[mid]) {
+                index2 = mid;
+            } else {
+                index1 = mid;
+            }
+        }
+        return 0;
+    }
+
 }
 
