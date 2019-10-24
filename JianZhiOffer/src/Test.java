@@ -186,5 +186,30 @@ public class Test {
         }
         return count;
     }
+    //面试题16：整数的整次方
+    public double Power(double base, int exponent) {
+        boolean flag = true;
+        if(exponent < 0) {
+            flag = false;
+            exponent = -exponent;
+        }
+        double resoult = getPower(base, exponent);
+        return flag? resoult : 1 / resoult;
+    }
+    public double getPower(double base, int exponent) {
+        if(exponent == 0) {
+            return 1;
+        }
+        if(exponent == 1) {
+            return base;
+        }
+
+        double resoult = getPower(base, exponent >> 1);
+        resoult *=resoult;
+        if((exponent & 1) == 1) {
+            resoult *= base;
+        }
+        return resoult;
+    }
 }
 
