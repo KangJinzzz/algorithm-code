@@ -177,6 +177,36 @@ public class Test {
         return 0;
     }
 
+    //面试题14：剪绳子
+    public int cutRope(int target) {
+        if(target < 2) {
+            return 0;
+        }
+        if(target == 2) {
+            return 1;
+        }
+        if(target == 3) {
+            return 2;
+        }
+        int max = 0;
+        //products[i]中每个元素代表长度为i的绳子剪成若干段后各段长度乘积的最大值(包括1*i，i可能是长度大于i的绳子剪下的)
+        int[] products = new int[target + 1];
+        products[0] = 0;
+        products[1] = 1;
+        products[2] = 2;
+        products[3] = 3;
+        for(int i = 4; i <= target; i++) {
+            max = 0;
+            for(int j = 1; j <= target / 2; j++) {
+                int product = products[j] * products[i - j];
+                if(max < product) {
+                    max = product;
+                }
+            }
+            products[i] = max;
+        }
+        return max;
+    }
     //面试题15：二进制中1的个数
     public int NumberOf1(int n) {
         int count = 0;
