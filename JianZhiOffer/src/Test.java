@@ -241,5 +241,25 @@ public class Test {
         }
         return resoult;
     }
+    //面试题18：删除链表中重复的结点
+    public ListNode deleteDuplication(ListNode pHead) {
+        ListNode newHead = new ListNode(-1);
+        ListNode newTail = newHead;
+        ListNode cur = pHead;
+        while(cur != null) {
+            if(cur.next != null && cur.val == cur.next.val) {
+                while(cur.next != null && cur.val == cur.next.val) {
+                    cur = cur.next;
+                }
+                cur = cur.next;
+            } else {
+                newTail.next = new ListNode(cur.val);
+                cur = cur.next;
+                newTail = newTail.next;
+            }
+
+        }
+        return newHead.next;
+    }
 }
 
