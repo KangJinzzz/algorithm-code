@@ -1,9 +1,11 @@
+import java.util.List;
+import java.util.ListResourceBundle;
 import java.util.Scanner;
 
 public class Test {
     public static void main(String[] args) {
-        String str = "1.1.1.1";
-        System.out.println(defangIPaddr(str));
+        String str = "abbAbccdddddghjzZ";
+        print(str);
 
     }
 
@@ -453,6 +455,50 @@ public class Test {
         return cur;
     }
 
+    public ListNode Merge(ListNode list1,ListNode list2) {
+        if(list1 == null) {
+            return list2;
+        }
+        if(list2 == null) {
+            return list1;
+        }
+        ListNode newHead = new ListNode(-1);
+        ListNode newTail = newHead;
+        while(list1 != null && list2 != null) {
+            if(list1.val < list2.val) {
+                newTail.next = new ListNode(list1.val);
+                list1 = list1.next;
+            } else {
+                newTail.next = new ListNode(list2.val);
+                list2 = list2.next;
+            }
+            newTail = newTail.next;
+        }
+        if(list1 == null) {
+            newTail.next = list2;
+        } else {
+            newTail.next = list1;
+        }
+        return newHead.next;
+    }
+    public static void print (String str) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        char[] arr = str.toCharArray();
+        int[] flag = new int[101];
+        for (int i = 0; i < arr.length; i++) {
+            flag[arr[i] - 'A'] = 1;
+        }
+        for (int i = 0; i < arr.length; i++) {
+
+            if(flag[arr[i] - 'A'] == 1) {
+                stringBuilder = stringBuilder.append(arr[i]);
+                flag[arr[i] - 'A'] = 0;
+            }
+        }
+        str = stringBuilder.toString();
+        System.out.println(str);
+    }
 }
 
 
