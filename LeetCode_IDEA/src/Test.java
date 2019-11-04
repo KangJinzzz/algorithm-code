@@ -1,6 +1,4 @@
-import java.util.List;
-import java.util.ListResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 public class Test {
     public static void main(String[] args) {
@@ -499,6 +497,100 @@ public class Test {
         str = stringBuilder.toString();
         System.out.println(str);
     }
+
+//    20.给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+//    有效字符串需满足：
+//    左括号必须用相同类型的右括号闭合。
+//    左括号必须以正确的顺序闭合。
+//    注意空字符串可被认为是有效字符串。
+    public boolean isValid(String s) {
+        if(s == null) {
+            return true;
+        }
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == '{' || s.charAt(i) == '[' || s.charAt(i) == '(') {
+                stack.push(s.charAt(i));
+                continue;
+            }
+            if(stack.isEmpty()) {
+                return false;
+            }
+            if((s.charAt(i) == '}' && stack.peek() == '{')
+                    || (s.charAt(i) == ']' && stack.peek() == '[')
+                    || (s.charAt(i) == ')' && stack.peek() == '(')) {
+                stack.pop();
+                continue;
+            }
+            return false;
+        }
+        return stack.isEmpty();
+    }
+
+
+
 }
+
+//使用队列实现栈的下列操作：
+//        push(x) -- 元素 x 入栈
+//        pop() -- 移除栈顶元素
+//        top() -- 获取栈顶元素
+//        empty() -- 返回栈是否为空
+class MyStack {
+    private LinkedList<Integer> A = new LinkedList<>();
+    private LinkedList<Integer> B = new LinkedList<>();
+
+    /** Initialize your data structure here. */
+    public MyStack() {
+
+    }
+
+    /** Push element x onto stack. */
+    public void push(int x) {
+        A.offer(x);
+    }
+
+    /** Removes the element on top of the stack and returns that element. */
+    public int pop() {
+        if(A.isEmpty()) {
+            return 0;
+        }
+        while(A.size() > 1) {
+            int cur = A.removeFirst();
+            B.add(cur);
+        }
+        int ret = A.removeFirst();
+        swapAB();
+        return ret;
+
+    }
+
+    /** Get the top element. */
+    public int top() {
+        if(A.isEmpty()) {
+            return 0;
+        }
+        while(A.size() > 1) {
+            int cur = A.removeFirst();
+            B.add(cur);
+        }
+        int ret = A.removeFirst();
+        B.offer(ret);
+        swapAB();
+        return ret;
+    }
+
+    /** Returns whether the stack is empty. */
+    public boolean empty() {
+        return A.isEmpty();
+    }
+
+    private void swapAB() {
+        LinkedList<Integer> temp = A;
+        A = B;
+        B = temp;
+    }
+}
+
 
 
