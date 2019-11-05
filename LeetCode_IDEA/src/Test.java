@@ -1,3 +1,5 @@
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+
 import java.util.*;
 
 public class Test {
@@ -531,6 +533,32 @@ public class Test {
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //使用队列实现栈的下列操作：
 //        push(x) -- 元素 x 入栈
 //        pop() -- 移除栈顶元素
@@ -591,6 +619,179 @@ class MyStack {
         B = temp;
     }
 }
+//使用栈实现队列的下列操作：
+//        push(x) -- 将一个元素放入队列的尾部。
+//        pop() -- 从队列首部移除元素。
+//        peek() -- 返回队列首部的元素。
+//        empty() -- 返回队列是否为空。
+class MyQueue {
+    private Stack<Integer> A = new Stack<>();
+    private Stack<Integer> B = new Stack<>();
 
+    /** Initialize your data structure here. */
+    public MyQueue() {
 
+    }
 
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        if(A.isEmpty() && B.isEmpty()) {
+            A.push(x);
+            return;
+        }
+        while (!B.isEmpty()) {
+            int cur = B.pop();
+            A.push(cur);
+        }
+        A.push(x);
+    }
+
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        if(A.isEmpty() && B.isEmpty()) {
+            return 0;
+        }
+        while(!A.isEmpty()) {
+            int cur = A.pop();
+            B.push(cur);
+        }
+        return B.pop();
+    }
+
+    /** Get the front element. */
+    public int peek() {
+        if(A.isEmpty() && B.isEmpty()) {
+            return 0;
+        }
+        while(!A.isEmpty()) {
+            int cur = A.pop();
+            B.push(cur);
+        }
+        return B.peek();
+    }
+
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return A.isEmpty() && B.isEmpty();
+    }
+}
+
+//    155.设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
+//
+//        push(x) -- 将元素 x 推入栈中。
+//        pop() -- 删除栈顶的元素。
+//        top() -- 获取栈顶元素。
+//        getMin() -- 检索栈中的最小元素。
+class MinStack {
+    private Stack<Integer> A = new Stack<>();
+    private Stack<Integer> B = new Stack<>();
+
+    /** initialize your data structure here. */
+    public MinStack() {
+
+    }
+
+    public void push(int x) {
+        A.push(x);
+        if(B.isEmpty()) {
+            B.push(x);
+        } else {
+            if(B.peek() < x) {
+                B.push(B.peek());
+            } else {
+                B.push(x);
+            }
+        }
+    }
+
+    public void pop() {
+        if(A.isEmpty()) {
+            return;
+        }
+        A.pop();
+        B.pop();
+
+    }
+
+    public int top() {
+        return A.peek();
+    }
+
+    public int getMin() {
+        return B.peek();
+    }
+}
+
+//    622.设计你的循环队列实现。 循环队列是一种线性数据结构，其操作表现基于 FIFO（先进先出）
+//        原则并且队尾被连接在队首之后以形成一个循环。它也被称为“环形缓冲器”。
+//        循环队列的一个好处是我们可以利用这个队列之前用过的空间。在一个普通队列里，
+//        一旦一个队列满了，我们就不能插入下一个元素，即使在队列前面仍有空间。但是使用循环队列，我们能使用这些空间去存储新的值。
+
+class MyCircularQueue {
+    private int[] arr;
+    private int head = 0;
+    private int tail = 0;
+    private int size = 0;
+    /** Initialize your data structure here. Set the size of the queue to be k. */
+    public MyCircularQueue(int k) {
+        arr = new int[k];
+    }
+
+    /** Insert an element into the circular queue. Return true if the operation is successful. */
+    public boolean enQueue(int value) {
+        if(size == arr.length) {
+            return false;
+        }
+        arr[tail] = value;
+        size++;
+        if(tail == arr.length - 1) {
+            tail = 0;
+        } else {
+            tail++;
+        }
+        return true;
+    }
+
+    /** Delete an element from the circular queue. Return true if the operation is successful. */
+    public boolean deQueue() {
+        if(size == 0) {
+            return false;
+        }
+        if(head == arr.length - 1) {
+            head = 0;
+        } else {
+            head++;
+        }
+        size--;
+        return true;
+    }
+
+    /** Get the front item from the queue. */
+    public int Front() {
+        if(size == 0) {
+            return -1;
+        }
+        return arr[head];
+    }
+
+    /** Get the last item from the queue. */
+    public int Rear() {
+        if(size == 0) {
+            return -1;
+        }
+        if(tail == 0){
+            return arr[arr.length - 1];
+        }
+        return arr[tail - 1];
+    }
+
+    /** Checks whether the circular queue is empty or not. */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    /** Checks whether the circular queue is full or not. */
+    public boolean isFull() {
+        return size == arr.length;
+    }
+}
