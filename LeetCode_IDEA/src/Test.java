@@ -1,5 +1,6 @@
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 
+import java.beans.IntrospectionException;
 import java.util.*;
 
 public class Test {
@@ -529,6 +530,18 @@ public class Test {
         return stack.isEmpty();
     }
 
+    //给定一个二叉树，返回它的 前序 遍历。
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if(root == null) {
+            return list;
+        }
+
+        list.add(root.val);
+        list.addAll(preorderTraversal(root.left));
+        list.addAll(preorderTraversal(root.right));
+        return list;
+    }
 
 
 }
