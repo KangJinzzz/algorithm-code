@@ -558,6 +558,69 @@ public class Test {
         return list;
     }
 
+//    100.给定两个二叉树，编写一个函数来检验它们是否相同。
+//    如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        //两个都为空返回true
+        if(q == null && p == null) {
+            return true;
+        }
+        //一个为空一个不为空，返回false
+        if(p == null || q == null) {
+            return false;
+        }
+        //两个节点值不同返回false；
+        if(p.val != q.val) {
+            return false;
+        }
+
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+
+    }
+
+//    572.给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节
+//    点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。
+    public boolean isSubtree(TreeNode s, TreeNode t) {
+        // 1. 如果两个树都是空树, 直接是 true
+        if (s == null && t == null) {
+            return true;
+        }
+        // 2. 如果两个树一个是空, 一个不是空, 暂且算作不包含. false
+        if (s == null || t == null) {
+            return false;
+        }
+        // 3. 如果两个数都非空
+        //  a) 比较根节点的值是不是相等, 如果相等的话,
+        //     比较一下 s 和 t 是不是相同的树, 如果是相同的树 就认为是包含的.
+        boolean ret = false;
+        if (s.val == t.val) {
+            ret = isSameTree(s, t);
+        }
+        //  b) 递归的判定一下, t 是否被 s 的左子树包含
+        if (!ret) {
+            ret = isSubtree(s.left, t);
+        }
+        //  c) 递归的判定一下, t 是否被 s 的右子树包含
+        if (!ret) {
+            ret = isSubtree(s.right, t);
+        }
+        return ret;
+    }
+
+//    给定一个二叉树，找出其最大深度。
+//    二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+    public int maxDepth(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+        if(root.right == null && root.left == null) {
+            return 1;
+        }
+        int leftDep = maxDepth(root.left);
+        int rightDep = maxDepth(root.right);
+        //最大深度为当前节点（1）+ 左右子树的最大深度
+        return 1 + (leftDep > rightDep ? leftDep : rightDep);
+    }
 
 }
 
