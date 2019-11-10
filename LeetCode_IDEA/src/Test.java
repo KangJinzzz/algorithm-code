@@ -1,4 +1,5 @@
 import com.sun.org.apache.bcel.internal.generic.RETURN;
+import sun.reflect.generics.tree.Tree;
 
 import java.beans.IntrospectionException;
 import java.util.*;
@@ -621,6 +622,53 @@ public class Test {
         //最大深度为当前节点（1）+ 左右子树的最大深度
         return 1 + (leftDep > rightDep ? leftDep : rightDep);
     }
+
+//  110. 给定一个二叉树，判断它是否是高度平衡的二叉树。
+//    本题中，一棵高度平衡二叉树定义为：
+//    一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过1。
+    public boolean isBalanced(TreeNode root) {
+            if(root == null) {
+                return true;
+            }
+            if(root.right == null && root.left == null) {
+                return true;
+            }
+            int rightDep = maxDepth(root.right);
+            int leftDep = maxDepth(root.left);
+            if((rightDep - leftDep > 1) || (leftDep - rightDep> 1)) {
+                return false;
+            }
+            return isBalanced(root.left) && isBalanced(root.right);
+    }
+
+//  101.  给定一个二叉树，检查它是否是镜像对称的。
+//    例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null) {
+            return true;
+        }
+        return isMirror(root.left, root.right);
+    }
+    public boolean isMirror(TreeNode t1, TreeNode t2) {
+        // 1. 如果两个树都是空树, 应算镜像
+        if (t1 == null && t2 == null) {
+            return true;
+        }
+        // 2. 如果两个树一个空一个非空, 就不算镜像
+        if (t1 == null || t2 == null) {
+            return false;
+        }
+        // 3. 如果两个树都不为空
+        //  a) 比较根节点是不是相同, 不相同就不是镜像
+        if (t1.val != t2.val) {
+            return false;
+        }
+        //  b) 递归比较子树, t1.left 和 t2.right ,
+        //     t1.right 和 t2.left 是不是镜像
+        return isMirror(t1.left, t2.right)
+                && isMirror(t1.right, t2.left);
+    }
+
 
 }
 
