@@ -669,6 +669,63 @@ public class Test {
                 && isMirror(t1.right, t2.left);
     }
 
+    //102. 二叉树的层次遍历
+    List<List<Integer>> result = new ArrayList<>();
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        if(root == null) {
+            return result;
+        }
+        helper(root, 0);
+        return result;
+    }
+    private void helper(TreeNode root, int level) {
+        //level == result.size()说明是第一次来到这一层，需要先创建顺序表
+        if(level == result.size()) {
+            result.add(new ArrayList<>());
+        }
+        result.get(level).add(root.val);
+        if(root.left != null) {
+            helper(root.left, level + 1);
+        }
+        if(root.right != null) {
+            helper(root.right, level + 1);
+        }
+    }
+
+    //236. 二叉树的最近公共祖先
+    private TreeNode lca = null;  // 保存最终的公共祖先节点
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        // 1. 借助一个辅助函数, 在 root 中递归查找 p 和 q.
+        //    设定辅助函数的返回值, 如果找到返回 1(找到一个或者两个都算), 没找到 返回 0
+        // 2. 这个递归查找的过程进一步拆解开. 递归在左子树中查找 + 递归在右子树中查找 + 对比根节点
+        // 3. 如果这三个位置中, 有两个地方找到了, 这个当前节点就是要找的最近公共祖先
+        if (root == null) {
+            return null;
+        }
+        // 辅助函数
+        findNode(root, p, q);
+        return lca;
+    }
+
+    private boolean findNode(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return false;
+        }
+        // 递归在左子树中尝试找 p 或者 q
+        int left = findNode(root.left, p, q) ? 1 : 0;
+        // 递归在右子树中尝试查找 p 或者 q
+        int right = findNode(root.right, p, q) ? 1 : 0;
+        // 对比一下当前节点有没有找到
+        int mid = (root == p || root == q) ? 1 : 0;
+        if (left + right + mid >= 2) {
+            // 找到 lca, 就是当前的 root
+            lca = root;
+        }
+        return (left + right + mid) > 0;
+    }
+
+
+
 
 }
 
