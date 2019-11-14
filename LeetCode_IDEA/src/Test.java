@@ -754,8 +754,36 @@ public class Test {
         return -1;
     }
 
+    //106. 从中序与后序遍历序列构造二叉树
+    public TreeNode postBuildTree(int[] inorder, int[] postorder) {
+        if(inorder.length == 0 || postorder.length == 0) {
+            return null;
+        }
+        return postBuildTreeHelper(inorder, 0, inorder.length - 1,
+                postorder, 0, postorder.length - 1);
 
+    }
+    public TreeNode postBuildTreeHelper(int[] inorder, int inorderL, int inorderR, int[] postorder, int postorderL, int postorderR) {
+        if(inorderL > inorderR || postorderL > postorderR) {
+            return null;
+        }
 
+        int index = inorderL;
+        while(inorder[index] != postorder[postorderR]) {
+            index++;
+        }
+        TreeNode root = new TreeNode(postorder[postorderR]);
+        root.left = postBuildTreeHelper(inorder, inorderL, index - 1, postorder,
+                postorderL, postorderR - inorderR + index - 1);
+        root.right = postBuildTreeHelper(inorder, index + 1, inorderR,
+                postorder, postorderR - inorderR + index, postorderR - 1);
+        return root;
+    }
+
+    //606. 根据二叉树创建字符串
+    public String tree2str(TreeNode t) {
+
+    }
 
 }
 
