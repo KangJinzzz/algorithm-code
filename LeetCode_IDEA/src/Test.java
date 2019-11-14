@@ -724,7 +724,35 @@ public class Test {
         return (left + right + mid) > 0;
     }
 
+    //105. 从前序与中序遍历序列构造二叉树
+    private int index = 0;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        index = 0;
+        return buildTreeHelper(preorder, inorder, 0, inorder.length);
+    }
+    public TreeNode buildTreeHelper(int[] preorder, int[] inorder, int inorderLeft, int inorderRight) {
+        if(inorderLeft >= inorderRight) {
+            return null;
+        }
+        if(index >= inorder.length) {
+            return null;
+        }
+        TreeNode root = new TreeNode(preorder[index]);
+        index++;
+        int pos = find(inorder, inorderLeft, inorderRight, root.val);
+        root.left = buildTreeHelper(preorder, inorder, inorderLeft, pos);
+        root.right = buildTreeHelper(preorder, inorder, pos + 1, inorderRight);
+        return root;
 
+    }
+    public int find(int[] inorder, int inorderLeft, int inorderRight, int val) {
+        for (int i = inorderLeft; i < inorderRight; i++) {
+            if(inorder[i] == val) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
 
 
