@@ -781,8 +781,49 @@ public class Test {
     }
 
     //606. 根据二叉树创建字符串
+    StringBuilder stringBuilder = new StringBuilder();
     public String tree2str(TreeNode t) {
+        if(t == null) {
+            return "";
+        }
+        tree2strHelper(t);
+        stringBuilder.deleteCharAt(0);
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        return stringBuilder.toString();
+    }
+    public void tree2strHelper(TreeNode t) {
+        if(t == null) {
+            return;
+        }
+        stringBuilder.append("(");
+        stringBuilder.append(t.val);
+        tree2strHelper(t.left);
+        if(t.left == null && t.right != null) {
+            stringBuilder.append("()");
+        }
+        tree2strHelper(t.right);
+        stringBuilder.append(")");
+    }
 
+    //144. 二叉树的前序遍历
+    public List<Integer> preorderTraversal2(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if(root == null) {
+            return list;
+        }
+        stack.push(root);
+        while(!stack.isEmpty()) {
+            TreeNode cur = stack.pop();
+            list.add(cur.val);
+            if(cur.right != null) {
+                stack.push(cur.right);
+            }
+            if(cur.left != null) {
+                stack.push(cur.left);
+            }
+        }
+        return list;
     }
 
 }
