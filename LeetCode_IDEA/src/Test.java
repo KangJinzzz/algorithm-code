@@ -808,23 +808,108 @@ public class Test {
     //144. 二叉树的前序遍历
     public List<Integer> preorderTraversal2(TreeNode root) {
         List<Integer> list = new ArrayList<>();
+        //创建一个栈辅助
         Stack<TreeNode> stack = new Stack<>();
         if(root == null) {
             return list;
         }
+        //根节点入栈
         stack.push(root);
         while(!stack.isEmpty()) {
+            //访问栈顶元素
             TreeNode cur = stack.pop();
             list.add(cur.val);
+            //左节点不为空入栈
             if(cur.right != null) {
                 stack.push(cur.right);
             }
+            //右节点不为空入栈
             if(cur.left != null) {
                 stack.push(cur.left);
             }
         }
         return list;
     }
+
+
+    public List<Integer> inorderTraversal2(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        //创建一个辅助栈
+        Stack<TreeNode> stack = new Stack<>();
+        if(root == null) {
+            return list;
+        }
+        TreeNode cur = root;
+        while (true) {
+            // 只要 cur 遇到的节点非 null, 就入栈, cur = cur.left
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            //当 cur 遇到 null 的, 就出栈一个元素, 访问这个元素
+            if (stack.isEmpty()) {
+                // 遍历结束了
+                break;
+            }
+            //访问栈顶元素
+            TreeNode top = stack.pop();
+            list.add(top.val);
+            // cur 指向当前元素的右子树
+            cur = top.right;
+        }
+        return list;
+    }
+
+    public List<Integer> postorderTraversal2(TreeNode root) {
+        LinkedList<Integer> list = new LinkedList<>();
+        //创建一个辅助栈
+        Stack<TreeNode> stack = new Stack<>();
+
+        if(root == null) {
+            return list;
+        }
+        stack.push(root);
+        while(!stack.isEmpty()) {
+            TreeNode cur = stack.pop();
+            list.addFirst(cur.val);
+            if(cur.left != null) {
+                stack.push(cur.left);
+            }
+            if(cur.right != null) {
+                stack.push(cur.right);
+            }
+        }
+        return list;
+//        if(root == null) {
+//            return list;
+//        }
+//        TreeNode cur = root;
+//        //prev永远指向上一个访问的节点
+//        TreeNode prev = null;
+//        while(true) {
+//            // 借助 cur 循环往左找, 如果该节点不为 null, 入栈
+//            while(cur != null) {
+//                stack.push(cur);
+//                cur = cur.left;
+//            }
+//            if(stack.isEmpty()) {;
+//                break;
+//            }
+//            TreeNode top = stack.peek();
+//            // 到底能不能访问栈顶元素, 有两种情况:
+//            //  a) 栈顶元素没有右子树, 就可以访问
+//            //  b) 栈顶元素的右子树刚刚已经访问过, 也可以访问
+//            if(top.right == null || top.right == prev) {
+//                stack.pop();
+//                list.add(top.val);
+//                prev = top;
+//            } else {
+//                cur = top.right;
+//            }
+//        }
+//        return list;
+    }
+
 
 }
 
