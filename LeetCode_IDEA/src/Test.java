@@ -831,7 +831,7 @@ public class Test {
         return list;
     }
 
-
+    //144. 二叉树的中序遍历
     public List<Integer> inorderTraversal2(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         //创建一个辅助栈
@@ -860,6 +860,7 @@ public class Test {
         return list;
     }
 
+    //144. 二叉树的后序遍历
     public List<Integer> postorderTraversal2(TreeNode root) {
         LinkedList<Integer> list = new LinkedList<>();
         //创建一个辅助栈
@@ -910,7 +911,30 @@ public class Test {
 //        return list;
     }
 
+    //136. 只出现一次的数字
+    public int singleNumber(int[] nums) {
+        int ret = 0;
+        for (int x: nums) {
+            ret ^= x;
+        }
+        return ret;
+    }
 
+    //138. 复制带随机指针的链表
+    public Node copyRandomList(Node head) {
+        if(head == null) {
+            return null;
+        }
+        Map<Node, Node> map = new HashMap<>();
+        for (Node node = head; node != null; node = node.next) {
+            map.put(node, new Node(node.val, null, null));
+        }
+        for (Node node = head; node != null; node = node.next) {
+            map.get(node).next = map.get(node.next);
+            map.get(node).random = map.get(node.random);
+        }
+        return map.get(head);
+    }
 }
 
 
