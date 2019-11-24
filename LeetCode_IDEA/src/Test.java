@@ -935,6 +935,60 @@ public class Test {
         }
         return map.get(head);
     }
+
+    //771. 宝石与石头
+    public int numJewelsInStones(String J, String S) {
+        Set<Character> set = new HashSet<>();
+        int count = 0;
+        for (int i = 0; i < J.length(); i++) {
+            set.add(J.charAt(i));
+        }
+        for (int i = 0; i < S.length(); i++) {
+            if(set.contains(S.charAt(i))) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    //692. 前K个高频单词
+    public List<String> topKFrequent(String[] words, int k) {
+        Map<String, Integer> map = new HashMap<>();
+        int count = 0;
+        for (int i = 0; i < words.length; i++) {
+            String str = words[i];
+            count = map.getOrDefault(str, 0);
+            map.put(str, count + 1);
+        }
+        List<String> list = new ArrayList<>(map.keySet());
+        // 在 sort 方法的第二个参数中指定一个比较器对象
+        // 来描述自定制比较规则(按出现次数来排序)
+        Collections.sort(list, new MyCompare(map));
+        // subList 能够返回一个 List 中的一个子区间
+        // [0, k) 前闭后开区间
+        return list.subList(0, k);
+    }
+
+    class MyCompare implements Comparator<String> {
+        public Map<String, Integer> map = null;
+        public MyCompare(Map<String, Integer> map) {
+            this.map = map;
+        }
+
+        @Override
+        public int compare(String o1, String o2) {
+            int count1 = map.get(o1);
+            int count2 = map.get(o2);
+            if(count1 == count2) {
+                return o1.compareTo(o2);
+            }
+            return count2 - count1;
+        }
+    }
+
+
+
+
 }
 
 
