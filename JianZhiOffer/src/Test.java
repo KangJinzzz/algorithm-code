@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
@@ -295,5 +296,27 @@ public class Test {
 
 
    }
+
+    //面试题22: 链表中倒数第k个结点
+    public ListNode FindKthToTail(ListNode head,int k) {
+        int size = size(head);
+        //边界一定要考虑清楚！！！
+        if(head == null || k <= 0 || k > size) {
+            return null;
+        }
+        for (int i = 0; i < size - k ; i++) {
+            head = head.next;
+        }
+        return head;
+    }
+    public int size(ListNode head) {
+        int size = 0;
+        for (; head != null; head = head.next) {
+            size++;
+        }
+        return size;
+    }
+
+
 }
 
