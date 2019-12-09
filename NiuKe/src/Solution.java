@@ -64,27 +64,21 @@ class Main0 {
 }
 
 
-//下厨房  错误！未通过
+//下厨房
 class Main1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Set<String> set = new HashSet<>();
+
         while(scanner.hasNext()) {
-            Set<String> set = new HashSet<>();
             String material = scanner.next();
-            StringBuilder stringBuilder = new StringBuilder();
 
-            for (int i = 0; i < material.length(); i++) {
-                if(material.charAt(i) != ' ') {
-                    stringBuilder.append(material.charAt(i));
-                }
-                else {
-                    set.add(stringBuilder.toString());
-                    stringBuilder.delete(0, stringBuilder.length());
-                }
+            String[] arr = material.split(" ");
+            for (String str : arr) {
+                set.add(str);
             }
-            System.out.println(set.size());
         }
-
+        System.out.println(set.size());
     }
 }
 
