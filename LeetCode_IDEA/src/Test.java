@@ -987,9 +987,34 @@ public class Test {
     }
 
 
+    //709. 转换成小写字母
+    public String toLowerCase(String str) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) <= 'Z' && str.charAt(i) >= 'A') {
+                builder.append((char) (str.charAt(i) + 32));
+            } else {
+                builder.append(str.charAt(i));
+            }
+        }
+        return builder.toString();
+    }
+
+
+
+
+
+
 
 
 }
+
+
+
+
+
+
+
 
 
 
