@@ -1000,8 +1000,32 @@ public class Test {
         return builder.toString();
     }
 
+//    189. 旋转数组
+//    给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数
+    public void rotate(int[] nums, int k) {
 
+        k = k % nums.length;
 
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+    }
+    //反转函数
+    private void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+//    给定一个数组 nums 和一个值 val ，你需要原地移除所有数值等于 val 的元素，返回移除后数组的新长度。
+//    不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成
+    public int removeElement(int[] nums, int val) {
+
+    }
 
 
 
