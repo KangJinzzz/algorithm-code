@@ -1036,7 +1036,7 @@ public class Test {
 
 //    35. 搜索插入位置
 //    给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它
-//    将会被按顺序插入的位置,你可以假设数组中无重复元素
+//    将会被按顺序插入的位置,你可以假设数组中无重复元素*
     public int searchInsert(int[] nums, int target) {
         for (int i = 0; i < nums.length; i++) {
             if(target == nums[i]) {
@@ -1049,6 +1049,28 @@ public class Test {
         return nums.length;
     }
 
+
+//    383. 赎金信
+    public boolean canConstruct(String ransomNote, String magazine) {
+        HashMap<Character, Integer> hashMap = new HashMap<>();
+        for(int i = 0; i < magazine.length(); i++) {
+            int n = hashMap.getOrDefault(magazine.charAt(i), 0);
+            hashMap.put(magazine.charAt(i), n + 1);
+        }
+        for (int i = 0; i < ransomNote.length(); i++) {
+            if (!hashMap.containsKey(ransomNote.charAt(i))) {
+                return false;
+            }
+            if (hashMap.get(ransomNote.charAt(i)) <= 0) {
+                return false;
+            }
+            if (hashMap.containsKey(ransomNote.charAt(i))) {
+                int n = hashMap.get(magazine.charAt(i));
+                hashMap.put(magazine.charAt(i), n - 1);
+            }
+        }
+        return true;
+    }
 
 
 
