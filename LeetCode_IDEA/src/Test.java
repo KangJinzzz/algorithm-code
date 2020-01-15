@@ -1052,21 +1052,13 @@ public class Test {
 
 //    383. 赎金信
     public boolean canConstruct(String ransomNote, String magazine) {
-        HashMap<Character, Integer> hashMap = new HashMap<>();
-        for(int i = 0; i < magazine.length(); i++) {
-            int n = hashMap.getOrDefault(magazine.charAt(i), 0);
-            hashMap.put(magazine.charAt(i), n + 1);
+        int[] arr = new int[26];
+        for (int i = 0; i < magazine.length(); i++) {
+            arr[magazine.charAt(i) - 'a']++;
         }
         for (int i = 0; i < ransomNote.length(); i++) {
-            if (!hashMap.containsKey(ransomNote.charAt(i))) {
+            if (arr[ransomNote.charAt(i) - 'a']-- <= 0) {
                 return false;
-            }
-            if (hashMap.get(ransomNote.charAt(i)) <= 0) {
-                return false;
-            }
-            if (hashMap.containsKey(ransomNote.charAt(i))) {
-                int n = hashMap.get(magazine.charAt(i));
-                hashMap.put(magazine.charAt(i), n - 1);
             }
         }
         return true;
