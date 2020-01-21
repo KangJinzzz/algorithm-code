@@ -1,4 +1,5 @@
 import com.sun.org.apache.bcel.internal.generic.RETURN;
+import sun.awt.image.IntegerInterleavedRaster;
 import sun.reflect.generics.tree.Tree;
 
 import java.beans.IntrospectionException;
@@ -1121,7 +1122,22 @@ public class Test {
         }
     }
 
+//    217. 存在重复元素
+    public boolean containsDuplicate(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int x : nums) {
+            if (set.contains(x)) {
+                return true;
+            }
+            set.add(x);
+        }
+        return false;
+    }
 
+//    925. 长按键入
+    public boolean isLongPressedName(String name, String typed) {
+        
+    }
 
 
 }
