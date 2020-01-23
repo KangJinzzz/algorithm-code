@@ -1136,7 +1136,25 @@ public class Test {
 
 //    925. 长按键入
     public boolean isLongPressedName(String name, String typed) {
-        
+
+    }
+
+    //    977. 有序数组的平方
+    public int[] sortedSquares2(int[] A) {
+        int left = 0;
+        int right = A.length - 1;
+        int[] arr = new int[A.length];
+        int index = arr.length - 1;
+        while (left <= right) {
+            if (A[left] * A[left] < A[right] * A[right]) {
+                arr[index--] = A[right] * A[right];
+                right--;
+            } else {
+                arr[index--] = A[left] * A[left];
+                left++;
+            }
+        }
+        return arr;
     }
 
 
