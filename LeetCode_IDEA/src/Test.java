@@ -1157,6 +1157,26 @@ public class Test {
         return arr;
     }
 
+//    917. 仅仅反转字母
+    public String reverseOnlyLetters(String S) {
+        StringBuilder builder = new StringBuilder();
+        int left = 0;
+        int right = S.length() - 1;
+        for (; left < S.length(); left++) {
+            if (Character.isLetter(S.charAt(left))) {
+                while (!Character.isLetter(S.charAt(right))) {
+                    right--;
+                }
+                builder.append(S.charAt(right--));
+            } else {
+                builder.append(S.charAt(left));
+            }
+        }
+        return builder.toString();
+    }
+
+
+
 
 }
 
