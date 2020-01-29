@@ -1175,6 +1175,26 @@ public class Test {
         return builder.toString();
     }
 
+//    905. 按奇偶排序数组
+    public int[] sortArrayByParity(int[] A) {
+        int temp = 0;
+        int left = 0;
+        int right = A.length - 1;
+        while (left < right) {
+            while (A[left] % 2 == 0 && left < right) {
+                left++;
+            }
+            while (A[right] % 2 == 1 && left <right) {
+                right--;
+            }
+            temp = A[left];
+            A[left] = A[right];
+            A[right] = temp;
+        }
+        return A;
+    }
+
+
 
 
 
