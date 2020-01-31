@@ -458,17 +458,17 @@ public class Test {
         return cur;
     }
 
-    public ListNode Merge(ListNode list1,ListNode list2) {
-        if(list1 == null) {
+    public ListNode Merge(ListNode list1, ListNode list2) {
+        if (list1 == null) {
             return list2;
         }
-        if(list2 == null) {
+        if (list2 == null) {
             return list1;
         }
         ListNode newHead = new ListNode(-1);
         ListNode newTail = newHead;
-        while(list1 != null && list2 != null) {
-            if(list1.val < list2.val) {
+        while (list1 != null && list2 != null) {
+            if (list1.val < list2.val) {
                 newTail.next = new ListNode(list1.val);
                 list1 = list1.next;
             } else {
@@ -477,14 +477,15 @@ public class Test {
             }
             newTail = newTail.next;
         }
-        if(list1 == null) {
+        if (list1 == null) {
             newTail.next = list2;
         } else {
             newTail.next = list1;
         }
         return newHead.next;
     }
-    public static void print (String str) {
+
+    public static void print(String str) {
         StringBuilder stringBuilder = new StringBuilder();
 
         char[] arr = str.toCharArray();
@@ -494,7 +495,7 @@ public class Test {
         }
         for (int i = 0; i < arr.length; i++) {
 
-            if(flag[arr[i] - 'A'] == 1) {
+            if (flag[arr[i] - 'A'] == 1) {
                 stringBuilder = stringBuilder.append(arr[i]);
                 flag[arr[i] - 'A'] = 0;
             }
@@ -503,25 +504,25 @@ public class Test {
         System.out.println(str);
     }
 
-//    20.给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+    //    20.给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
 //    有效字符串需满足：
 //    左括号必须用相同类型的右括号闭合。
 //    左括号必须以正确的顺序闭合。
 //    注意空字符串可被认为是有效字符串。
     public boolean isValid(String s) {
-        if(s == null) {
+        if (s == null) {
             return true;
         }
         Stack<Character> stack = new Stack<>();
         for (int i = 0; i < s.length(); i++) {
-            if(s.charAt(i) == '{' || s.charAt(i) == '[' || s.charAt(i) == '(') {
+            if (s.charAt(i) == '{' || s.charAt(i) == '[' || s.charAt(i) == '(') {
                 stack.push(s.charAt(i));
                 continue;
             }
-            if(stack.isEmpty()) {
+            if (stack.isEmpty()) {
                 return false;
             }
-            if((s.charAt(i) == '}' && stack.peek() == '{')
+            if ((s.charAt(i) == '}' && stack.peek() == '{')
                     || (s.charAt(i) == ']' && stack.peek() == '[')
                     || (s.charAt(i) == ')' && stack.peek() == '(')) {
                 stack.pop();
@@ -535,7 +536,7 @@ public class Test {
     //给定一个二叉树，返回它的 前序 遍历。
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
-        if(root == null) {
+        if (root == null) {
             return list;
         }
 
@@ -548,7 +549,7 @@ public class Test {
     //二叉树后序遍历
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
-        if(root == null) {
+        if (root == null) {
             return list;
         }
 
@@ -560,19 +561,19 @@ public class Test {
         return list;
     }
 
-//    100.给定两个二叉树，编写一个函数来检验它们是否相同。
+    //    100.给定两个二叉树，编写一个函数来检验它们是否相同。
 //    如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
     public boolean isSameTree(TreeNode p, TreeNode q) {
         //两个都为空返回true
-        if(q == null && p == null) {
+        if (q == null && p == null) {
             return true;
         }
         //一个为空一个不为空，返回false
-        if(p == null || q == null) {
+        if (p == null || q == null) {
             return false;
         }
         //两个节点值不同返回false；
-        if(p.val != q.val) {
+        if (p.val != q.val) {
             return false;
         }
 
@@ -580,7 +581,7 @@ public class Test {
 
     }
 
-//    572.给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节
+    //    572.给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节
 //    点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。
     public boolean isSubtree(TreeNode s, TreeNode t) {
         // 1. 如果两个树都是空树, 直接是 true
@@ -609,13 +610,13 @@ public class Test {
         return ret;
     }
 
-//    给定一个二叉树，找出其最大深度。
+    //    给定一个二叉树，找出其最大深度。
 //    二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
     public int maxDepth(TreeNode root) {
-        if(root == null) {
+        if (root == null) {
             return 0;
         }
-        if(root.right == null && root.left == null) {
+        if (root.right == null && root.left == null) {
             return 1;
         }
         int leftDep = maxDepth(root.left);
@@ -624,32 +625,33 @@ public class Test {
         return 1 + (leftDep > rightDep ? leftDep : rightDep);
     }
 
-//  110. 给定一个二叉树，判断它是否是高度平衡的二叉树。
+    //  110. 给定一个二叉树，判断它是否是高度平衡的二叉树。
 //    本题中，一棵高度平衡二叉树定义为：
 //    一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过1。
     public boolean isBalanced(TreeNode root) {
-            if(root == null) {
-                return true;
-            }
-            if(root.right == null && root.left == null) {
-                return true;
-            }
-            int rightDep = maxDepth(root.right);
-            int leftDep = maxDepth(root.left);
-            if((rightDep - leftDep > 1) || (leftDep - rightDep> 1)) {
-                return false;
-            }
-            return isBalanced(root.left) && isBalanced(root.right);
+        if (root == null) {
+            return true;
+        }
+        if (root.right == null && root.left == null) {
+            return true;
+        }
+        int rightDep = maxDepth(root.right);
+        int leftDep = maxDepth(root.left);
+        if ((rightDep - leftDep > 1) || (leftDep - rightDep > 1)) {
+            return false;
+        }
+        return isBalanced(root.left) && isBalanced(root.right);
     }
 
-//  101.  给定一个二叉树，检查它是否是镜像对称的。
+    //  101.  给定一个二叉树，检查它是否是镜像对称的。
 //    例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
     public boolean isSymmetric(TreeNode root) {
-        if(root == null) {
+        if (root == null) {
             return true;
         }
         return isMirror(root.left, root.right);
     }
+
     public boolean isMirror(TreeNode t1, TreeNode t2) {
         // 1. 如果两个树都是空树, 应算镜像
         if (t1 == null && t2 == null) {
@@ -672,29 +674,32 @@ public class Test {
 
     //102. 二叉树的层次遍历
     List<List<Integer>> result = new ArrayList<>();
+
     public List<List<Integer>> levelOrder(TreeNode root) {
-        if(root == null) {
+        if (root == null) {
             return result;
         }
         helper(root, 0);
         return result;
     }
+
     private void helper(TreeNode root, int level) {
         //level == result.size()说明是第一次来到这一层，需要先创建顺序表
-        if(level == result.size()) {
+        if (level == result.size()) {
             result.add(new ArrayList<>());
         }
         result.get(level).add(root.val);
-        if(root.left != null) {
+        if (root.left != null) {
             helper(root.left, level + 1);
         }
-        if(root.right != null) {
+        if (root.right != null) {
             helper(root.right, level + 1);
         }
     }
 
     //236. 二叉树的最近公共祖先
     private TreeNode lca = null;  // 保存最终的公共祖先节点
+
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         // 1. 借助一个辅助函数, 在 root 中递归查找 p 和 q.
         //    设定辅助函数的返回值, 如果找到返回 1(找到一个或者两个都算), 没找到 返回 0
@@ -727,15 +732,17 @@ public class Test {
 
     //105. 从前序与中序遍历序列构造二叉树
     private int index = 0;
+
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         index = 0;
         return buildTreeHelper(preorder, inorder, 0, inorder.length);
     }
+
     public TreeNode buildTreeHelper(int[] preorder, int[] inorder, int inorderLeft, int inorderRight) {
-        if(inorderLeft >= inorderRight) {
+        if (inorderLeft >= inorderRight) {
             return null;
         }
-        if(index >= inorder.length) {
+        if (index >= inorder.length) {
             return null;
         }
         TreeNode root = new TreeNode(preorder[index]);
@@ -746,9 +753,10 @@ public class Test {
         return root;
 
     }
+
     public int find(int[] inorder, int inorderLeft, int inorderRight, int val) {
         for (int i = inorderLeft; i < inorderRight; i++) {
-            if(inorder[i] == val) {
+            if (inorder[i] == val) {
                 return i;
             }
         }
@@ -757,20 +765,21 @@ public class Test {
 
     //106. 从中序与后序遍历序列构造二叉树
     public TreeNode postBuildTree(int[] inorder, int[] postorder) {
-        if(inorder.length == 0 || postorder.length == 0) {
+        if (inorder.length == 0 || postorder.length == 0) {
             return null;
         }
         return postBuildTreeHelper(inorder, 0, inorder.length - 1,
                 postorder, 0, postorder.length - 1);
 
     }
+
     public TreeNode postBuildTreeHelper(int[] inorder, int inorderL, int inorderR, int[] postorder, int postorderL, int postorderR) {
-        if(inorderL > inorderR || postorderL > postorderR) {
+        if (inorderL > inorderR || postorderL > postorderR) {
             return null;
         }
 
         int index = inorderL;
-        while(inorder[index] != postorder[postorderR]) {
+        while (inorder[index] != postorder[postorderR]) {
             index++;
         }
         TreeNode root = new TreeNode(postorder[postorderR]);
@@ -783,8 +792,9 @@ public class Test {
 
     //606. 根据二叉树创建字符串
     StringBuilder stringBuilder = new StringBuilder();
+
     public String tree2str(TreeNode t) {
-        if(t == null) {
+        if (t == null) {
             return "";
         }
         tree2strHelper(t);
@@ -792,14 +802,15 @@ public class Test {
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         return stringBuilder.toString();
     }
+
     public void tree2strHelper(TreeNode t) {
-        if(t == null) {
+        if (t == null) {
             return;
         }
         stringBuilder.append("(");
         stringBuilder.append(t.val);
         tree2strHelper(t.left);
-        if(t.left == null && t.right != null) {
+        if (t.left == null && t.right != null) {
             stringBuilder.append("()");
         }
         tree2strHelper(t.right);
@@ -811,21 +822,21 @@ public class Test {
         List<Integer> list = new ArrayList<>();
         //创建一个栈辅助
         Stack<TreeNode> stack = new Stack<>();
-        if(root == null) {
+        if (root == null) {
             return list;
         }
         //根节点入栈
         stack.push(root);
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             //访问栈顶元素
             TreeNode cur = stack.pop();
             list.add(cur.val);
             //左节点不为空入栈
-            if(cur.right != null) {
+            if (cur.right != null) {
                 stack.push(cur.right);
             }
             //右节点不为空入栈
-            if(cur.left != null) {
+            if (cur.left != null) {
                 stack.push(cur.left);
             }
         }
@@ -837,7 +848,7 @@ public class Test {
         List<Integer> list = new ArrayList<>();
         //创建一个辅助栈
         Stack<TreeNode> stack = new Stack<>();
-        if(root == null) {
+        if (root == null) {
             return list;
         }
         TreeNode cur = root;
@@ -867,17 +878,17 @@ public class Test {
         //创建一个辅助栈
         Stack<TreeNode> stack = new Stack<>();
 
-        if(root == null) {
+        if (root == null) {
             return list;
         }
         stack.push(root);
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();
             list.addFirst(cur.val);
-            if(cur.left != null) {
+            if (cur.left != null) {
                 stack.push(cur.left);
             }
-            if(cur.right != null) {
+            if (cur.right != null) {
                 stack.push(cur.right);
             }
         }
@@ -915,7 +926,7 @@ public class Test {
     //136. 只出现一次的数字
     public int singleNumber(int[] nums) {
         int ret = 0;
-        for (int x: nums) {
+        for (int x : nums) {
             ret ^= x;
         }
         return ret;
@@ -923,7 +934,7 @@ public class Test {
 
     //138. 复制带随机指针的链表
     public Node copyRandomList(Node head) {
-        if(head == null) {
+        if (head == null) {
             return null;
         }
         Map<Node, Node> map = new HashMap<>();
@@ -945,7 +956,7 @@ public class Test {
             set.add(J.charAt(i));
         }
         for (int i = 0; i < S.length(); i++) {
-            if(set.contains(S.charAt(i))) {
+            if (set.contains(S.charAt(i))) {
                 count++;
             }
         }
@@ -972,6 +983,7 @@ public class Test {
 
     class MyCompare implements Comparator<String> {
         public Map<String, Integer> map = null;
+
         public MyCompare(Map<String, Integer> map) {
             this.map = map;
         }
@@ -980,7 +992,7 @@ public class Test {
         public int compare(String o1, String o2) {
             int count1 = map.get(o1);
             int count2 = map.get(o2);
-            if(count1 == count2) {
+            if (count1 == count2) {
                 return o1.compareTo(o2);
             }
             return count2 - count1;
@@ -1001,7 +1013,7 @@ public class Test {
         return builder.toString();
     }
 
-//    189. 旋转数组
+    //    189. 旋转数组
 //    给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数
     public void rotate(int[] nums, int k) {
 
@@ -1011,6 +1023,7 @@ public class Test {
         reverse(nums, 0, k - 1);
         reverse(nums, k, nums.length - 1);
     }
+
     //反转函数
     private void reverse(int[] nums, int start, int end) {
         while (start < end) {
@@ -1022,28 +1035,28 @@ public class Test {
         }
     }
 
-//    27. 移除元素
+    //    27. 移除元素
 //    给定一个数组 nums 和一个值 val ，你需要原地移除所有数值等于 val 的元素，返回移除后数组的新长度。
 //    不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成
     public int removeElement(int[] nums, int val) {
         int len = 0;
         for (int i = 0; i < nums.length; i++) {
-            if(nums[i] != val) {
+            if (nums[i] != val) {
                 nums[len++] = nums[i];
             }
         }
         return len;
     }
 
-//    35. 搜索插入位置
+    //    35. 搜索插入位置
 //    给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它
 //    将会被按顺序插入的位置,你可以假设数组中无重复元素*
     public int searchInsert(int[] nums, int target) {
         for (int i = 0; i < nums.length; i++) {
-            if(target == nums[i]) {
+            if (target == nums[i]) {
                 return i;
             }
-            if(target < nums[i]) {
+            if (target < nums[i]) {
                 return i;
             }
         }
@@ -1051,7 +1064,7 @@ public class Test {
     }
 
 
-//    383. 赎金信
+    //    383. 赎金信
     public boolean canConstruct(String ransomNote, String magazine) {
         int[] arr = new int[26];
         for (int i = 0; i < magazine.length(); i++) {
@@ -1065,10 +1078,10 @@ public class Test {
         return true;
     }
 
-//    9. 回文数
+    //    9. 回文数
 //    判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数
     public boolean isPalindrome(int x) {
-        if (x < 0 || (x % 10 ==0 && x != 0)) {
+        if (x < 0 || (x % 10 == 0 && x != 0)) {
             return false;
         }
         int n = 0;
@@ -1080,7 +1093,7 @@ public class Test {
         return x == n || x == (n / 10);
     }
 
-//    58. 最后一个单词的长度
+    //    58. 最后一个单词的长度
 //    给定一个仅包含大小写字母和空格 ' ' 的字符串 s，返回其最后一个单词的长度。
 //    如果字符串从左向右滚动显示，那么最后一个单词就是最后出现的单词。
 //    如果不存在最后一个单词，请返回 0 。
@@ -1103,7 +1116,7 @@ public class Test {
         return count;
     }
 
-//    88. 合并两个有序数组
+    //    88. 合并两个有序数组
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         int p1 = m - 1;
         int p2 = n - 1;
@@ -1122,7 +1135,7 @@ public class Test {
         }
     }
 
-//    217. 存在重复元素
+    //    217. 存在重复元素
     public boolean containsDuplicate(int[] nums) {
         Set<Integer> set = new HashSet<>();
         for (int x : nums) {
@@ -1134,7 +1147,7 @@ public class Test {
         return false;
     }
 
-//    925. 长按键入
+    //    925. 长按键入
     public boolean isLongPressedName(String name, String typed) {
 
     }
@@ -1157,7 +1170,7 @@ public class Test {
         return arr;
     }
 
-//    917. 仅仅反转字母
+    //    917. 仅仅反转字母
     public String reverseOnlyLetters(String S) {
         StringBuilder builder = new StringBuilder();
         int left = 0;
@@ -1175,7 +1188,7 @@ public class Test {
         return builder.toString();
     }
 
-//    905. 按奇偶排序数组
+    //    905. 按奇偶排序数组
     public int[] sortArrayByParity(int[] A) {
         int temp = 0;
         int left = 0;
@@ -1184,7 +1197,7 @@ public class Test {
             while (A[left] % 2 == 0 && left < right) {
                 left++;
             }
-            while (A[right] % 2 == 1 && left <right) {
+            while (A[right] % 2 == 1 && left < right) {
                 right--;
             }
             temp = A[left];
@@ -1194,7 +1207,7 @@ public class Test {
         return A;
     }
 
-//    724. 寻找数组的中心索引
+    //    724. 寻找数组的中心索引
     public int pivotIndex(int[] nums) {
         int sum = 0;
         int leftSum = 0;
@@ -1210,6 +1223,22 @@ public class Test {
         return -1;
     }
 
+    //66. 加一
+    public int[] plusOne(int[] digits) {
+        for (int i = digits.length - 1; i >= 0; --i) {
+            if (digits[i] != 9) {
+                digits[i]++;
+                return digits;
+            } else {
+                digits[i] = 0;
+            }
+        }
+        digits = new int[digits.length + 1];
+        digits[0] = 1;
+        return digits;
+    }
+
+//    414.第三大的数
 
 
 
