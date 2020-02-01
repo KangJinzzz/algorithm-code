@@ -1,8 +1,3 @@
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-import sun.awt.image.IntegerInterleavedRaster;
-import sun.reflect.generics.tree.Tree;
-
-import java.beans.IntrospectionException;
 import java.util.*;
 
 public class Test {
@@ -1239,7 +1234,16 @@ public class Test {
     }
 
 //    414.第三大的数
-
+    public int thirdMax(int[] nums) {
+        TreeSet<Integer> set = new TreeSet<Integer>();
+        for (int num : nums) {
+            set.add(num);
+            if (set.size() > 3) {
+                set.remove(set.first());
+            }
+        }
+        return set.size() > 2 ? set.first() : set.last();
+    }
 
 
 }
