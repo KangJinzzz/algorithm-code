@@ -1258,6 +1258,24 @@ public class Test {
         return null;
     }
 
+//    67. 二进制求和
+    public String addBinary(String a, String b) {
+        int ca = 0;
+        int sum = 0;
+        StringBuilder builder = new StringBuilder();
+        for (int i = a.length() - 1, j = b.length() - 1; i >= 0 || j >= 0; i--,j--) {
+            sum = ca;
+            sum += (i >= 0 ? a.charAt(i) - '0': 0);
+            sum += (j >= 0 ? b.charAt(j) - '0': 0);
+            builder.append(sum % 2);
+            ca = sum / 2;
+        }
+        builder.append(ca == 1 ? "1" : "");
+        return builder.reverse().toString();
+    }
+
+
+
 }
 
 
