@@ -1323,6 +1323,45 @@ public class Test {
         return rev;
     }
 
+//    34. 在排序数组中查找元素的第一个和最后一个位置
+    public int[] searchRange(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        int mid = 0;
+        int[] ret = new int[] {-1, -1};
+        while (left <= right) {
+            mid = (left + right) / 2;
+            if (nums[mid] == target) {
+                break;
+            }
+            if (nums[mid] > target) {
+                right = mid - 1;
+            }
+            if (nums[mid] < target) {
+                left = mid + 1;
+            }
+        }
+        //跳出上面循环是因为找到target
+        if (left <= right) {
+            while (nums[mid] == target) {
+                mid--;
+                if (mid < 0) {
+                    break;
+                }
+            }
+            mid++;
+            ret[0] = mid;
+            while (nums[mid] == target) {
+                mid++;
+                if (mid > nums.length - 1) {
+                    break;
+                }
+            }
+            ret[1] = mid  - 1;
+        }
+        return ret;
+    }
+
 
 }
 
