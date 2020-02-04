@@ -1,3 +1,4 @@
+import javax.naming.InsufficientResourcesException;
 import java.util.*;
 
 public class Test {
@@ -1143,9 +1144,9 @@ public class Test {
     }
 
     //    925. 长按键入
-    public boolean isLongPressedName(String name, String typed) {
-
-    }
+//    public boolean isLongPressedName(String name, String typed) {
+//
+//    }
 
     //    977. 有序数组的平方
     public int[] sortedSquares2(int[] A) {
@@ -1274,6 +1275,53 @@ public class Test {
         return builder.reverse().toString();
     }
 
+//    8. 字符串转换整数 (atoi)
+    public int myAtoi(String str) {
+        char[] charList = str.toCharArray();
+        //正负号
+        int sy = 1;
+        int rev = 0;
+        int pop = 0;
+        int i = 0;
+        //找到数字的开始下标i
+        for (; i < str.length(); i++) {
+            if (charList[i] != ' ') {
+                if (charList[i] == '+') {
+                    i++;
+                    break;
+                }
+                if (charList[i] == '-') {
+                    i++;
+                    sy = -1;
+                    break;
+                }
+                if (charList[i] >= '0' && charList[i] <= '9') {
+                    break;
+                } else {
+                    return 0; //出现的第一个字符不是数字返回0
+                }
+            }
+        }
+        if (i == str.length()) {
+            return 0;
+        }
+        for (; i < str.length(); i++) {
+            if (charList[i] >= '0' && charList[i] <= '9') {
+                pop = (charList[i] - 48) * sy;
+                if(rev>Integer.MAX_VALUE/10 || (rev == Integer.MAX_VALUE / 10 && pop > 7)){
+                    return Integer.MAX_VALUE;
+                }
+                if(rev<Integer.MIN_VALUE/10 || (rev == Integer.MIN_VALUE / 10 && pop < -8)){
+                    return Integer.MIN_VALUE;
+                }
+                rev = rev * 10 + pop;
+
+            } else {
+                break;
+            }
+        }
+        return rev;
+    }
 
 
 }
