@@ -1396,6 +1396,71 @@ public class Test {
         return true;
     }
 
+//    443. 压缩字符串
+    public int compress(char[] chars) {
+        //指向每个区块的开头
+        int anchor = 0;
+        int read = 0;
+        int write = 0;
+        for (; read <chars.length; read++) {
+            //read指向每个区块的尾
+            if (read + 1 == chars.length || chars[read] != chars[read + 1]) {
+                chars[write++] = chars[anchor];
+                if (read > anchor) {
+                    for (char x : ("" + (read - anchor + 1)).toCharArray()) {
+                        chars[write++] = x;
+                    }
+                }
+                anchor = read + 1;
+            }
+        }
+        return write;
+    }
+
+//    581.最短无序连续子数组
+    public int findUnsortedSubarray(int[] nums) {
+        int left = 0;
+        int right = 0;
+        int min = 0;
+        int max = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i + 1]) {
+                left = i;
+                break;
+            }
+        }
+        for (int i = nums.length - 1; i > 0; i--) {
+            if (nums[i] < nums[i - 1]) {
+                right = i;
+                break;
+            }
+        }
+        min = nums[left];
+        max = nums[left];
+        for (; left <= right; left++) {
+            if (nums[left] < min) {
+                min = nums[left];
+            }
+            if (nums[left] > max) {
+                max = nums[left];
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > min) {
+                left = i;
+                break;
+            }
+        }
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if (nums[i] < max) {
+                right = i;
+                break;
+            }
+        }
+        return right - left + 1;
+    }
+
+
 
 
 }
