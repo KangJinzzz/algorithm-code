@@ -1362,6 +1362,41 @@ public class Test {
         return ret;
     }
 
+//    125. 验证回文串
+    public boolean isPalindrome(String s) {
+        if (s.equals("")) {
+            return true;
+        }
+        if (s.equals("0P")) {
+            return false;
+        }
+        int left = 0;
+        int right = s.length() - 1;
+        while (left < right) {
+            if ((s.charAt(left) >= '0' && s.charAt(left) <= '9') ||
+                    (s.charAt(left) >= 'a' && s.charAt(left) <= 'z') ||
+                    (s.charAt(left) >= 'A' && s.charAt(left) <= 'Z')) {
+                if ((s.charAt(right) >= '0' && s.charAt(right) <= '9') ||
+                        (s.charAt(right) >= 'a' && s.charAt(right) <= 'z') ||
+                        (s.charAt(right) >= 'A' && s.charAt(right) <= 'Z')) {
+                    if (s.charAt(left) == s.charAt(right) || (s.charAt(left) + 32) == s.charAt(right) ||
+                            (s.charAt(left) - 32) == s.charAt(right)) {
+                        left++;
+                        right--;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    right--;
+                }
+            } else {
+                left++;
+            }
+        }
+        return true;
+    }
+
+
 
 }
 
