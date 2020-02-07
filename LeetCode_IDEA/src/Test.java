@@ -1480,8 +1480,25 @@ public class Test {
         return stack.pop();
     }
 
+//    78. 子集
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ret = new ArrayList<>();
+        ret.add(new ArrayList<Integer>());
+        for (int x : nums) {
+            int size = ret.size();
+            for (int i = 0; i < size; i++) {
+                List<Integer> newList = new ArrayList<>(ret.get(i));
+                newList.add(x);
+                ret.add(newList);
+            }
+        }
+        return ret;
+    }
 
-    
+//    329. 矩阵中的最长递增路径
+    public int longestIncreasingPath(int[][] matrix) {
+        
+    }
 
 }
 
