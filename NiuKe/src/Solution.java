@@ -112,3 +112,36 @@ class Main2 {
         }
     }
 }
+
+//字符串中找出连续最长的数字串
+class Main3 {
+    public static void fun(String str) {
+        StringBuilder sb = new StringBuilder();
+        String print = "";
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+                sb.append(str.charAt(i));
+            } else {
+                if (sb.toString().length() > print.length()) {
+                    print = sb.toString();
+                } else if (sb.length() > 0) {
+                    sb.delete(0, sb.length());
+                }
+            }
+            if (i == str.length() - 1) {
+                if (sb.toString().length() > print.length()) {
+                    print = sb.toString();
+                }
+            }
+        }
+        System.out.println(print);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String str = sc.nextLine();
+            fun(str);
+        }
+    }
+}
