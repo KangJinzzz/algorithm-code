@@ -1517,6 +1517,22 @@ public class Test {
         return mul - sum;
     }
 
+    //    1290. 二进制链表转整数
+    public int getDecimalValue(ListNode head) {
+        if (head == null) {
+            return 0;
+        }
+        int count = 0;
+        int sum = 0;
+        for (ListNode node = head; node != null; node = node.next) {
+            count++;
+        }
+        for (; head != null; head = head.next) {
+            sum += head.val * Math.pow(2, count - 1);
+            count--;
+        }
+        return sum;
+    }
 
 
 
