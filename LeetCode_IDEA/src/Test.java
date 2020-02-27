@@ -1534,6 +1534,18 @@ public class Test {
         return sum;
     }
 
+//    1313. 解压缩编码列表
+    public int[] decompressRLElist(int[] nums) {
+        int[] arr = new int[5000];
+        int index = 0;
+        for (int i = 0; i < nums.length; i += 2) {
+            for (int j = 0; j < nums[i]; j++) {
+                arr[index++] = nums[i + 1];
+            }
+        }
+        return Arrays.copyOf(arr, index);
+    }
+
 
 
 }
