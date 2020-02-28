@@ -1546,6 +1546,22 @@ public class Test {
         return Arrays.copyOf(arr, index);
     }
 
+//1295. 统计位数为偶数的数字
+    public int findNumbers(int[] nums) {
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int n = 0;
+            while (nums[i] > 0) {
+                n++;
+                nums[i] /= 10;
+            }
+            if (n % 2 == 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 
 
 }
