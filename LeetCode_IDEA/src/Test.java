@@ -1576,6 +1576,23 @@ public class Test {
         return count;
     }
 
+//    1221. 分割平衡字符串
+    public int balancedStringSplit(String s) {
+        int ret = 0;
+        int num = 0;
+        for (char x : s.toCharArray()) {
+            if (x == 'R') {
+                num++;
+            } else {
+                num--;
+            }
+            if (num == 0) {
+                ret++;
+            }
+        }
+        return ret;
+    }
+
 }
 
 
