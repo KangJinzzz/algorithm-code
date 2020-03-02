@@ -146,6 +146,7 @@ class Main3 {
     }
 }
 
+//统计回文
 class Main4 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -177,5 +178,46 @@ class Main4 {
             }
         }
         return true;
+    }
+}
+
+//寻找第k大
+class Finder {
+    public int findKth(int[] a, int n, int K) {
+        return quickSort(a, 0, n - 1, K);
+    }
+
+    public int quickSort(int[] a, int left, int right, int K) {
+        int pivotIndex = partion(a, left, right);
+        if (pivotIndex + 1== K) {
+            return a[pivotIndex];
+        }
+        if (pivotIndex + 1 > K) {
+            return quickSort(a, left, pivotIndex - 1, K);
+        }
+        return quickSort(a, pivotIndex + 1, right, K);
+    }
+
+    public int partion(int[] a, int left, int right) {
+        int i = left;
+        int j = right;
+        int pivot = a[left];
+        while (i < j) {
+            while (i < j && a[j] <= pivot) {
+                j--;
+            }
+            while (i < j && a[i] >= pivot) {
+                i++;
+            }
+            swap(a, i, j);
+        }
+        swap(a, i, left);
+        return i;
+    }
+
+    public void swap(int[] a, int left, int right) {
+        int temp = a[left];
+        a[left] = a[right];
+        a[right] = temp;
     }
 }
