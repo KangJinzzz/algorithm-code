@@ -145,3 +145,37 @@ class Main3 {
         }
     }
 }
+
+class Main4 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String A;
+        String B;
+        int ret = 0;
+        while (!sc.hasNext("0")) {
+            A = sc.nextLine();
+            B = sc.nextLine();
+            for (int i = 0; i <= A.length(); i++) {
+                StringBuilder builder = new StringBuilder(A);
+                builder.insert(i, B);
+                if (fun(builder.toString())) {
+                    ret++;
+                }
+            }
+        }
+        System.out.println(ret);
+    }
+    public static Boolean fun(String str) {
+        int left = 0;
+        int right = str.length() - 1;
+        while (left < right)  {
+            if (str.charAt(left) == str.charAt(right)) {
+                left++;
+                right--;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+}
