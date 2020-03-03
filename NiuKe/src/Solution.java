@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -222,11 +223,11 @@ class Finder {
     }
 }
 
-
+//汽水瓶
 class Main5 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNext())) {
+        while (sc.hasNext()) {
             int drink = 0;
             int blank = 0;
             blank = sc.nextInt();
@@ -244,3 +245,52 @@ class Main5 {
         }
     }
 }
+
+//数组中的逆序对
+//利用归并排序
+class AntiOrder {
+    public static void main(String[] args) {
+        int[] arr = new int[] {1,2,3,4,5,6,7,0};
+
+        System.out.println(mergeSort(arr, 0, 8));
+    }
+    public int count(int[] A, int n) {
+        return mergeSort(A, 0, n);
+    }
+    public int mergeSort(int[] a, int left, int right){
+        if (left >= right || right -  left == 1) {
+            // 空区间或者区间只有一个元素, 都不需要进行归并排序
+            return 0;
+        }
+        int mid = (right + left) / 2;
+        return mergeSort(a, left, mid) + mergeSort(a, mid, right) + merge(a, left, mid, right);
+    }
+
+
+    public int merge(int[] a, int left, int mid, int right) {
+        int[] extra = new int[right - left];
+        int index = 0;
+        int i = left;
+        int j = mid;
+        int reverseNum = 0;
+        while (i < mid && j < right) {
+            if (a[i] <= a[j]) {
+                extra[index++] = a[i++];
+            } else {
+                extra[index++] = a[j++];
+                reverseNum += (mid - i);
+            }
+        }
+        while (i < mid) {
+            extra[index++] = a[i++];
+        }
+        while (j < right) {
+            extra[index++] = a[j++];
+        }
+        for (int t = 0; t < extra.length; t++) {
+            a[left + t] = extra[t];
+        }
+        return reverseNum;
+    }
+}
+
