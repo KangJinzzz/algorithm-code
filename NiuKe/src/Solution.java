@@ -221,3 +221,26 @@ class Finder {
         a[right] = temp;
     }
 }
+
+
+class Main5 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext())) {
+            int drink = 0;
+            int blank = 0;
+            blank = sc.nextInt();
+            if (blank > 0 && blank <= 100) {
+                while (blank >= 3) {
+                    drink += blank / 3;
+                    blank = blank / 3 + blank % 3;
+                }
+                if (blank == 2) {
+                    drink++;
+                }
+                System.out.println(drink);
+            }
+
+        }
+    }
+}
