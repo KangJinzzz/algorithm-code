@@ -1,6 +1,6 @@
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
+
+
 public class Solution {
 
     //输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向
@@ -315,3 +315,22 @@ class Main6 {
         System.out.println(str.substring(flag, flag + max));
     }
 }
+
+class Parenthesis {
+    public boolean chkParenthesis(String A, int n) {
+        Stack<Character> stack = new Stack<>();
+        for (char ch : A.toCharArray()) {
+            if (ch == '(') {
+                stack.push(ch);
+            }
+            else if (ch == ')') {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+                stack.pop();
+            }
+        }
+        return stack.isEmpty();
+    }
+}
+
