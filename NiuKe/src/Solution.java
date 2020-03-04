@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -249,11 +248,7 @@ class Main5 {
 //数组中的逆序对
 //利用归并排序
 class AntiOrder {
-    public static void main(String[] args) {
-        int[] arr = new int[] {1,2,3,4,5,6,7,0};
 
-        System.out.println(mergeSort(arr, 0, 8));
-    }
     public int count(int[] A, int n) {
         return mergeSort(A, 0, n);
     }
@@ -294,3 +289,29 @@ class AntiOrder {
     }
 }
 
+
+class Main6 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        int left = 0;
+        int flag = 0;
+        int max = 0;
+        int i = 0;
+        while (i < str.length()) {
+            if (str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+                left = i;
+                while (i < str.length() && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+                    i++;
+                }
+                if (i - left > max) {
+                    flag = left;
+                    max = i - left;
+                }
+            } else {
+                i++;
+            }
+        }
+        System.out.println(str.substring(flag, flag + max));
+    }
+}
