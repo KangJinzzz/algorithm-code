@@ -334,3 +334,22 @@ class Parenthesis {
     }
 }
 
+class Main7 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            if (n < 1 || n > 100) {
+                return;
+            }
+            if (n < 6 || n == 10 || n % 2 == 1) { //6和8可以组成大于10的任意一个偶数
+                System.out.println(-1);
+            } else if (n % 8 == 0){
+                System.out.println(n / 8);
+            } else {
+                System.out.println(1 + n / 8); //对于10以上的偶数，只要对8取余数不为0，就要从前面的1或者2个8中
+                                                // 拿出2个，把余数补为6（本来余数就是6，就不用拿）。所以+1；
+            }
+        }
+    }
+}
