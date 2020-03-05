@@ -289,7 +289,7 @@ class AntiOrder {
     }
 }
 
-
+//逆序对
 class Main6 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -316,6 +316,7 @@ class Main6 {
     }
 }
 
+//括号匹配
 class Parenthesis {
     public boolean chkParenthesis(String A, int n) {
         Stack<Character> stack = new Stack<>();
@@ -334,6 +335,7 @@ class Parenthesis {
     }
 }
 
+//买苹果
 class Main7 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -350,6 +352,28 @@ class Main7 {
                 System.out.println(1 + n / 8); //对于10以上的偶数，只要对8取余数不为0，就要从前面的1或者2个8中
                                                 // 拿出2个，把余数补为6（本来余数就是6，就不用拿）。所以+1；
             }
+        }
+    }
+}
+
+//删除公共字符串
+class Main8 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String str1 = sc.nextLine();
+            String str2 = sc.nextLine();
+            StringBuilder builder = new StringBuilder();
+            Set<Character> set = new HashSet<>();
+            for (int i = 0; i < str2.length(); i++) {
+                set.add(str2.charAt(i));
+            }
+            for (int i = 0; i < str1.length(); i++) {
+                if (!set.contains(str1.charAt(i))) {
+                    builder.append(str1.charAt(i));
+                }
+            }
+            System.out.println(builder.toString());
         }
     }
 }
