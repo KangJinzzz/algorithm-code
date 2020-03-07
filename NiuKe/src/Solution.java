@@ -415,21 +415,29 @@ class Main9 {
 
 //用两个栈实现队列
 class Solution1 {
-    Stack<Integer> stack1 = new Stack<Integer>();
-    Stack<Integer> stack2 = new Stack<Integer>();
 
-    public void push(int node) {
-        stack1.push(node);
-    }
+}
 
-    public int pop() {
-        while (!stack1.isEmpty()) {
-            stack2.push(stack1.pop());
+//计算糖果
+class Main10 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int[] arr = new int[4];
+        arr[0] = sc.nextInt();
+        arr[1] = sc.nextInt();
+        arr[2] = sc.nextInt();
+        arr[3] = sc.nextInt();
+        if (arr[0] - arr[2] + arr[1] + arr[3] != 0) {
+            System.out.println("No");
+            return;
         }
-        int ret = stack2.pop();
-        while (!stack2.isEmpty()) {
-            stack1.push(stack2.pop());
-        }
-        return ret;
+        int C = (arr[3] - arr[1]) / 2;
+        int B = (arr[1] + arr[3]) / 2;
+        int A = arr[2] - (arr[1] + arr[3]) / 2;
+
+        System.out.println(A + " " + B + " " + C);
     }
 }
+
+//n个数里出现次数大于等于n/2的数
