@@ -441,3 +441,14 @@ class Main10 {
 }
 
 //n个数里出现次数大于等于n/2的数
+class Main11 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Integer> list = new ArrayList<>();
+        while (sc.hasNextInt()) {
+            list.add(sc.nextInt());
+        }
+        Collections.sort(list);
+        System.out.println(list.get(list.size() / 2));
+    }
+}
