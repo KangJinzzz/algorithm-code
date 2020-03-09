@@ -452,3 +452,49 @@ class Main11 {
         System.out.println(list.get(list.size() / 2));
     }
 }
+
+//不要二
+class Main12{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int m = sc.nextInt(); //行
+            int n = sc.nextInt(); //列
+            int prevCount = (n / 4) * 2 + (n % 4 < 2 ? n % 4 : 2);
+            int lastCount = (n / 4) * 2 + (n % 4 > 2 ? 1 : 0);
+            int ret = (m / 4) * (2 * prevCount + 2 * lastCount);
+            if (m % 4 == 0) {
+                System.out.println(ret);
+                return;
+            } else if (m % 4 == 1) {
+                ret += prevCount;
+            } else if (m % 4 == 2) {
+                ret += 2 * prevCount;
+            } else {
+                ret += (2 * prevCount + lastCount);
+            }
+            System.out.println(ret);
+        }
+    }
+}
+
+//求最小公倍数
+class Main13{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextInt()) {
+            int A = sc.nextInt();
+            int B = sc.nextInt();
+            int max = A > B ? A : B;
+            int ret = max;
+            while (true) {
+                if (ret % A == 0 && ret % B == 0) {
+                    System.out.println(ret);
+                    return;
+                } else {
+                    ret += max;
+                }
+            }
+        }
+    }
+}
