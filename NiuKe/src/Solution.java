@@ -498,3 +498,91 @@ class Main13{
         }
     }
 }
+
+//删数
+class Main14 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextInt()) {
+            int n = sc.nextInt();
+            Queue<Integer> queue = new LinkedList<>();
+            for (int i = 0; i < n; i++) {
+                queue.offer(i);
+            }
+            int cyc = 0;
+            while (queue.size() > 1) {
+                if (cyc == 2) {
+                    queue.poll();
+                    cyc = 0;
+                } else {
+                    queue.offer(queue.poll());
+                    cyc++;
+                }
+            }
+            System.out.println(queue.peek());
+        }
+    }
+}
+
+//n个数里最小的k个
+class Main15 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String str = sc.nextLine();
+            String[] s = str.split(" ");
+            int[] arr = new int[s.length - 1];
+            for (int i = 0; i < s.length - 1; i++) {
+                arr[i] = Integer.parseInt(s[i]);
+            }
+            int k = Integer.parseInt(s[s.length - 1]);
+            fun(arr, 0, arr.length - 1, k);
+            int[] print = new int[k];
+            for (int i = 0; i < k; i++) {
+                print[i] = arr[i];
+            }
+            Arrays.sort(print);
+            for (int i = 0; i < print.length; i++) {
+                System.out.print(print[i]);
+                if (i != k - 1) {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+    public static void fun(int[] arr, int left, int right, int k) {
+        int pivotIndex = partion(arr, left, right);
+        if (pivotIndex == k - 1) {
+            return;
+        }
+        if (pivotIndex > k - 1) {
+            fun(arr, left, pivotIndex - 1, k);
+            return;
+        }
+        fun(arr, pivotIndex + 1, right, k);
+    }
+    public static int partion(int[] arr, int left, int right) {
+        int pivot = arr[left];
+        int pivotIndex = 0;
+        int i = left;
+        int j = right;
+        while (i < j) {
+            while (i < j && arr[j] >= pivot) {
+                j--;
+            }
+            while (i < j && arr[i] <= pivot) {
+                i++;
+            }
+            swap(arr, i, j);
+        }
+        swap(arr, left, i);
+        return i;
+    }
+
+    public static void swap(int[] arr, int index1, int index2) {
+        int temp = arr[index1];
+        arr[index1] = arr[index2];
+        arr[index2] = temp;
+    }
+}
