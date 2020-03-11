@@ -586,3 +586,40 @@ class Main15 {
         arr[index2] = temp;
     }
 }
+
+//末尾0的个数
+//10由5*偶数构成，只要统计5的个数
+//1、 每隔5个，会产生一个0，比如 5， 10 ，15，20.。。
+//2 、每隔 5×5 个会多产生出一个0，比如 25，50，75，100
+//3 、每隔 5×5×5 会多出一个0，比如125.
+class Main16 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextInt()) {
+            int n = sc.nextInt();
+            int count = 0;
+            while (n > 0) {
+                n = n / 5;
+                count += n;
+            }
+            System.out.println(count);
+        }
+    }
+}
+
+//数字颠倒
+class Main17 {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextInt()) {
+            int n = sc.nextInt();
+            print(n);
+        }
+    }
+    public static void print(int n) {
+        System.out.print(n % 10);
+        if (n >= 10) {
+            print(n / 10);
+        }
+    }
+}
