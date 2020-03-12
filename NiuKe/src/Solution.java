@@ -648,3 +648,16 @@ class Main18 {
         return c - n < n - b ? c - n : n - b;
     }
 }
+
+//机器人走方格I
+class Robot {
+    public int countWays(int x, int y) {
+        if  (x == 0 || y == 0) {
+            return 0;
+        }
+        if (x == 1|| y == 1) {
+            return 1;
+        }
+        return countWays(x - 1, y) + countWays(x, y - 1);
+    }
+}
