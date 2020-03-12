@@ -623,3 +623,28 @@ class Main17 {
         }
     }
 }
+
+//Fibonacci数列
+class Main18 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextInt()) {
+            int n = sc.nextInt();
+            System.out.println(fun(n));
+        }
+    }
+    public static int fun(int n) {
+        int a = 0;
+        int b = 1;
+        int c = a + b;
+        while (c < n) {
+            a = b;
+            b = c;
+            c = a + b;
+        }
+        if (c == n) {
+            return 0;
+        }
+        return c - n < n - b ? c - n : n - b;
+    }
+}
