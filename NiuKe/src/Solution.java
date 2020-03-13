@@ -661,3 +661,42 @@ class Robot {
         return countWays(x - 1, y) + countWays(x, y - 1);
     }
 }
+
+//个位数统计
+class Main19 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        while (sc.hasNext()) {
+            int[] arr = new int[10];
+            String n = sc.nextLine();
+            for (int i = 0; i < n.length(); i++) {
+                int index = n.charAt(i) - '0';
+                arr[index]++;
+            }
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] > 0) {
+                    System.out.println(i + ":" + arr[i]);
+                }
+            }
+        }
+    }
+}
+
+//构建乘积数组
+class Solution2 {
+    public int[] multiply(int[] A) {
+
+        int[] B = new int[A.length];
+        B[0] = 1;
+        for (int i = 1; i < A.length; i++) {
+            B[i] = B[i - 1] * A[i - 1];
+        }
+        int temp = 1;
+        for (int i = A.length - 2; i >= 0; i--) {
+            temp *= A[i + 1];
+            B[i] *= temp;
+        }
+        return B;
+    }
+}
