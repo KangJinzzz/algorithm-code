@@ -700,3 +700,42 @@ class Solution2 {
         return B;
     }
 }
+
+//无缓存交换
+class Exchange {
+    public int[] exchangeAB(int[] AB) {
+        AB[0] = AB[0] ^ AB[1];
+        AB[1] = AB[0] ^ AB[1];
+        AB[0] = AB[0] ^ AB[1];
+        return AB;
+    }
+}
+
+//生成格雷码
+class GrayCode {
+    public static void main(String[] args) {
+        String[] strs = getGray(2);
+        for (String str : strs) {
+            System.out.print(str + " ");
+        }
+    }
+    public static String[] getGray(int n) {
+        if (n == 1) {
+            return new String[] {"0", "1"};
+        }
+        String[] str = getGray(n - 1);
+        String[] newStr = new String[str.length * 2];
+        for (int i = 0,j = newStr.length - 1; i < j; i++,j--) {
+            newStr[i] = str[i];
+            newStr[j] = str[i];
+        }
+        for (int i = 0; i < newStr.length; i++) {
+            if (i <= newStr.length / 2 - 1) {
+                newStr[i] = "0" + newStr[i];
+            } else {
+                newStr[i] = "1" + newStr[i];
+            }
+        }
+        return newStr;
+    }
+}
