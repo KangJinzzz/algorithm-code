@@ -739,3 +739,31 @@ class GrayCode {
         return newStr;
     }
 }
+
+//跟奥巴马一起编程
+class Main20 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            char c = sc.next().charAt(0);
+            int row = n / 2;
+            if (n % 2 == 1) {
+                row++;
+            }
+            int col = n;
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    if (i == 0 || i == row - 1 || j == 0 || j == col - 1) {
+                        System.out.print(c);
+                        if (j == col - 1) {
+                            System.out.println();
+                        }
+                    } else {
+                        System.out.print(' ');
+                    }
+                }
+            }
+        }
+    }
+}
