@@ -767,3 +767,35 @@ class Main20 {
         }
     }
 }
+
+//超长正整数相加
+class Main21 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            StringBuilder builder = new StringBuilder();
+            String str1 = sc.nextLine();
+            String str2 = sc.nextLine();
+            while (str1.length() != str2.length()) {
+                if (str1.length() < str2.length()) {
+                    str1 = "0" + str1;
+                }else {
+                    str2 = "0" + str2;
+                }
+            }
+            int car = 0;
+            for (int i = str1.length() - 1; i >= 0; i--) {
+                int sum = 0;
+                int a = str1.charAt(i) - '0';
+                int b = str2.charAt(i) - '0';
+                sum = a + b + car;
+                builder.append(sum % 10);
+                car = sum / 10;
+            }
+            if (car != 0) {
+                builder.append(car);
+            }
+            System.out.println(builder.reverse().toString());
+        }
+    }
+}
