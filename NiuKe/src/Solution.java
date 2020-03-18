@@ -825,3 +825,26 @@ class Main22 {
         }
     }
 }
+
+//尼科彻斯定理
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int m = sc.nextInt();
+            int sum = 0;
+            for (int i = 1; i <= m - 1; i++) {
+                sum += i;
+            }
+            int start = 2 * sum + 1;
+            for (int i = 0; i < m; i++) {
+                System.out.print(start);
+                start += 2;
+                if (i != m - 1) {
+                    System.out.print("+");
+                }
+            }
+            System.out.println();
+        }
+    }
+}
