@@ -850,6 +850,8 @@ class Main {
 }
 
 //另类加法
+//A ^ B = A + B (但没有包括进位) 1 ^ 1 = 0, 1 ^ 0 = 1, 0 ^ 0, = 0
+//A & B = A + B 各位的进位   1 & 1 = 1, 1 & 0 = 0, 0 & 0 = 0
 class UnusualAdd {
     public int addAB(int A, int B) {
         int xor = 0;
@@ -861,5 +863,24 @@ class UnusualAdd {
             B = and;
         }
         return xor;
+    }
+}
+
+//饥饿的小易
+//4 * x + 3 是执行了 2 次 2 * x + 1
+//8 * x + 7 是执行了 3 次
+class Main23 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int x = sc.nextInt();
+            int count = 0;
+            while (x != 0 && count <= 300000) {
+                x = ((x << 1) + 1) % 1000000007;
+                count++;
+            }
+            int res = (count + 2) / 3;
+            System.out.println(res > 100000 ? -1 : res);
+        }
     }
 }
