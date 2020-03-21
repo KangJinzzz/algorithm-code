@@ -1,5 +1,11 @@
 import java.util.*;
 
+//火车进站
+//洗牌
+
+
+
+
 
 public class Solution {
 
@@ -940,5 +946,22 @@ class Main25 {
             System.out.println(map.getOrDefault(get_score, 0));
 
         }
+    }
+}
+
+
+
+
+//二叉树的镜像
+class Solution3 {
+    public void Mirror(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        Mirror(root.left);
+        Mirror(root.right);
     }
 }
