@@ -1,7 +1,7 @@
 import java.util.*;
 
-//火车进站
-//洗牌
+//day_17 火车进站
+//day_16洗牌
 
 
 
@@ -963,5 +963,33 @@ class Solution3 {
         root.right = temp;
         Mirror(root.left);
         Mirror(root.right);
+    }
+}
+
+//DNA序列
+class Main26 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String str = sc.next();
+            int n = sc.nextInt();
+            int max = 0;
+            int index = 0;
+            for (int i = 0; i <= str.length() - n; i++) {
+                int count = 0;
+                for (int j = i; j < i + n; j++) {
+                    if (str.charAt(j) == 'G' || str.charAt(j) == 'C') {
+                        count++;
+                    }
+                }
+                if (count > max) {
+                    max = count;
+                    index = i;
+                }
+            }
+            for (int i = 0; i < n; i++) {
+                System.out.print(str.charAt(index++));
+            }
+        }
     }
 }
