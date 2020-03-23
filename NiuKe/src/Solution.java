@@ -1,8 +1,8 @@
 import java.util.*;
 
 //day_17 火车进站
-//day_16洗牌
-
+//day_16 洗牌
+//day_19 子串判断
 
 
 
@@ -1004,5 +1004,16 @@ class Main27 {
             sumStranger=sumStranger+(long)Math.pow(2,i-1);
         }
         System.out.print(sumRich+" "+sumStranger);
+    }
+}
+
+//子串判断
+class Substr {
+    public boolean[] chkSubStr(String[] p, int n, String s) {
+        boolean[] res = new boolean[n];
+        for (int i = 0; i < n; i++) {
+            res[i] = s.contains(p[i]);
+        }
+        return res;
     }
 }
