@@ -1063,6 +1063,33 @@ class Main28 {
     }
 }
 
+//微信红包
+class Gift {
+    public int getValue(int[] gifts, int n) {
+        int count = 0;
+        int temp = 0;
+        for (int i = 0; i < n; i++) {
+            if (count == 0) {
+                temp = gifts[i];
+                count++;
+            } else {
+                if (temp == gifts[i]) {
+                    count++;
+                } else {
+                    count--;
+                }
+            }
+        }
+        count = 0;
+        for (int i = 0; i < n; i++) {
+            if (gifts[i] == temp) {
+                count++;
+            }
+        }
+        return (count > n / 2) ? temp : 0;
+    }
+}
+
 
 
 
