@@ -1017,3 +1017,54 @@ class Substr {
         return res;
     }
 }
+
+//成绩排序
+class Student {
+    public String name;
+    public  int score;
+
+    public Student(String name, int score) {
+        this.name = name;
+        this.score = score;
+    }
+}
+class Main28 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            List<Student> list = new ArrayList<>();
+            int n = sc.nextInt();
+            int sortWay = sc.nextInt();
+            for (int i = 0; i < n; i++) {
+                String name = sc.next();
+                int score = sc.nextInt();
+                Student student = new Student(name, score);
+                list.add(new Student(name, score));
+            }
+            if (sortWay == 1) {
+                list.sort(new Comparator<Student>() {
+                    @Override
+                    public int compare(Student o1, Student o2) {
+                        return o1.score - o2.score;
+                    }
+                });
+            } else if (sortWay == 0) {
+                list.sort(new Comparator<Student>() {
+                    @Override
+                    public int compare(Student o1, Student o2) {
+                        return o2.score - o1.score;
+                    }
+                });
+            }
+            for (Student stu : list) {
+                System.out.println(stu.name + " " + stu.score);
+            }
+        }
+    }
+}
+
+
+
+
+
+
