@@ -1090,7 +1090,26 @@ class Gift {
     }
 }
 
-
+//链表分割
+class Partition {
+    public ListNode partition(ListNode pHead, int x) {
+        ListNode sHead = new ListNode(-1);
+        ListNode sTail = sHead;
+        ListNode bHead = new ListNode(-1);
+        ListNode bTail = bHead;
+        for (ListNode node = pHead; node != null; node = node.next) {
+            if (node.val < x) {
+                sTail.next = new ListNode(node.val);
+                sTail = sTail.next;
+            } else {
+                bTail.next = new ListNode(node.val);
+                bTail = bTail.next;
+            }
+        }
+        sTail.next = bHead.next;
+        return sHead.next;
+    }
+}
 
 
 
