@@ -1111,6 +1111,43 @@ class Partition {
     }
 }
 
+//统计每个月兔子的总数
+//每个月兔子的数量与斐波那契数列一致，即可用递归
+class Main29 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int month = sc.nextInt();
+            int m1 = 1;    //月份为1的兔子数量
+            int m2 = 0;    //月份为2的兔子数量
+            int m3 = 0;    //成熟的兔子数量
+            //循环month - 1次
+            while (--month > 0) {
+                m3 += m2;
+                m2 = m1;
+                m1 = m3;
+            }
+            System.out.println(m1 + m2 + m3);
+        }
+    }
+}
 
-
-
+//最难得问题
+class Main30 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String hibun = sc.nextLine();
+            for (int i = 0; i < hibun.length(); i++) {
+                char ch = hibun.charAt(i);
+                if (ch >= 'F' && ch <= 'Z') {
+                    System.out.print((char)(ch - 5));
+                } else if (ch >= 'A' && ch <= 'E') {
+                    System.out.print((char)(ch + 21));
+                } else {
+                    System.out.print(ch);
+                }
+            }
+        }
+    }
+}
