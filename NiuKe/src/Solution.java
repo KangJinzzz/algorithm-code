@@ -1183,6 +1183,27 @@ class Main31 {
     }
 }
 
+//链式A+B
+class Plus {
+    public ListNode plusAB(ListNode a, ListNode b) {
+        ListNode listNode = new ListNode(-1);
+        ListNode tail = listNode;
+        int car = 0;
+        while (a != null || b != null || car != 0) {
+            int aVal = a != null ? a.val : 0;
+            int bVal = b != null ? b.val : 0;
+            int sum = aVal + bVal + car;
+            int nu = sum % 10;
+            car = sum / 10;
+            tail.next  = new ListNode(nu);
+            tail = tail.next;
+            a = a != null ? a.next : null;
+            b = b != null ? b.next : null;
+        }
+        return listNode.next;
+    }
+}
+
 
 
 
