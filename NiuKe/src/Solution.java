@@ -1148,6 +1148,50 @@ class Main30 {
                     System.out.print(ch);
                 }
             }
+            System.out.println();
         }
     }
 }
+
+//到底买不买
+class Main31 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            HashMap<Character, Integer> map = new HashMap<>();
+            String str1 = sc.nextLine();
+            String str2 = sc.nextLine();
+            for (int i = 0; i < str1.length(); i++) {
+                int count = map.getOrDefault(str1.charAt(i), 0);
+                map.put(str1.charAt(i), count + 1);
+            }
+            int lack = 0;
+            for (int i = 0; i < str2.length(); i++) {
+                if (map.containsKey(str2.charAt(i)) && map.get(str2.charAt(i)) > 0) {
+                    int count = map.get(str2.charAt(i));
+                    map.put(str2.charAt(i), count - 1);
+                } else {
+                    lack++;
+                }
+            }
+            if (lack > 0) {
+                System.out.println("No " + lack);
+            } else {
+                System.out.println("Yes " + (str1.length() - str2.length()));
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
