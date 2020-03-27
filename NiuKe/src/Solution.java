@@ -1204,6 +1204,35 @@ class Plus {
     }
 }
 
+//二叉树平衡检查
+class Balance {
+    public boolean isBalance(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        if (root.left == null && root.right == null) {
+            return true;
+        }
+        int leftDepth = maxDepth(root.left);
+        int rightDepth = maxDepth(root.right);
+        if (leftDepth - rightDepth > 1 || rightDepth - leftDepth > 1) {
+            return false;
+        }
+        return isBalance(root.left) && isBalance(root.right);
+    }
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+        int leftDepth = maxDepth(root.left);
+        int rightDepth = maxDepth(root.right);
+        return 1 + (leftDepth > rightDepth ? leftDepth : rightDepth);
+    }
+}
+
 
 
 
