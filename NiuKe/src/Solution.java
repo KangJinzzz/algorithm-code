@@ -1233,8 +1233,78 @@ class Balance {
     }
 }
 
+//数字分类
+class Main32 {
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int A1 = 0;
+            int count1 = 0;
+            int A2 = 0;
+            int count2 = 0;
+            int A3 = 0;
 
-
+            double A4 = 0;
+            int count4 = 0;
+            int A5 = 0;
+            int count5 = 0;
+            while (n-- > 0) {
+                int num = sc.nextInt();
+                switch(num % 5) {
+                    case 0:
+                        if (num % 2 == 0) {
+                            count1++;
+                            A1 += num;
+                        }
+                        break;
+                    case 1:
+                        A2 += (num * Math.pow(-1, count2++));
+                        break;
+                    case 2:
+                        A3++;
+                        break;
+                    case 3:
+                        A4 += num;
+                        count4++;
+                        break;
+                    case 4:
+                        A5 = A5 > num ? A5 : num;
+                        count5++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            A4 /= count4;
+            if (count1 > 0) {
+                System.out.print(A1 + " ");
+            } else {
+                System.out.print("N ");
+            }
+            if (count2 > 0) {
+                System.out.print(A2 + " ");
+            } else {
+                System.out.print("N ");
+            }
+            if (A3 > 0) {
+                System.out.print(A3 + " ");
+            } else {
+                System.out.print("N ");
+            }
+            if (count4 > 0) {
+                System.out.printf("%.1f ", A4);
+            } else {
+                System.out.print("N ");
+            }
+            if (count5 > 0) {
+                System.out.println(A5);
+            } else {
+                System.out.println("N");
+            }
+        }
+    }
+}
 
 
 
