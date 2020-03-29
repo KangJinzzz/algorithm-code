@@ -1334,6 +1334,41 @@ class Main33 {
     }
 }
 
+//最高分是多少
+class Main34 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int oper = sc.nextInt();
+            ArrayList<Integer> result = new ArrayList<>();
+            int[] arr = new int[n + 1];
+            for (int i = 1; i <= n; i++) {
+                arr[i] = sc.nextInt();
+            }
+            for (int i = 0; i < oper; i++) {
+                char C = sc.next().charAt(0);
+                int A = sc.nextInt();
+                int B = sc.nextInt();
+                if (C == 'Q') {
+                    int max = arr[A];
+                    for (int j = A; j <= B; j++) {
+                        max = max > arr[j] ? max : arr[j];
+                    }
+                    result.add(max);
+                }
+                if (C == 'U') {
+                    arr[A] = B;
+                }
+            }
+            for (int x : result) {
+                System.out.println(x);
+            }
+        }
+    }
+}
+
 
 
 
