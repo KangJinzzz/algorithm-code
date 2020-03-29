@@ -1306,6 +1306,34 @@ class Main32 {
     }
 }
 
+//小易的升级之路
+class Main33 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int init = sc.nextInt();
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+                if(init >= arr[i]) {
+                    init += arr[i];
+                } else {
+                    int gcd = GCD(init, arr[i]);
+                    init += gcd;
+                }
+            }
+            System.out.println(init);
+        }
+    }
+    public static int GCD(int a, int b) {
+        if (b % a == 0) {
+            return a;
+        }
+        return GCD(b % a, a);
+    }
+}
+
 
 
 
