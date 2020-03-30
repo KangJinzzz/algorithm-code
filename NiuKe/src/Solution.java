@@ -1369,7 +1369,49 @@ class Main34 {
     }
 }
 
-
+//学分绩点
+class Main35 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int[] credit = new int[n];
+            int creSum = 0;
+            double[] grade = new double[n];
+            double graSum = 0;
+            for (int i = 0; i < n; i++) {
+                credit[i] = sc.nextInt();
+                creSum += credit[i];
+            }
+            for (int i = 0; i < n; i++) {
+                int score = sc.nextInt();
+                if (score >= 90 && score <= 100) {
+                    grade[i] = 4.0 * credit[i];
+                } else if (score >= 85 && score <= 89) {
+                    grade[i] = 3.7 * credit[i];
+                } else if (score >= 82 && score <= 84) {
+                    grade[i] = 3.3 * credit[i];
+                } else if (score >= 78 && score <= 81) {
+                    grade[i] = 3.0 * credit[i];
+                } else if (score >= 75 && score <= 77) {
+                    grade[i] = 2.7 * credit[i];
+                } else if (score >= 72 && score <= 74) {
+                    grade[i] = 2.3 * credit[i];
+                } else if (score >= 68 && score <= 71) {
+                    grade[i] = 2.0 * credit[i];
+                } else if (score >= 64 && score <= 67) {
+                    grade[i] = 1.5 * credit[i];
+                }else if (score >= 60 && score <= 63) {
+                    grade[i] = 1.0 * credit[i];
+                } else {
+                    grade[i] = 0;
+                }
+                graSum += grade[i];
+            }
+            System.out.printf("%.2f",graSum / creSum);
+        }
+    }
+}
 
 
 
