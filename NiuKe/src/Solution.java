@@ -3,7 +3,7 @@ import java.util.*;
 //day_17 火车进站
 //day_16 洗牌
 //day_19 子串判断
-
+//day_25 人民币转换
 
 
 
@@ -1413,8 +1413,27 @@ class Main35 {
     }
 }
 
-
-
+//数字之和
+class Main36 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int n2 = n * n;
+            int nSum = 0;
+            int n2Sum = 0;
+            while (n > 0) {
+                nSum += (n % 10);
+                n /= 10;
+            }
+            while (n2 > 0) {
+                n2Sum += (n2 % 10);
+                n2 /= 10;
+            }
+            System.out.println(nSum + " " + n2Sum);
+        }
+    }
+}
 
 
 
