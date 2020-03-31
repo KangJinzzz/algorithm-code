@@ -1435,7 +1435,35 @@ class Main36 {
     }
 }
 
+//计票统计
+class Main37 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int invalid = 0;
+            int n = sc.nextInt();
+            HashMap<String, Integer> map = new LinkedHashMap<>();
+            for (int i = 0; i < n; i++) {
+                map.put(sc.next(), 0);
+            }
+            int votes = sc.nextInt();
+            for (int i = 0; i < votes; i++) {
+                String name = sc.next();
+                if (map.containsKey(name)) {
+                    int count = map.get(name);
+                    map.put(name, count + 1);
+                } else {
+                    invalid++;
+                }
+            }
 
+            for(Map.Entry entry : map.entrySet()) {
+                System.out.println(entry.getKey()+" : "+entry.getValue());
+            }
+            System.out.println("Invalid : "+invalid);
+        }
+    }
+}
 
 
 
