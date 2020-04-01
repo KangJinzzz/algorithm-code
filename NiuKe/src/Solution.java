@@ -1465,5 +1465,24 @@ class Main37 {
     }
 }
 
-
+//找x
+class Main38 {
+    public static void main(String[] ags) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            Map<Integer, Integer> map = new HashMap<>();
+            int n = sc.nextInt();
+            int index = 0;
+            for (int i = 0; i < n; i++) {
+                map.put(sc.nextInt(), index++);
+            }
+            int result = sc.nextInt();
+            if (map.containsKey(result)) {
+                System.out.println(map.get(result));
+            } else {
+                System.out.println(-1);
+            }
+        }
+    }
+}
 
