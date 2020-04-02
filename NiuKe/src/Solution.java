@@ -1486,3 +1486,56 @@ class Main38 {
     }
 }
 
+//整数与IP地址间的转换
+class Main39 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String strIp = sc.next();
+            long result1 = ipTOLong(strIp);
+            Long longIp = sc.nextLong();
+            String result2 = longToIp(longIp);
+            System.out.println(result1);
+            System.out.println(result2);
+        }
+    }
+
+    private static String longToIp(long ip) {
+        StringBuilder builder = new StringBuilder();
+        String binary = Long.toBinaryString(ip);
+        int len = 32 - binary.length();
+        for (int i = 0; i < len; i++) {
+            binary = "0" + binary;
+        }
+        String[] strs = new String[] {binary.substring(0, 8), binary.substring(8, 16)
+                , binary.substring(16, 24), binary.substring(24, 32)};
+        for (int i = 0; i < strs.length; i++) {
+            int temp = 0;
+            String str = strs[i];
+            int index = 0;
+            for (int j = 7; j >= 0; j--) {
+                if (str.charAt(index++) == '1') {
+                    temp += ((int)Math.pow(2, j));
+                }
+            }
+            builder.append(temp);
+            if (i != strs.length - 1) {
+                builder.append(".");
+            }
+        }
+        return builder.toString();
+    }
+
+    public static long ipTOLong(String ip) {
+        String[] strs = ip.split("\\.");
+        StringBuilder builder = new StringBuilder();
+        long ret = 0;
+        for (int i = 0; i < strs.length; i++) {
+            ret += Long.parseLong(strs[i]);
+            if (i != strs.length - 1) {
+                ret <<= 8;
+            }
+        }
+        return ret;
+    }
+}
