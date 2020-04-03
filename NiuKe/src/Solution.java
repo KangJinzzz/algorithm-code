@@ -1616,5 +1616,37 @@ class Main41 {
     }
 }
 
+//年会抽奖
+class Main42 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            double result = fenZi(n) / fenMu(n);
+            result *= 100;
+            System.out.printf("%.2f%%\n", result);
+        }
+    }
+
+    public static float fenMu(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        return n * (fenMu(n - 1));
+    }
+
+    public static float fenZi(int n) {
+        if (n == 1) {
+            return 0;
+        }
+        if (n == 2) {
+            return 1;
+        }
+        return (n - 1) * (fenZi(n - 2) + fenZi(n - 1));
+    }
+}
+
+
+
 
 
