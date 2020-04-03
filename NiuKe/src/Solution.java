@@ -1565,3 +1565,56 @@ class Main40 {
     }
 }
 
+//密码验证合格程序
+class Main41 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String str = sc.nextLine();
+            fun(str);
+        }
+    }
+    public static void fun(String str) {
+        //1.密码长度超过8位
+        if (str.length() <= 8) {
+            System.out.println("NG");
+            return;
+        }
+        //2.种类出现3种及以上
+        int types = 0;
+        int upper = 0;
+        int lower = 0;
+        int num = 0;
+        int other = 0;
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (ch >= 'A' && ch <= 'Z') {
+                upper++;
+            } else if (ch >= 'a' && ch <= 'z') {
+                lower++;
+            } else if (ch >= '0' && ch <= '9') {
+                num++;
+            } else {
+                other++;
+            }
+        }
+        types = (upper > 0 ? 1 : 0) + (lower > 0 ? 1 : 0) + (num > 0 ? 1 : 0) + (other > 0 ? 1 : 0);
+        if (types < 3) {
+            System.out.println("NG");
+            return;
+        }
+        //3.子串长度不超过2
+        for (int i = 3; i < str.length() - 2; i++) {
+            for (int j = 0; j < i - 2; j++) {
+                if (str.charAt(i) == str.charAt(j) && str.charAt(i + 1) == str.charAt(j + 1) && str.charAt(i + 2) == str.charAt(j + 2)) {
+                    System.out.println("NG");
+                    return;
+                }
+            }
+        }
+        System.out.println("OK");
+    }
+}
+
+
+
