@@ -1646,6 +1646,51 @@ class Main42 {
     }
 }
 
+//数字和为 sum 的方法数
+class Main43 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int sum = sc.nextInt();
+            int[] arr = new int[n + 1];
+            for (int i = 1; i <= n; i++) {
+                arr[i] = sc.nextInt();
+            }
+            int[][] dp = new int[n + 1][sum + 1];
+            for (int i = 0; i <= n; i++) {
+                dp[i][0] = 1;
+            }
+            for (int j = 1; j <= sum; j++) {
+                dp[0][j] = 0;
+            }
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= sum; j++) {
+                    /*
+                    这里分两种情况：
+                    1.第 i 个数大于 j，说明第i个数不可能包含在任意的方案中
+                        这里很好理解，因为如果第 i 个数在一个方案中，那么这个方案的数字和
+                        肯定大于 j 所以前 i 个数之和为 j 的方案数就等于前 i - 1 个数之和
+                        为 j 的的方案数，即 dp[i][j] == dp[i - 1][j]
+                    2.第 i 个数小于等于 j，此时所有的方案可以分成两部分
+                        a）把第 i 个数不加入到方案:
+                            则此时和为 j 共有 dp[i - 1][j] 种方案
+                        b) 把第 i 个数加入到方案：
+                            此时要求的和为 j 已经满足了 arr[i],只要在前 i - 1 个数中找到
+                            和为 j - arr[i] 的方案数即可，即 dp[i - 1][j - arr[i]]
+                        因此情况2共有 dp[i - 1][j] + dp[i - 1][j - arr[i]] 中方案
+                    */
+                    if (arr[i] <= j) {
+                        dp[i][j] = dp[i - 1][j] + dp[i - 1][j - arr[i]];
+                    } else {
+                        dp[i][j] = dp[i - 1][j];
+                    }
+                }
+            }
+            System.out.println(dp[n][sum]);
+        }
+    }
+}
 
 
 
