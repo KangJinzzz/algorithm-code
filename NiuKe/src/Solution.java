@@ -1692,6 +1692,77 @@ class Main43 {
     }
 }
 
+class Main45 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String str = sc.next();
+            for (int i = 0; i < str.length(); i++) {
+                int count = 0;
+                StringBuilder builder = new StringBuilder();
+                char c = str.charAt(i);
+                for (int j = 0; j < 7; j++) {
+                    int and = ((c >> j) & 1);
+                    builder.append(and);
+                    if (and == 1) {
+                        count++;
+                    }
+                }
+                if (count % 2== 0) {
+                    builder.append(1);
+                } else {
+                    builder.append(0);
+                }
+                System.out.println(builder.reverse().toString());
+            }
+        }
+    }
+}
 
+//大整数排序
+class Main46 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            String[] arr = new String[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.next();
+            }
+            for (int i = 0; i < arr.length - 1; i++) {
+                boolean flag = true;
+                for (int j = 0; j < arr.length - 1 - i; j++) {
+                    compare(arr, j, j + 1);
+                    flag = false;
+                }
+                if (flag) {
+                    break;
+                }
+            }
+            for (int i = 0; i < arr.length; i++) {
+                System.out.println(arr[i]);
+            }
+        }
+    }
+    public static void compare(String[] arr, int a, int b) {
+        if (arr[a].length() > arr[b].length()) {
+            swap(arr, a, b);
+        } else if (arr[a].length() == arr[b].length()){
+            for (int i = 0; i < arr[a].length(); i++) {
+                if (arr[a].charAt(i) != arr[b].charAt(i)) {
+                    if (arr[a].charAt(i) > arr[b].charAt(i)) {
+                        swap(arr, a, b);
+                    }
+                    return;
+                }
+            }
+        }
 
+    }
+    public static void swap(String[] arr, int a, int b) {
+        String temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    }
+}
 
