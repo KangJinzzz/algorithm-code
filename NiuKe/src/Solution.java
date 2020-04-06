@@ -1766,3 +1766,49 @@ class Main46 {
     }
 }
 
+//说反话
+class Main47 {
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String str = sc.nextLine();
+            char[] arr = str.toCharArray();
+            int left = 0;
+            int right = str.length() - 1;
+            while (left < right) {
+                char temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+                left++;
+                right--;
+            }
+            left = 0;
+            right = 0;
+            while (left < arr.length) {
+                int index = 0;
+                while (arr[right] != ' ') {
+                    right++;
+                    if (right == arr.length) {
+                        break;
+                    }
+                }
+                index = right;
+                right--;
+                while (left < right) {
+                    char temp = arr[left];
+                    arr[left] = arr[right];
+                    arr[right] = temp;
+                    right--;
+                    left++;
+                }
+                left = index + 1;
+                right = left;
+            }
+            System.out.println(arr);
+        }
+    }
+}
+
+
+
+
