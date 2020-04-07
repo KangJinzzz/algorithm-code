@@ -4,7 +4,7 @@ import java.util.*;
 //day_16 洗牌
 //day_19 子串判断
 //day_25 人民币转换
-
+//day_31简单错误记录
 
 
 public class Solution {
@@ -1809,6 +1809,31 @@ class Main47 {
     }
 }
 
+//在霍格沃茨找零钱
+class Main48 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] w = new int[]{17 * 29, 29, 1};
+        while (sc.hasNext()) {
+            String p = sc.next();
+            String a = sc.next();
+            String[] sp = p.split("\\.");
+            String[] sa = a.split("\\.");
 
+            int[] tp = new int[]{Integer.parseInt(sp[0]), Integer.parseInt(sp[1]), Integer.parseInt(sp[2])};
+            int[] ta = new int[]{Integer.parseInt(sa[0]), Integer.parseInt(sa[1]), Integer.parseInt(sa[2])};
+
+            int rp = tp[0] * w[0] + tp[1] * w[1] + tp[2] * w[2];
+            int ra = ta[0] * w[0] + ta[1] * w[1] + ta[2] * w[2];
+
+            int result = ra - rp;
+            if (result < 0) {
+                result = (-result);
+                System.out.print("-");
+            }
+            System.out.println(result / w[0] + "." + result % w[0] / w[1] + "." + result % w[0] % w[1]);
+        }
+    }
+}
 
 
