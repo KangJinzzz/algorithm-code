@@ -5,7 +5,7 @@ import java.util.*;
 //day_19 子串判断
 //day_25 人民币转换
 //day_31简单错误记录
-
+//day_32 2的个数
 
 public class Solution {
 
@@ -1833,6 +1833,108 @@ class Main48 {
             }
             System.out.println(result / w[0] + "." + result % w[0] / w[1] + "." + result % w[0] % w[1]);
         }
+    }
+}
+
+//锤子剪刀布
+class Main49 {
+
+    static class Person {
+        public int win;
+        public int draw;
+        public int lose;
+        Map<String , Integer> map = new HashMap<>();
+
+        public Person() {
+            map.put("C", 0);
+            map.put("J", 0);
+            map.put("B", 0);
+        }
+    }
+
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            Person jia = new Person();
+            Person yi = new Person();
+            for (int i = 0; i < n; i++) {
+                String jiaRes = sc.next();
+                String yiRes = sc.next();
+                judge(jiaRes, yiRes, jia, yi);
+            }
+            System.out.println(jia.win + " " + jia.draw + " " + jia.lose);
+            System.out.println(yi.win + " " + yi.draw + " " + yi.lose);
+
+            System.out.print(advantage(jia.map) + " " + advantage(yi.map));
+        }
+    }
+
+    private static void judge(String js, String ys, Person jia, Person yi) {
+        if (js.equals("C")) {
+            if (ys.equals("J")) {
+                jia.win++;
+                yi.lose++;
+                jia.map.put(js, jia.map.get(js) + 1);
+            } else if (ys.equals("C")) {
+                jia.draw++;
+                yi.draw++;
+            } else {
+                jia.lose++;
+                yi.win++;
+                yi.map.put(ys, yi.map.get(ys) + 1);
+            }
+        }
+        if (js.equals("J")) {
+            if (ys.equals("B")) {
+                jia.win++;
+                yi.lose++;
+                jia.map.put(js, jia.map.get(js) + 1);
+            } else if (ys.equals("J")) {
+                jia.draw++;
+                yi.draw++;
+            } else {
+                jia.lose++;
+                yi.win++;
+                yi.map.put(ys, yi.map.get(ys) + 1);
+            }
+        }
+        if (js.equals("B")) {
+            if (ys.equals("C")) {
+                jia.win++;
+                yi.lose++;
+                jia.map.put(js, jia.map.get(js) + 1);
+            } else if (ys.equals("B")) {
+                jia.draw++;
+                yi.draw++;
+            } else {
+                jia.lose++;
+                yi.win++;
+                yi.map.put(ys, yi.map.get(ys) + 1);
+            }
+        }
+    }
+
+    private static String advantage(Map<String, Integer> map) {
+        if (map.get("B") == (map.get("C")) && map.get("B") >= map.get("J")) {
+            return "B";
+        }
+        if (map.get("B") == map.get("J") && map.get("B") >= map.get("C")) {
+            return "B";
+        }
+        if (map.get("C") == map.get("J") && map.get("C") >= map.get("B")) {
+            return "C";
+        }
+        int max = 0;
+        String ret = "";
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if(entry.getValue() > max) {
+                max = entry.getValue();
+                ret = entry.getKey();
+            }
+        }
+        return ret;
+
     }
 }
 
