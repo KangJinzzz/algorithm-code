@@ -1958,3 +1958,29 @@ class GoUpstairs {
     }
 }
 
+//broken keyboard
+class Main50{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String ideal = sc.next();
+            String actual = sc.next();
+            ideal = ideal.toUpperCase();
+            actual = actual.toUpperCase();
+            Set<Character> set = new HashSet<>();
+            for (int i = 0; i < actual.length(); i++) {
+                set.add(actual.charAt(i));
+            }
+            Set<Character> ret = new HashSet<>();
+            for (int i = 0; i < ideal.length(); i++) {
+                if (!set.contains(ideal.charAt(i))) {
+                    if(!ret.contains(ideal.charAt(i))) {
+                        ret.add(ideal.charAt(i));
+                        System.out.print(ideal.charAt(i));
+                    }
+                }
+            }
+
+        }
+    }
+}
