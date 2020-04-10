@@ -2007,6 +2007,15 @@ class Main51 {
 
 //百万富翁问题
 class Main52 {
-    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long richer = 0;
+        long stranger = 0;
+        for (int i = 0; i < 30; i++) {
+            richer += 10;
+            stranger += Math.pow(2, i);
+        }
+        System.out.println(richer + " " + stranger);
+    }
 }
 
