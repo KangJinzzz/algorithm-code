@@ -1984,3 +1984,29 @@ class Main50{
         }
     }
 }
+
+//球的半径和体积
+class Main51 {
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int[] x = new int[3];
+            int[] y = new int[3];
+            for (int i = 0; i < 3; i++) {
+                x[i] = sc.nextInt();
+            }
+            for (int i = 0; i < 3; i++) {
+                y[i] = sc.nextInt();
+            }
+            double r = Math.sqrt((y[0] - x[0]) * (y[0] - x[0]) + (y[1] - x[1]) * (y[1] - x[1]) + (y[2] - x[2]) * (y[2] - x[2]));
+            double v = (double) 4 / (double) 3 * Math.acos(-1) * Math.pow(r, 3);
+            System.out.printf("%.3f %.3f", r, v);
+        }
+    }
+}
+
+//百万富翁问题
+class Main52 {
+    
+}
+
