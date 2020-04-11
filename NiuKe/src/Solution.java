@@ -2019,3 +2019,39 @@ class Main52 {
     }
 }
 
+class Solution5 {
+    /**
+     * 计算你能获得的最大收益
+     *
+     * @param prices Prices[i]即第i天的股价
+     * @return 整型
+     */
+    //把股票买卖的最佳时机1问题分成两部分(0, i), (i + 1, prices.length - 1)
+    public int calculateMax(int[] prices) {
+        int n = prices.length;
+        int max1 = 0;
+        int max2 = 0;
+        int MAX = 0;
+        for (int i = 0; i < n; i++) {
+            max1 = getMax(prices, 0, i);
+            max2 = getMax(prices, i + 1, n - 1);
+            if (max1 + max2 > MAX)  {
+                MAX = max1 + max2;
+            }
+        }
+        return MAX;
+    }
+
+    public int getMax(int[] prices, int left, int right) {
+        int min = Integer.MAX_VALUE;
+        int max = 0;
+        for (int i = left; i <= right; i++) {
+            if (prices[i] < min) {
+                min = prices[i];
+            } else if (prices[i] - min > max) {
+                max = prices[i] - min;
+            }
+        }
+        return max;
+    }
+}
