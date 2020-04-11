@@ -2055,3 +2055,34 @@ class Solution5 {
         return max;
     }
 }
+
+//字母统计
+class Main53 {
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String str = sc.next();
+            Map<Character, Integer> map = new HashMap<>();
+            String word = "QWERTYUIOPLKJHGFDSAZXCVBNM";
+            for (int i = 0; i < word.length(); i++) {
+                map.put(word.charAt(i), 0);
+            }
+            for (int i = 0; i < str.length(); i++) {
+                char c = str.charAt(i);
+                if (c >= 'A' && c <= 'Z') {
+                    map.put(c, map.get(c) + 1);
+                }
+            }
+            List<Map.Entry<Character, Integer>> list = new ArrayList<>(map.entrySet());
+            list.sort(new Comparator<Map.Entry<Character, Integer>>() {
+                @Override
+                public int compare(Map.Entry<Character, Integer> o1, Map.Entry<Character, Integer> o2) {
+                    return o1.getKey() - o2.getKey();
+                }
+            });
+            for (Map.Entry entry : list) {
+                System.out.println(entry.getKey() + ":" + entry.getValue());
+            }
+        }
+    }
+}
