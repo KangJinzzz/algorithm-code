@@ -2086,3 +2086,25 @@ class Main53 {
         }
     }
 }
+
+//进制转换
+class Main54 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()) {
+            String str = sc.next().substring(2);
+            char[] arr = str.toCharArray();
+            int decimal = 0;
+            int index = 0;
+            for (int i = arr.length - 1; i >= 0; i--) {
+                if (arr[index] >= 'A' && arr[index] <= 'Z') {
+                    decimal += (arr[index] - 55) * Math.pow(16, i);
+                } else {
+                    decimal += ((arr[index] - '0') * Math.pow(16, i));
+                }
+                index++;
+            }
+            System.out.println(decimal);
+        }
+    }
+}
