@@ -2108,3 +2108,42 @@ class Main54 {
         }
     }
 }
+
+//木棒拼图
+//        木棍集合中找出一根最长的，记为 max_len
+//        除了这一根外，剩下的长度之和，记为 Len
+//        则必须满足 Len > max_len 。
+//        换言之， 设总长度为 Tlen，
+//        则仅当 Tlen - max_len > max_len 时，才能组成面积大于0 的简单多边形
+class Main55 {
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> ls= new ArrayList<>();
+        for (int i=0;i<n;i++){
+            int op = sc.nextInt();
+            int length = sc.nextInt();
+            if (op==1){
+                ls.add(length);
+            }else{
+                int idx = ls.indexOf(length);
+                ls.remove(idx);
+            }
+            if (ls.size() < 3){
+                System.out.println("No");
+            }else{
+                Collections.sort(ls,Collections.reverseOrder());
+                int max = ls.get(0);
+                int sum = 0;
+                for (int j=1;j<ls.size();j++){
+                    sum += ls.get(j);
+                }
+                if(sum>max){
+                    System.out.println("Yes");
+                }else{
+                    System.out.println("No");
+                }
+            }
+        }
+    }
+}
