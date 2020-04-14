@@ -6,6 +6,7 @@ import java.util.*;
 //day_25 人民币转换
 //day_31简单错误记录
 //day_32 2的个数
+//day_37 地下迷宫
 
 public class Solution {
 
@@ -2147,3 +2148,42 @@ class Main55 {
         }
     }
 }
+
+//最近公共组先
+
+//利用这个关系，如果a ！= b，就让其中的较大数除以2， 如此循环知道a == b，
+//即是原来两个数的最近公共祖先
+class LCA {
+    public int getLCA(int a, int b) {
+        while (a != b) {
+            if (a > b) {
+                a /= 2;
+            } else {
+                b /= 2;
+            }
+        }
+        return a;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
