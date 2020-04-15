@@ -2166,6 +2166,20 @@ class LCA {
     }
 }
 
+//空格替换
+class Replacement {
+    public String replaceSpace(String iniString, int length) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            if(iniString.charAt(i) != ' ') {
+                builder.append(iniString.charAt(i));
+            } else {
+                builder.append("%20");
+            }
+        }
+        return builder.toString();
+    }
+}
 
 
 
