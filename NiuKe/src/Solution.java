@@ -2181,7 +2181,28 @@ class Replacement {
     }
 }
 
-
+//二维数组打印
+class Printer {
+    public int[] arrayPrint(int[][] arr, int n) {
+        int[] ret = new int[n * n];
+        int index = 0;
+        for (int col = n - 1; col >= 0; col--) {
+            int i = 0;
+            int j = col;
+            while (i < n  && j < n) {
+                ret[index++] = arr[i++][j++];
+            }
+        }
+        for (int row = 1; row < n; row++) {
+            int i = row;
+            int j = 0;
+            while (i < n  && j < n) {
+                ret[index++] = arr[i++][j++];
+            }
+        }
+        return ret;
+    }
+}
 
 
 
