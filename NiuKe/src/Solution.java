@@ -2204,8 +2204,36 @@ class Printer {
     }
 }
 
-
-
+//回文串
+class Main56 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String str = sc.next();
+            int left = 0;
+            int right = str.length() - 1;
+            int missCount = 0;
+            while (left < right) {
+                if (str.charAt(left) != str.charAt(right)) {
+                    if (str.charAt(left) == str.charAt(right - 1)) {
+                        right--;
+                    } else {
+                        left++;
+                    }
+                    missCount++;
+                } else {
+                    left++;
+                    right--;
+                }
+            }
+            if (missCount == 1) {
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
+        }
+    }
+}
 
 
 
