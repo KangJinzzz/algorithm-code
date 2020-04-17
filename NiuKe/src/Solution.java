@@ -2020,6 +2020,7 @@ class Main52 {
     }
 }
 
+//中国牛市
 class Solution5 {
     /**
      * 计算你能获得的最大收益
@@ -2235,10 +2236,50 @@ class Main56 {
     }
 }
 
+//删除公共字符串
+class Main57 {
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String str1 = sc.nextLine();
+            String str2 = sc.nextLine();
+            StringBuilder builder = new StringBuilder();
+            Set<Character> set = new HashSet<>();
+            for (int i = 0; i < str2.length(); i++) {
+                set.add(str2.charAt(i));
+            }
+            for (int i = 0; i < str1.length(); i++) {
+                if (!set.contains(str1.charAt(i))) {
+                    builder.append(str1.charAt(i));
+                }
+            }
+            System.out.print(builder.toString());
+        }
+    }
+}
 
-
-
-
+//句子逆序
+class Main58 {
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String str = sc.nextLine();
+            StringBuilder builder = new StringBuilder();
+            String[] arr = str.split(" ");
+            for (int i = 0; i < arr.length; i++) {
+                arr[i] = builder.append(arr[i]).reverse().toString();
+                builder.delete(0, builder.length());
+            }
+            for (int i = 0; i < arr.length; i++) {
+                builder.append(arr[i]);
+                if (i != arr.length - 1) {
+                    builder.append(" ");
+                }
+            }
+            System.out.print(builder.reverse().toString());
+        }
+    }
+}
 
 
 
