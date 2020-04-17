@@ -2281,7 +2281,34 @@ class Main58 {
     }
 }
 
-
+//最大连续和
+class Main59 {
+    //temp[i]表示前i个的最大连续和，如果temp[i - 1] <= 0,则前i个数的最大连续和就是temp[i],否则就是temp[i - 1] + temp[i]
+    //max就是temp[i]中最大的一个
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+            }
+            int max = Integer.MIN_VALUE;
+            int temp = 0;
+            for (int i = 0; i < n; i++) {
+                if (temp <= 0) {
+                    temp = arr[i];
+                } else {
+                    temp += arr[i];
+                }
+                if (temp > max) {
+                    max = temp;
+                }
+            }
+            System.out.println(max);
+        }
+    }
+}
 
 
 
