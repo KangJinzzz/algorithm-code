@@ -2310,8 +2310,51 @@ class Main59 {
     }
 }
 
-
-
+//坐标移动
+class Main60 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int x = 0;
+            int y = 0;
+            String str = sc.nextLine();
+            String[] arr = str.split(";");
+            for (String s : arr) {
+                if (judge(s)) {
+                    int operateNum = Integer.parseInt(s.substring(1, s.length()));
+                    if (s.charAt(0) == 'A') {
+                        x -= operateNum;
+                    }
+                    if (s.charAt(0) == 'W') {
+                        y += operateNum;
+                    }
+                    if (s.charAt(0) == 'S') {
+                        y -= operateNum;
+                    }
+                    if (s.charAt(0) == 'D') {
+                        x += operateNum;
+                    }
+                }
+            }
+            System.out.println(x + "," + y);
+        }
+    }
+    public static boolean judge(String str) {
+        if (str.length() > 3 || str.length() < 2) {
+            return false;
+        }
+        if (str.charAt(0) != 'A' && str.charAt(0) != 'W' && str.charAt(0) != 'S' && str.charAt(0) != 'D') {
+            return false;
+        }
+        if (str.length() == 3 && (str.charAt(1) <= '0' || str.charAt(1) > '9' || str.charAt(2) < '0' || str.charAt(2) > '9')) {
+            return false;
+        }
+        if (str.length() == 2 && (str.charAt(1) < '0' || str.charAt(1) > '9')) {
+            return false;
+        }
+        return true;
+    }
+}
 
 
 
