@@ -2356,6 +2356,35 @@ class Main60 {
     }
 }
 
+//计算日期到天数转换
+class Main61 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int year = sc.nextInt();
+            int month = sc.nextInt();
+            int day = sc.nextInt();
+            int res = getDay(year, month, day);
+            System.out.println(res);
+        }
+    }
+
+    private static int getDay(int year, int month, int day) {
+        int res = 0;
+        int[] arr = new int[] {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+            arr[1] = 29;
+        }
+        for (int i = 0; i < month - 1; i++) {
+            res += arr[i];
+        }
+        res += day;
+        if (res < 1 || res > 366) {
+            return -1;
+        }
+        return res;
+    }
+}
 
 
 
