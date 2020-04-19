@@ -2386,7 +2386,62 @@ class Main61 {
     }
 }
 
+//字符串加解密
+class Main62 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()){
+            String str1 = sc.next();
+            String str2 = sc.next();
+            str1 = encrypt(str1);
+            str2 = unEncrypt(str2);
+            System.out.println(str1);
+            System.out.println(str2);
+        }
+    }
 
+    private static String encrypt(String str1) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < str1.length(); i++) {
+            char c = str1.charAt(i);
+            if (c == 'Z') {
+                builder.append('a');
+            } else if (c == 'z') {
+                builder.append('A');
+            } else if (c == '9') {
+                builder.append('0');
+            } else if (c >= 'A' && c <= 'Y') {
+                builder.append((char)(c + 33));
+            } else if (c >= 'a' && c <= 'y') {
+                builder.append((char)(c - 31));
+            } else {
+                builder.append((char)(c + 1));
+            }
+        }
+        return builder.toString();
+    }
+
+    private static String unEncrypt(String str2) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < str2.length(); i++) {
+            char c = str2.charAt(i);
+            if (c == 'A') {
+                builder.append('z');
+            } else if (c == 'a') {
+                builder.append('Z');
+            } else if (c == '0') {
+                builder.append('9');
+            } else if (c >= 'B' && c <= 'Z') {
+                builder.append((char)(c + 31));
+            } else if (c >= 'b' && c <= 'z') {
+                builder.append((char)(c - 33));
+            } else {
+                builder.append((char)(c - 1));
+            }
+        }
+        return builder.toString();
+    }
+}
 
 
 
