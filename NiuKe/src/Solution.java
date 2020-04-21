@@ -2473,10 +2473,22 @@ class Main63{
     }
 }
 
-
+//骆驼命名法
 class Main64 {
-    public static void main(String[] ags) {
-
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String str = sc.next();
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < str.length(); i++) {
+                if (str.charAt(i) == '_') {
+                    builder.append((char)(str.charAt(++i) - 32));
+                } else {
+                    builder.append(str.charAt(i));
+                }
+            }
+            System.out.println(builder.toString());
+        }
     }
 }
 
