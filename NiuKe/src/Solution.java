@@ -7,6 +7,7 @@ import java.util.*;
 //day_31简单错误记录
 //day_32 2的个数
 //day_37 地下迷宫
+//day_43 求和
 
 public class Solution {
 
@@ -2443,5 +2444,39 @@ class Main62 {
     }
 }
 
+//电话号码
+class Main63{
+    public static void main(String[] args){
+        String symbol="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        String number="222333444555666777788899991234567890";
+        Scanner scanner=new Scanner(System.in);
+        while(scanner.hasNext()){
+            int n=scanner.nextInt();
+            ArrayList<String> arrayList=new ArrayList<String>();
+            for(int i=0;i<n;i++){
+                String str=scanner.next();
+                str=str.replace("-","");
+                String result="";
+                for(int j=0;j<7;j++){
+                    result+=number.charAt(symbol.indexOf(str.charAt(j)+""));
+                }
+                result=result.substring(0,3)+"-"+result.substring(3,7);
+                if(!arrayList.contains(result))
+                    arrayList.add(result);
+            }
+            Collections.sort(arrayList);
+            for(int j=0;j<arrayList.size();j++){
+                System.out.println(arrayList.get(j));
+            }
+            System.out.println();
+        }
+    }
+}
 
+
+class Main64 {
+    public static void main(String[] ags) {
+
+    }
+}
 
