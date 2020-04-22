@@ -2492,3 +2492,35 @@ class Main64 {
     }
 }
 
+//单词倒排
+class Main65 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            //正则表达式
+            String[] strs = sc.nextLine().split("[^a-zA-Z]+");
+
+            StringBuilder builder = new StringBuilder();
+
+            for (int i = 0; i < strs.length; i++) {
+                builder.append(strs[i]);
+                strs[i] = builder.reverse().toString();
+                builder.delete(0, builder.length());
+            }
+            for (int i = 0; i < strs.length; i++) {
+                builder.append(strs[i]);
+                if (i != strs.length - 1) {
+                    builder.append(" ");
+                }
+            }
+            System.out.println(builder.reverse().toString());
+        }
+    }
+}
+
+
+
+
+
+
+
