@@ -2518,8 +2518,39 @@ class Main65 {
     }
 }
 
-
-
+//乒乓球框
+class Main66 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String strA = sc.next();
+            String strB = sc.next();
+            if (strB.length() > strA.length()) {
+                System.out.println("No");
+                continue;
+            }
+            int[] arrA = new int[26];
+            int[] arrB = new int[26];
+            for (int i = 0; i < strA.length(); i++) {
+                arrA[strA.charAt(i) - 'A']++;
+                if (i < strB.length()) {
+                    arrB[strB.charAt(i) - 'A']++;
+                }
+            }
+            boolean flag = true;
+            for (int i = 0; i < 26; i++) {
+                if (arrA[i] < arrB[i]) {
+                    flag = false;
+                }
+            }
+            if (!flag) {
+                System.out.println("No");
+            } else {
+                System.out.println("Yes");
+            }
+        }
+    }
+}
 
 
 
