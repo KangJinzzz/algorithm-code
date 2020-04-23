@@ -2552,6 +2552,19 @@ class Main66 {
     }
 }
 
-
+//数组中出现次数超过一半的数字
+class Solution4 {
+    public int MoreThanHalfNum_Solution(int [] array) {
+        Arrays.sort(array);
+        int n = array[array.length / 2];
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == n) {
+                count++;
+            }
+        }
+        return (count > array.length / 2) ? n : 0;
+    }
+}
 
 
