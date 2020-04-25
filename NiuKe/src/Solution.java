@@ -8,6 +8,8 @@ import java.util.*;
 //day_32 2的个数
 //day_37 地下迷宫
 //day_43 求和
+//day_47 合唱团
+//day_47 马戏团
 
 public class Solution {
 
@@ -2567,4 +2569,20 @@ class Solution4 {
     }
 }
 
-
+//左右最值最大差
+//先找出数组中最大值max，另一边的最大值选两端的较小值
+// 假设现在k右移，变成了A[0]A[1]与后面所有，那么左边部分的最大值就可能会变大”，
+// 即如果A[1] > A[0]，那么左边部分的最大值会变大，相应最终结果就会变小，所以不可能。
+// 如果A[1] < A[0]，那么左边的最大值依旧是A[0]，所以最小的只需判断首尾就好了
+class MaxGap {
+    public int findMaxGap(int[] A, int n) {
+        int max = A[0];
+        int min = A[0] > A[n - 1] ? A[n - 1] : A[0];
+        for (int i = 0; i < n; i++) {
+            if (A[i] > max) {
+                max = A[i];
+            }
+        }
+        return max - min;
+    }
+}
