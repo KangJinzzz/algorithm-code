@@ -2586,3 +2586,137 @@ class MaxGap {
         return max - min;
     }
 }
+
+//顺时针打印矩阵
+class Printer2 {
+    public int[] clockwisePrint(int[][] mat, int n, int m) {
+        int[] a=new int[n*m];
+        int index=0;
+        int topX=0, topY=0, lowX=n-1, lowY=m-1;
+        while(topX<=lowX && topY<=lowY){
+            if(topX==lowX){    //只剩下一行时
+                for(int i=topY; i<=lowY; i++)
+                    a[index++]=mat[topX][i];
+                return a;
+            }
+            if(topY==lowY){  //只剩下一列时
+                for(int i=topX; i<=lowX; i++)
+                    a[index++]=mat[i][topY];
+                return a;
+            }
+            for(int i=topY; i<lowY; i++)
+                a[index++]=mat[topX][i];
+            for(int i=topX; i<lowX; i++)
+                a[index++]=mat[i][lowY];
+            for(int i=lowY; i>topY; i--)
+                a[index++]=mat[lowX][i];
+            for(int i=lowX; i>topX; i--)
+                a[index++]=mat[i][topY];
+            topX++; topY++; lowX--; lowY--;
+        }
+        return a;
+    }
+}
+
+//数组中值出现了一次的数字
+class Main68 {
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+                int count = map.getOrDefault(arr[i], 0);
+                map.put(arr[i], count + 1);
+            }
+            int[] nums = new int[2];
+            int index = 0;
+            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+                if (entry.getValue() == 1) {
+                    nums[index++] = entry.getKey();
+                }
+            }
+            if (nums[0] > nums[1]) {
+                System.out.println(nums[1] + " " + nums[0]);
+            } else {
+                System.out.println(nums[0] + " " + nums[1]);
+            }
+        }
+    }
+}
+
+class Main70 {
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            int x = 0;
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+                x ^= arr[i];
+            }
+            //此时 x 为两个出现 1 次的数的异或结果
+            int index = 0;  //index 记录 x 第一个位为 1 的位置
+            for (int i = 0; i < 32; i++) {
+                if (((x >> i) & 1) == 1) {
+                    index = i;
+                    break;
+                }
+            }
+            //将数组分为两部分
+            int num1 = 0;   //第一部分的异或结果
+            int num2 = 0;   //第二部分的异或结果
+            for (int i = 0; i < n; i++) {
+                if (((arr[i] >> index) & 1) == 1) {     //index位为 1
+                    num1 ^= arr[i];
+                } else {    //index位为 0
+                    num2 ^= arr[i];
+                }
+            }
+            // 从小到大输出
+            if (num1 < num2) {
+                System.out.println(num1 + " " + num2);
+            } else {
+                System.out.println(num2 + " " + num1);
+            }
+        }
+    }
+}
+
+
+//单调栈结构
+class Main69 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+            }
+            for (int i = 0; i < n; i++) {
+                int j = i;
+                while (j >= 0 &&arr[j] >= arr[i]) {
+                    j--;
+                }
+                if (j >= 0) {
+                    System.out.print(j + " ");
+                } else  {
+                    System.out.print(-1 + " ");
+                }
+                int k = i;
+                while (k < n && arr[k] >= arr[i]) {
+                    k++;
+                }
+                if (k < n) {
+                    System.out.println(k + " ");
+                } else  {
+                    System.out.println(-1 + " ");
+                }
+            }
+        }
+    }
+}
