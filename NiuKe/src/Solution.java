@@ -2792,3 +2792,27 @@ class Solution7 {
         return ret[row - 1][col - 1];
     }
 }
+
+//word-break
+/*
+    状态：F(i):前i个字符是否可以分割
+    转移方程： F(i) = F(0) && wordDict.contains(0, i) || F(1) && wordDict.contains(1, i) || ..... || F(j) && wordDict.contains(j, i)
+ */
+class Solution9 {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        int len = s.length();
+        boolean[] canBreak = new boolean[len + 1];
+        canBreak[0] = true;
+        for (int i = 1; i <= len; ++i) {
+            for (int j = 0; j <= i; j++) {
+                if (canBreak[j] && wordDict.contains(s.substring(j, i))) {
+                    canBreak[i] = true;
+                    break;
+                }
+            }
+        }
+        return canBreak[len];
+    }
+}
+
+
