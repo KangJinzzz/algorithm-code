@@ -2720,3 +2720,75 @@ class Main69 {
         }
     }
 }
+
+//unique-paths-ii
+class Solution6 {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        int[][] ret = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            if (obstacleGrid[i][0] == 1) {
+                for (int j = i; j < m; j++) {
+                    ret[j][0] = 0;
+                }
+                break;
+            } else {
+                ret[i][0] = 1;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (obstacleGrid[0][i] == 1) {
+                for (int j = i; j < n; j++) {
+                    ret[0][j] = 0;
+                }
+                break;
+            } else {
+                ret[0][i] = 1;
+            }
+        }
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (obstacleGrid[i][j] == 1) {
+                    ret[i][j] = 0;
+                } else {
+                    ret[i][j] = ret[i][j - 1] + ret[i - 1][j];
+                }
+            }
+        }
+        return ret[m - 1][n - 1];
+    }
+}
+
+//minimum-path-sum
+class Solution7 {
+    public static void main(String[] args) {
+        int[][] arr = new int[][] {{1,2}, {1,1}};
+        System.out.println(minPathSum(arr));
+    }
+    public static int minPathSum(int[][] grid) {
+        int row = grid.length;
+        int col = grid[0].length;
+        int[][] ret = new int[row][col];
+        ret[0][0] = grid[0][0];
+        for (int i = 1; i < row; i++) {
+            ret[i][0] = ret[i - 1][0] + grid[i][0];
+
+        }
+        if (col == 1) {
+            return ret[row - 1][0];
+        }
+        for (int i = 1; i < col; i++) {
+            ret[0][i] = ret[0][i - 1] + grid[0][i];
+        }
+        if (row == 1) {
+            return ret[0][col - 1];
+        }
+        for (int i = 1; i < row; i++) {
+            for (int j = 1; j < col ; j++) {
+                ret[i][j] = Math.min(ret[i - 1][j], ret[i][j - 1]) + grid[i][j];
+            }
+        }
+        return ret[row - 1][col - 1];
+    }
+}
