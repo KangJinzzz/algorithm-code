@@ -1920,7 +1920,47 @@ class Solution {
 
 
 class Solution1 {
+    //自顶向下
     public int minimumTotal(List<List<Integer>> triangle) {
-
+        int m = triangle.size();
+        int n = triangle.get(m - 1).size();
+        int[][] dp = new int[m][n];
+        dp[0][0] = triangle.get(0).get(0);
+        for (int i = 1; i < m; i++) {
+            for (int j = 0; j <= i; j++) {
+                if (j == 0) {   //第0列只有 (i-1, 0) 能到达 (i, 0)
+                    dp[i][j] = dp[i - 1][j] + triangle.get(i).get(j);
+                } else if (i == j) {   // i == j 时，只有 (i-1, j-1) 能到达 (i, j)
+                    dp[i][j] = dp[i - 1][j - 1] + triangle.get(i).get(j);
+                } else {
+                    dp[i][j] = Math.min(dp[i - 1][j], dp[i - 1][j - 1]) + triangle.get(i).get(j);
+                }
+            }
+        }
+        //找出最后一行路径和最小的
+        int min = dp[m - 1][0];
+        for (int j = 1; j < n; j++) {
+            if (dp[m - 1][j] < min) {
+                min = dp[m - 1][j];
+            }
+        }
+        return min;
+    }
+    //自底向上
+    public int minimumTotal2(List<List<Integer>> triangle) {
+        int m = triangle.size();
+        int n = triangle.get(m - 1).size();
+        int[][] dp = new int[m][n];
+        //初始化最后一行，最后一行的距离即为对应的 triangle
+        for (int i = 0; i < n; i++) {
+            dp[m - 1][i] = triangle.get(m - 1).get(i);
+        }
+        for (int i = m - 2; i >= 0; i--) {
+            for (int j = 0; j <= i; j++) {
+                //F(i, j) = min ( F(i + 1, j), F(i + 1, j + 1) ) + array[i, j]
+                dp[i][j] = Math.min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle.get(i).get(j);
+            }
+        }
+        return dp[0][0];
     }
 }
