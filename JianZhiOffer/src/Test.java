@@ -316,7 +316,64 @@ public class Test {
         }
         return size;
     }
-
-
 }
 
+// 23：链表中环的节点
+    //用哈希表简单
+class Solution23 {
+
+    public ListNode detectCycle(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        ListNode meetNode = getMeetNode(head);
+        if (meetNode == null) {
+            return null;
+        }
+
+        ListNode node1 = head;
+
+        while (node1 != meetNode) {
+            node1 = node1.next;
+            meetNode = meetNode.next;
+        }
+        return node1;
+    }
+    //找到相遇的节点
+    private ListNode getMeetNode(ListNode pHead) {
+
+        ListNode nodeSlow = pHead;
+        ListNode nodeFast = nodeSlow;
+        while (nodeFast != null && nodeFast.next != null) {
+            nodeSlow = nodeSlow.next;
+            nodeFast = nodeFast.next.next;
+            if (nodeSlow == nodeFast) {
+                return nodeFast;
+            }
+        }
+        return null;
+    }
+}
+
+// 24：反转链表
+class Solution24 {
+    public ListNode reverseList(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        if (head.next == null) {
+            return head;
+        }
+        ListNode node1 = null;
+        ListNode node2 = head;
+        ListNode node3 = head.next;
+        while (node3 != null) {
+            node2.next = node1;
+            node1 = node2;
+            node2 = node3;
+            node3 = node3.next;
+        }
+        node2.next = node1;
+        return node2;
+    }
+}
