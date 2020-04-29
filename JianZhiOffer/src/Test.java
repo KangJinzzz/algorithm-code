@@ -377,3 +377,33 @@ class Solution24 {
         return node2;
     }
 }
+
+//面试题25. 合并两个排序的链表
+class Solution25 {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            return l2;
+        }
+        if (l2 == null) {
+            return l1;
+        }
+        ListNode newHead = new ListNode();
+        ListNode newTail = newHead;
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                newTail.next = new ListNode(l1.val);
+                l1 = l1.next;
+            } else {
+                newTail.next = new ListNode(l2.val);
+                l2 = l2.next;
+            }
+            newTail = newTail.next;
+        }
+        if (l1 == null) {
+            newTail.next = l2;
+        } else {
+            newTail.next = l1;
+        }
+        return newHead.next;
+    }
+}
