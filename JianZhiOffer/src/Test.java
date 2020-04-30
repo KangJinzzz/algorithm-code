@@ -387,7 +387,7 @@ class Solution25 {
         if (l2 == null) {
             return l1;
         }
-        ListNode newHead = new ListNode();
+        ListNode newHead = new ListNode(-1);
         ListNode newTail = newHead;
         while (l1 != null && l2 != null) {
             if (l1.val < l2.val) {
@@ -405,5 +405,34 @@ class Solution25 {
             newTail.next = l1;
         }
         return newHead.next;
+    }
+}
+
+//面试题26. 树的子结构
+class Solution26 {
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
+        if (A == null || B == null) {
+            return false;
+        }
+        boolean res = false;
+        if (A.val == B.val) {
+            res = helper(A, B);
+        }
+        if (!res) {
+            res = isSubStructure(A.left, B);
+        }
+        if (!res) {
+            res = isSubStructure(A.right, B);
+        }
+        return res;
+    }
+    public boolean helper(TreeNode A, TreeNode B) {
+        if (B == null) {
+            return true;
+        }
+        if (A == null || A.val != B.val) {
+            return false;
+        }
+        return helper(A.left, B.left) && helper(A.right, B.right);
     }
 }
