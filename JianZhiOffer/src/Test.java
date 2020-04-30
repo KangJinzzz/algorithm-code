@@ -436,3 +436,30 @@ class Solution26 {
         return helper(A.left, B.left) && helper(A.right, B.right);
     }
 }
+
+//面试题27. 二叉树的镜像
+class Solution27 {
+    public TreeNode mirrorTree(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        if (root.right == null && root.left == null) {
+            return root;
+        }
+        TreeNode temp = null;
+        temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        if (root.left != null) {
+            mirrorTree(root.left);
+        }
+        if (root.right != null) {
+            mirrorTree(root.right);
+        }
+        return root;
+    }
+}
+
+//面试题28. 对称的二叉树
+
+
