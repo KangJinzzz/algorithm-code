@@ -461,5 +461,56 @@ class Solution27 {
 }
 
 //面试题28. 对称的二叉树
+//  如果一个二叉树是对称的，那么这个二叉树左序遍历（中，左，右）的值与右序遍历（中，右，左）的值对应
+class Solution28 {
+    public boolean isSymmetric(TreeNode root) {
+        return helper(root, root);
+    }
+    public boolean helper(TreeNode node1, TreeNode node2) {
+        if (node1 == null && node2 == null) {
+            return true;
+        }
+        if (node1 == null || node2 == null) {
+            return false;
+        }
+        if (node1.val != node2.val) {
+            return false;
+        }
+        return helper(node1.left, node2.right) && helper(node1.right, node2.left);
+    }
+}
 
+//面试题29. 顺时针打印矩阵
+class Solution29 {
+    public int[] spiralOrder(int[][] matrix) {
+        if (matrix.length == 0) {
+            return new int[0];
+        }
+        int left = 0;  //左边界
+        int right = matrix[0].length - 1;   //右边界
+        int top = 0;  //上边界
+        int below = matrix.length - 1;  //下边界
+        int index = 0;
+        int[] ret = new int[(right + 1) * (below + 1)];
+        while (true) {
+            for (int i = left; i <= right; i++) {   //由左边界开始向右打印上边界，打印完后上边界收缩
+                ret[index++] = matrix[top][i];
+            }
+            if (++top > below) break;
+            for (int i = top; i <= below; i++) {    //由上边界开始向下打印右边界，打印完后右边界收缩
+                ret[index++] = matrix[i][right];
+            }
+            if (--right < left) break;
+            for (int i = right; i >= left; i--) {   //由右边界开始向左打印下边界，打印完后下边界收缩
+                ret[index++] = matrix[below][i];
+            }
+            if (--below < top) break;
+            for (int i = below; i >= top; i--) {    //由下边界开始向上打印左边界，打印完后左边界收缩
+                ret[index++] = matrix[i][left];
+            }
+            if (++left > right) break;
+        }
+        return ret;
+    }
+}
 
