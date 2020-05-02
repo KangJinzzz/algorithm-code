@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 public class Test {
     public static void main(String[] args) {
@@ -514,3 +515,36 @@ class Solution29 {
     }
 }
 
+//面试题30. 包含min函数的栈
+class MinStack {
+
+    /** initialize your data structure here. */
+    Stack<Integer> A = new Stack<>();
+    Stack<Integer> B = new Stack<>();   //辅助栈
+
+    public MinStack() {
+
+    }
+
+    public void push(int x) {
+        A.push(x);
+        if (B.size() == 0 || x < B.peek()) {
+            B.push(x);
+        } else {
+            B.push(B.peek());
+        }
+    }
+
+    public void pop() {
+        A.pop();
+        B.pop();
+    }
+
+    public int top() {
+        return A.peek();
+    }
+
+    public int min() {
+        return B.peek();
+    }
+}
