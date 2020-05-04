@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.beans.IntrospectionException;
+import java.util.*;
 
 public class Test {
     public static void main(String[] args) {
@@ -571,3 +569,29 @@ class Solution31 {
         return stack.isEmpty();
     }
 }
+
+//面试题32 - I. 从上到下打印二叉树
+class Solution32 {
+    public int[] levelOrder(TreeNode root) {
+        if (root == null) {
+            return new int[0];
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        List<TreeNode> list = new ArrayList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.peek();
+            if (node.left != null) queue.offer(node.left);
+            if (node.right != null) queue.offer(node.right);
+            list.add(queue.poll());
+        }
+        int[] ret = new int[list.size()];
+        int index = 0;
+        for (TreeNode n : list) {
+            ret[index++] = n.val;
+        }
+        return ret;
+    }
+}
+
+
