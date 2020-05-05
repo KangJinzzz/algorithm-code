@@ -594,4 +594,26 @@ class Solution32 {
     }
 }
 
-
+//面试题32 - II. 从上到下打印二叉树 II
+class Solution32_2 {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            List<Integer> tmp = new ArrayList<>();
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                tmp.add(node.val);
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+            }
+            list.add(tmp);
+        }
+        return list;
+    }
+}
