@@ -619,7 +619,7 @@ class Solution32_2 {
 }
 
 //面试题32 - III. 从上到下打印二叉树 III
-class Solution {
+class Solution32_3 {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
@@ -646,4 +646,24 @@ class Solution {
     }
 }
 
-
+//面试题33. 二叉搜索树的后序遍历序列
+class Solution {
+    public boolean verifyPostorder(int[] postorder) {
+        return helper(postorder, 0, postorder.length - 1);
+    }
+    public boolean helper(int[] arr, int i, int j) {
+        if (i >= j) {
+            return true;
+        }
+        int root = arr[j];
+        int m = i;
+        while (arr[m] < root) {
+            m++;
+        }
+        int l = m;
+        while (arr[m] > root) {
+            m++;
+        }
+        return m == j && helper(arr, i, m - 1) && helper(arr, m, j);
+    }
+}
