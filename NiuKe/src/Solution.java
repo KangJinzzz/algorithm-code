@@ -2815,4 +2815,77 @@ class Solution9 {
     }
 }
 
+//背包问题
+class Solution10 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            int[] A = new int[n];
+            int[] V = new int[n];
+            for (int i = 0; i < n; i++) {
+                A[i] = sc.nextInt();
+                V[i] = sc.nextInt();
+            }
+            System.out.println(backPackII(m, A, V));
+        }
+    }
+
+    /*
+    状态：设F(i, j)表示:背包空间为 j 时，前 i 件物品的最大价值
+    转移方程：1.当A[i - 1] > j时，此时这件物品肯定放不下，因此 F(i, j) = F(i - 1, j)
+              2.当A[i - 1] <= j时，第 i 件物品可以选择放进背包，或不放进背包：
+                (1）不放进背包时最大价值 F(i, j) = F(i - 1, j);
+                (2）放进背包，第 i 件物品已经占据 A[i - 1] 空间的大小，背包还剩 j - A[i - 1]空间，
+                可用剩下的空间装前 i - 1 件物品因此此时的最大价值为 F(i, j) = F(i - 1, j - A[i - 1]) + V[i - 1]
+              即第 2 种情况的最大价值为(1), (2)中价值较大的 即 F(i, j) = max(F(i - 1, j), F(i - 1, j - A[i - 1]) + V[i - 1])
+     返回值：F(A.length, m)
+     */
+//    public static int backPackII(int m, int[] A, int[] V) {
+//        int len = A.length;
+//        int[][] maxValue = new int[len + 1][m + 1];
+//        //初始化
+//        for (int i = 0; i <= len; i++) {
+//            maxValue[i][0] = 0;
+//        }
+//        for (int j = 1; j <= m ; j++) {
+//            maxValue[0][j] = 0;
+//        }
+//
+//        for (int i = 1; i <= len; i++) {
+//            for (int j = 1; j <= m; j++) {
+//                if (A[i - 1] > j) {
+//                    maxValue[i][j] = maxValue[i - 1][j];
+//                } else {
+//                    maxValue[i][j] = Math.max(maxValue[i -1][j], maxValue[i - 1][j - A[i - 1]] + V[i - 1]);
+//                }
+//            }
+//        }
+//        return maxValue[len][m];
+//    }
+
+//    优化版
+//当前的状态只与上一行当前列之前的列有关， 因此只需要保存上一行的值，但j要从后往前算，不然上一行第 j 列之前的列数据更新后的值就成了当前行的数据，而不是上一行的值
+    public static int backPackII(int m, int[] A, int[] V) {
+        int len = A.length;
+        int[] maxValue = new int[m + 1];
+        //初始化
+        for (int i = 0; i <= m ; i++) {
+            maxValue[i] = 0;
+        }
+
+        for (int i = 1; i <= len; i++) {
+            for (int j = m; j >= 1; j--) {  //当前的状态只与上一行当前列之前的列有关， 因此只需要保存上一行的值，但j要从后往前算，不然上一行第 j 列之前的列数据更新后的值就成了当前行的数据
+                if (A[i - 1] <= j) {
+                    maxValue[j] = Math.max(maxValue[j], maxValue[j - A[i - 1]] + V[i - 1]);
+                }
+            }
+        }
+        return maxValue[m];
+    }
+
+}
+
+
 
