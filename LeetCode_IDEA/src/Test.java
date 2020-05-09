@@ -1970,7 +1970,7 @@ class Solution1 {
 /**
  * 状态：F(i):前i个字符分割成回文串的最小次数
  * 转移方程：j < i, j = 0, 1,....i - 1
- *          当 substring(j + 1, i)是回文串，F(i) = min{F(j) + 1}, j = 0, 1, 2, .....i - 1
+ *          当 s[j + 1, i]是回文串，F(i) = min{F(j) + 1}, j = 0, 1, 2, .....i - 1
  * 返回值：F(s.length())
  */
 class Solution2 {
@@ -1987,7 +1987,7 @@ class Solution2 {
         }
         for (int i = 1; i <= len; i++) {
             for (int j = i - 1; j >= 0; j--) {
-                if (isPal[j + 1][i]) {
+                if (isPal[j + 1][i]) {      // s[j + 1, i]是回文串
                     min[i] = Math.min(min[i], min[j] + 1);
                 }
             }
@@ -1995,6 +1995,28 @@ class Solution2 {
         return min[len];
     }
 
+    //将字符串的所有子串是否是回文串保存在二维数组，用空间换时间
+    /**
+     * 状态：F(i, j):第 i 个字符到第 j 个字符是否是回文串
+     * 转移方程：如果 s.charAt(i - 1) == s.charAt(j - 1) && F(i + 1, j - 1)则 F(i, j)为ture
+     * 返回：二维数组
+     */
     private boolean[][] isPalindrome(String s) {
+        int len = s.length();
+        boolean[][] isPal = new boolean[len + 1][len + 1];
+        for (int i = len; i >= 1; i--) {
+            for (int j = i; j <= len; j++) {
+                if (i == j) {   //单个字符，一定是回文串
+                    isPal[i][j] = true;
+                } else if (i == j - 1) {    //两个字符，若这两个字符相等，则为回文串
+                    if (s.charAt(i - 1) == s.charAt(j - 1))
+                        isPal[i][j] = true;
+                } else {
+                    if (s.charAt(i - 1) == s.charAt(j - 1) && isPal[i + 1][j - 1])
+                        isPal[i][j] = true;
+                }
+            }
+        }
+        return isPal;
     }
 }
