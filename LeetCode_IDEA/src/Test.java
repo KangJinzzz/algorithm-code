@@ -1964,3 +1964,37 @@ class Solution1 {
         return dp[0][0];
     }
 }
+
+//132. 分割回文串 II
+
+/**
+ * 状态：F(i):前i个字符分割成回文串的最小次数
+ * 转移方程：j < i, j = 0, 1,....i - 1
+ *          当 substring(j + 1, i)是回文串，F(i) = min{F(j) + 1}, j = 0, 1, 2, .....i - 1
+ * 返回值：F(s.length())
+ */
+class Solution2 {
+    public int minCut(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        int len = s.length();
+        boolean[][] isPal = isPalindrome(s);
+        int[] min = new int[len + 1];
+        //初始化，长度为 n 的字符串最多都分割成单个字符，即 n - 1 种方法
+        for (int i = 0; i <= len; i++) {
+            min[i] = i - 1;
+        }
+        for (int i = 1; i <= len; i++) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (isPal[j + 1][i]) {
+                    min[i] = Math.min(min[i], min[j] + 1);
+                }
+            }
+        }
+        return min[len];
+    }
+
+    private boolean[][] isPalindrome(String s) {
+    }
+}
