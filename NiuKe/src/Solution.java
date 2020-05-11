@@ -2887,5 +2887,80 @@ class Solution10 {
 
 }
 
+//餐馆   //未通过
+class Main72 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            int[] table = new int[n + 1];
+            int[] nums = new int[m + 1];
+            int[] money = new int[m + 1];
+            for (int i = 1; i <= n; i++) {
+                table[i] = sc.nextInt();
+            }
+            for (int i = 1; i <= m; i++) {
+                nums[i] = sc.nextInt();
+                money[i] = sc.nextInt();
+            }
+
+            int[][] maxValue = new int[m + 1][n + 1];
+            for (int i = 0; i <= m; i++) {
+                maxValue[i][0] = 0;
+            }
+            for (int j = 0; j <= n; j++) {
+                maxValue[0][j] = 0;
+            }
+            for (int i = 1; i <= m; i++) {
+                for (int j = 1; j <= n; j++) {
+                    if (nums[i] > table[j]) {
+                        maxValue[i][j] = maxValue[i - 1][j];
+                    } else {
+                        maxValue[i][j] = Math.max(maxValue[i - 1][j], maxValue[i - 1][j - 1] + money[i]);
+                    }
+                }
+            }
+            System.out.println(maxValue[m][n]);
+        }
+    }
+}
+
+//航线  //未通过
+class Main73 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            int[] sites = new int[n + 1];
+            int[] p = new int[m + 1];
+            int[] q = new int[m + 1];
+            int[] k = new int[m + 1];
+            int[] x = new int[m + 1];
+            int[] y = new int[m + 1];
+            int day = 0;
+            for (int i = 1; i <= m ;i++) {
+                p[i] = sc.nextInt();
+                q[i] = sc.nextInt();
+                k[i] = sc.nextInt();
+                x[i] = sc.nextInt();
+                y[i] = sc.nextInt();
+            }
+            int[][] minDays = new int[m + 1][n + 1];
+            for (int i = 0; i <= m; i++) {
+                minDays[i][1] = 0;
+            }
+            for (int i = 2; i <= n; i++) {
+                minDays[0][i] = Integer.MAX_VALUE;
+            }
+            for (int i = 1; i <= m; i++) {
+                for (int j = 2; j <= n; j++) {
+
+                }
+            }
+        }
+    }
+}
 
 
