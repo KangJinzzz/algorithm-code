@@ -3000,3 +3000,48 @@ class Solution8 {
         return minDis[row][col];
     }
 }
+
+/*
+    状态：
+        子状态：由S的前1,2,...,m个字符组成的子串与T的前1,2,...,n个字符相同的个数
+        F(i,j): S[1:i]中的子串与T[1:j]相同的个数
+    状态递推：
+        在F(i,j)处需要考虑S[i] = T[j] 和 S[i] != T[j]两种情况
+        当S[i] = T[j]:
+        1>: 让S[i]匹配T[j]，则
+        F(i,j) = F(i-1,j-1)
+        2>: 让S[i]不匹配T[j],则问题就变为S[1:i-1]中的子串与T[1:j]相同的个数，则
+        F(i,j) = F(i-1,j)
+        故，S[i] = T[j]时，F(i,j) = F(i-1,j-1) + F(i-1,j)
+        当S[i] != T[j]:
+        问题退化为S[1:i-1]中的子串与T[1:j]相同的个数
+        故，S[i] != T[j]时，F(i,j) = F(i-1,j)
+    初始化：引入空串进行初始化
+        F(i,0) = 1 ---> S的子串与空串相同的个数，只有空串与空串相同
+    返回结果：F(m,n)
+*/
+class Solution11 {
+    public int numDistinct(String S, String T) {
+        int row = S.length();
+        int col = T.length();
+        int[][] dp = new  int[row + 1][col + 1];
+        //初始化
+        for (int i = 0; i <= row; i++) {
+            dp[i][0] = 1;
+        }
+        for (int j = 1; j <= col; j++) {
+            dp[0][j] = 0;
+        }
+        for (int i = 1; i <= row; i++) {
+            for (int j = 1; j <= col; j++) {
+                if (S.charAt(i - 1) == T.charAt(j - 1)) {
+                    //S的第i个字符和T的第j个字符相等，可以选择把S的第i个字符放入子串或不放
+                    dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
+                } else {
+                    dp[i][j] = dp[i - 1][j];
+                }
+            }
+        }
+        return dp[row][col];
+    }
+}
