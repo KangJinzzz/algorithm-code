@@ -2020,3 +2020,24 @@ class Solution2 {
         return isPal;
     }
 }
+
+//690. 员工的重要性
+class Solution3 {
+    public int getImportance(List<Employee> employees, int id) {
+        HashMap<Integer, Employee> map = new HashMap<>();
+        for (Employee e : employees) {
+            map.put(e.id, e);
+        }
+        return dfs(map, id);
+    }
+    public int dfs(HashMap<Integer, Employee> map, int id) {
+        int res = 0;
+        Employee employee = map.get(id);
+        res += employee.importance;
+        for (int eid : employee.subordinates) {
+            res += dfs(map, eid);
+        }
+        return res;
+    }
+}
+
