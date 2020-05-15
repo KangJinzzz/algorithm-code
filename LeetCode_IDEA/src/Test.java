@@ -2041,3 +2041,29 @@ class Solution3 {
     }
 }
 
+//733. 图像渲染
+class Solution4 {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        if (newColor == image[sr][sc]) {
+            return image;
+        }
+        int oldColor = image[sr][sc];
+        int[][] direction = new int[][] {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
+        dfs(image, sr, sc, newColor, oldColor, direction);
+        return image;
+    }
+    public void dfs(int[][] image, int x, int y, int newColor, int oldColor, int[][] direction) {
+        int row = image.length;
+        int col = image[0].length;
+        if (x < 0 || x >= row || y < 0 || y >= col) {
+            return;
+        }
+        if (image[x][y] == oldColor) {
+            image[x][y] = newColor;
+            for (int i = 0; i < 4; i++) {
+                dfs(image, x + direction[i][0], y + direction[i][1], newColor, oldColor, direction);
+            }
+        }
+
+    }
+}
