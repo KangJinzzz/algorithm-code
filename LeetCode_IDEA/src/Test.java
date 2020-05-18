@@ -2092,3 +2092,60 @@ class Solution5 {
         return list;
     }
 }
+
+//130. 被围绕的区域
+class Solution6 {
+
+    int[][] position = new int[][] {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
+
+    public void solve(char[][] board) {
+        if (board.length == 0) {
+            return;
+        }
+        int row = board.length;
+        int col = board[0].length;
+        int[][] flag = new int[row][col];
+        for (int i = 0; i < col; i++) {
+            if (board[0][i] == 'O') {
+                dfs(board, flag, 0, i);
+            }
+            if (board[row - 1][i] == 'O') {
+                dfs(board, flag, row - 1, i);
+            }
+        }
+        for (int i = 1; i < row - 1; i++) {
+            if (board[i][0] == 'O') {
+                dfs(board, flag, i, 0);
+            }
+            if (board[i][col - 1] == 'O') {
+                dfs(board, flag, i, col - 1);
+            }
+        }
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (board[i][j] == '*') {
+                    board[i][j] = 'O';
+                } else {
+                    board[i][j] = 'X';
+                }
+            }
+        }
+    }
+
+    private void dfs(char[][] board, int[][] flag, int x, int y) {
+        int row = board.length;
+        int col = board[0].length;
+        //越界
+        if (x < 0 || x >= row || y < 0 || y >= col) {
+            return;
+        }
+        //该点不等于O或已被访问过
+        if (board[x][y] != 'O' || flag[x][y] == 1) {
+            return;
+        }
+        flag[x][y] = 1;
+        for (int i = 0; i < 4; i++) {
+            dfs(board, flag, x + position[i][0], y + position[i][1]);
+        }
+    }
+}
