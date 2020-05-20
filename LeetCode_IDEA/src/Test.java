@@ -2149,3 +2149,40 @@ class Solution6 {
         }
     }
 }
+
+
+class Solution7 {
+    int[][] position = new int[][] {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    public int numIslands(char[][] grid) {
+        if (grid.length == 0) {
+            return 0;
+        }
+        int row = grid.length;
+        int col = grid[0].length;
+        int ret = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == '1') {
+                    dfs(grid, i, j);
+                    ret++;
+                }
+            }
+        }
+        return ret;
+    }
+
+    public void dfs(char[][] grid, int x, int y) {
+        int row = grid.length;
+        int col = grid[0].length;
+        if (x < 0 || x >= row || y < 0 || y >= col) {
+            return;
+        }
+        if (grid[x][y] == '0') {
+            return;
+        }
+        grid[x][y] = '0';
+        for (int i = 0; i < 4; i++) {
+            dfs(grid, x + position[i][0], y + position[i][1]);
+        }
+    }
+}
