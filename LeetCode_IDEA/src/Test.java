@@ -2150,7 +2150,7 @@ class Solution6 {
     }
 }
 
-
+//695. 岛屿的最大面积
 class Solution7 {
     int[][] position = new int[][] {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     public int numIslands(char[][] grid) {
@@ -2184,5 +2184,27 @@ class Solution7 {
         for (int i = 0; i < 4; i++) {
             dfs(grid, x + position[i][0], y + position[i][1]);
         }
+    }
+}
+
+//690. 员工的重要性
+//  广度优先搜索
+class Solution8 {
+    public int getImportance(List<Employee> employees, int id) {
+        int sum = 0;
+        Queue<Employee> queue = new LinkedList<>();
+        Map<Integer, Employee> map = new HashMap<>();
+        for (Employee e : employees) {
+            map.put(e.id, e);
+        }
+        queue.offer(map.get(id));
+        while (!queue.isEmpty()) {
+            Employee em = queue.poll();
+            sum += em.importance;
+            for (Integer x : em.subordinates) {
+                queue.offer(map.get(x));
+            }
+        }
+        return sum;
     }
 }
