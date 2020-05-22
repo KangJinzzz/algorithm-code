@@ -2069,29 +2069,29 @@ class Solution4 {
 }
 
 //429. N叉树的层序遍历
-class Solution5 {
-    public List<List<Integer>> levelOrder(Node root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
-        List<List<Integer>> list = new ArrayList<>();
-        Queue<Node> queue = new LinkedList<>();
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            List<Integer> tmp = new ArrayList<>();
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                Node node = queue.poll();
-                tmp.add(node.val);
-                for (Node n : node.children) {
-                    queue.offer(n);
-                }
-            }
-            list.add(tmp);
-        }
-        return list;
-    }
-}
+//class Solution5 {
+//    public List<List<Integer>> levelOrder(Node root) {
+//        if (root == null) {
+//            return new ArrayList<>();
+//        }
+//        List<List<Integer>> list = new ArrayList<>();
+//        Queue<Node> queue = new LinkedList<>();
+//        queue.offer(root);
+//        while (!queue.isEmpty()) {
+//            List<Integer> tmp = new ArrayList<>();
+//            int size = queue.size();
+//            for (int i = 0; i < size; i++) {
+//                Node node = queue.poll();
+//                tmp.add(node.val);
+//                for (Node n : node.children) {
+//                    queue.offer(n);
+//                }
+//            }
+//            list.add(tmp);
+//        }
+//        return list;
+//    }
+//}
 
 //130. 被围绕的区域
 class Solution6 {
@@ -2206,5 +2206,71 @@ class Solution8 {
             }
         }
         return sum;
+    }
+}
+
+//994. 腐烂的橘子
+class Solution9 {
+    class Pair {
+        public int x;
+        public int y;
+
+        public Pair(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+    public void chuanran(int[][] grid, int x, int y) {
+        int row = grid.length;
+        int col = grid[0].length;
+        if (x < 0 || x >= row || y < 0 || y >= col) {
+            return;
+        }
+        if (grid[x][y] == 1) {
+            grid[x][y] = 2;
+            queue.offer(new Pair(x, y));
+        }
+    }
+
+    int[][] position = new int[][] {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    Queue<Pair> queue = new LinkedList<>();
+
+    public int orangesRotting(int[][] grid) {
+        int times = 0;
+        int row = grid.length;
+        int col = grid[0].length;
+        boolean flag = false;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 2) {
+                    queue.offer(new Pair(i, j));
+                }
+                if (grid[i][j] == 1) {
+                    flag = true;
+                }
+            }
+        }
+        if (!flag) {
+            return 0;
+        }
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                Pair pair = queue.poll();
+                for (int j = 0; j < 4; j++) {
+                    chuanran(grid, pair.x + position[j][0], pair.y + position[j][1]);
+                }
+            }
+            times++;
+        }
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 1) {
+                    return -1;
+                }
+            }
+        }
+        return times - 1;
     }
 }
