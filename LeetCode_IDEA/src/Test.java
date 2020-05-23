@@ -2274,3 +2274,45 @@ class Solution9 {
         return times - 1;
     }
 }
+
+//127. 单词接龙
+class Solution10 {
+
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        //存放所有访问过的单词
+        Set<String> visited = new HashSet<>();
+        //set的查找速率快，直接用wordList查找会超出时间限制
+        Set<String> words = new HashSet<>();
+        Queue<String> queue = new LinkedList<>();
+        for (String str : wordList) {
+            words.add(str);
+        }
+        int res = 1;
+        visited.add(beginWord);
+        queue.offer(beginWord);
+        while (!queue.isEmpty()) {
+            res++;
+            int size = queue.size();
+            while (size-- > 0) {
+                String str = queue.poll();
+                for (int i = 0; i < beginWord.length(); i++) {
+                    StringBuilder newStr = new StringBuilder(str);
+                    for (int j = 0; j < 26; j++) {
+                        newStr.setCharAt(i, (char)('a' + j));
+                        String newStr1 = newStr.toString();
+                        if (words.contains(newStr1) && !visited.contains(newStr1)) {
+                            if (newStr1.equals(endWord)) {
+                                return res;
+                            }
+                            queue.offer(newStr1);
+                            visited.add(newStr1);
+                        }
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+}
+
+
