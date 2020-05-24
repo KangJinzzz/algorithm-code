@@ -2315,4 +2315,42 @@ class Solution10 {
     }
 }
 
-
+//752. 打开转盘锁
+class Solution11 {
+    public int openLock(String[] deadends, String target) {
+        Set<String> set = new HashSet<>(Arrays.asList(deadends));
+        if (set.contains("0000")) {
+            return -1;
+        }
+        Queue<String> queue = new LinkedList<>();
+        queue.offer("0000");
+        set.add("0000");
+        int res = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; ++i) {
+                String curStr = queue.poll();
+                if (curStr.equals(target)) {
+                    return res;
+                }
+                for (int j = 0; j < 4; ++j) {
+                    StringBuilder str = new StringBuilder(curStr);
+                    str.setCharAt(j, (char)((((str.charAt(j) - '0') + 1 + 10) % 10) + '0'));
+                    String str1 = str.toString();
+                    if (!set.contains(str1)) {
+                        queue.offer(str1);
+                        set.add(str1);
+                    }
+                    str.setCharAt(j, (char)((((str.charAt(j) - '0') - 2 + 10) % 10) + '0'));
+                    String str2 = str.toString();
+                    if (!set.contains(str2)) {
+                        queue.offer(str2);
+                        set.add(str2);
+                    }
+                }
+            }
+            res++;
+        }
+        return -1;
+    }
+}
