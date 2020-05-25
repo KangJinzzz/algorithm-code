@@ -2354,3 +2354,30 @@ class Solution11 {
         return -1;
     }
 }
+
+//17. 电话号码的字母组合
+class Solution12 {
+    String[] strings = new String[] {"", "", "abc","def","ghi","jkl","mno", "pqrs","tuv","wxyz"};
+    public List<String> letterCombinations(String digits) {
+        List<String> res = new ArrayList<>();
+        if (digits == null || digits.length() == 0) {
+            return res;
+        }
+        dfs(digits, res, 0, "");
+        return res;
+    }
+
+    public void dfs(String digits, List<String> res, int curIndex, String curStr) {
+        if (curIndex == digits.length()) {
+            if (curStr != null) {
+                res.add(curStr);
+            }
+            return;
+        }
+        String str = strings[digits.charAt(curIndex) - '0'];
+        for (char ch : str.toCharArray()) {
+            dfs(digits, res, curIndex + 1, curStr + ch);
+        }
+    }
+}
+
