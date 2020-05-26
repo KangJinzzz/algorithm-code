@@ -2379,5 +2379,37 @@ class Solution12 {
             dfs(digits, res, curIndex + 1, curStr + ch);
         }
     }
+
 }
 
+//39. 组合总和
+class Solution13 {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> solutions = new ArrayList<>();
+        List<Integer> solution = new ArrayList<>();
+        if (candidates.length == 0) {
+            return solutions;
+        }
+        dfs(candidates, solutions, solution, 0, 0, target);
+        return solutions;
+    }
+
+    public void dfs(int[] candidates, List<List<Integer>> solutions, List<Integer> solution
+            , int curSum, int index, int target) {
+        if (curSum >= target) {
+            if (curSum == target) {
+                List<Integer> list = new ArrayList<>(solution);
+                solutions.add(list);
+            }
+            return;
+        }
+        for (int i = index; i < candidates.length; ++i) {
+            if (candidates[i] > target) {
+                continue;
+            }
+            solution.add(candidates[i]);
+            dfs(candidates, solutions, solution, curSum + candidates[i], i, target);
+            solution.remove(solution.size() - 1);
+        }
+    }
+}
