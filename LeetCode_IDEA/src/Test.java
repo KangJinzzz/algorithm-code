@@ -2413,3 +2413,30 @@ class Solution13 {
         }
     }
 }
+
+//1079. 活字印刷
+class Solution14 {
+    public int numTilePossibilities(String tiles) {
+        if (tiles.length() == 0) {
+            return 0;
+        }
+        String curStr = "";
+        int[] isUsed = new int[tiles.length()];
+        Set<String> set = new HashSet<>();
+        dfs(tiles, curStr, isUsed, set);
+        return set.size();
+    }
+
+    public void dfs(String tiles, String curStr, int[] isUsed, Set<String> set) {
+        if (curStr.length() != 0) {
+            set.add(curStr);
+        }
+        for (int i = 0; i < tiles.length(); i++) {
+            if (isUsed[i] == 0) {
+                isUsed[i] = 1;
+                dfs(tiles, curStr + tiles.charAt(i), isUsed, set);
+                isUsed[i] = 0;
+            }
+        }
+    }
+}
