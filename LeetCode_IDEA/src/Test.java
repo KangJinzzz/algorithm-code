@@ -2462,10 +2462,27 @@ class Solution145{
         //保存结果中的一种
         List<Pair> solution = new ArrayList<>();
         queensTransBack(solutions, solution, 0, n);
-        return pairToString(solutions);
+        return pairToString(solutions, n);
     }
 
-    private List<List<String>> pairToString(List<List<Pair>> solutions) {
+    private List<List<String>> pairToString(List<List<Pair>> solutions, int n) {
+        List<List<String>> res = new ArrayList<>();
+        for (List<Pair> solution : solutions) {
+            List<String> tmp = new ArrayList<>();
+            for (Pair p : solution) {
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < n; i++) {
+                    if (i == p.y) {
+                        builder.append("Q");
+                    } else {
+                        builder.append(".");
+                    }
+                }
+                tmp.add(builder.toString());
+            }
+            res.add(tmp);
+        }
+        return res;
     }
 
     private void queensTransBack(List<List<Pair>> solutions, List<Pair> solution, int curRow, int n) {
@@ -2476,12 +2493,30 @@ class Solution145{
         }
         
         for (int i = 0; i < n; i++) {
+            //判断当前坐标是否可以安全放入皇后
             if (isSafe(solution, curRow, i)) {
-                
+                solution.add(new Pair(curRow, i));
+                queensTransBack(solutions, solution, curRow + 1, n);
+                solution.remove(solution.size() - 1);
             }
         }
     }
 
+    /**
+     * p.y == i：当前要放皇后的 位置与之前放的皇后在一列
+     * p.y + p.x == curRow + i：/ 上有皇后
+     * p.y - p.x == i - curRow：\ 上有皇后
+     * @param solution
+     * @param curRow
+     * @param i
+     * @return
+     */
     private boolean isSafe(List<Pair> solution, int curRow, int i) {
+        for (Pair p : solution) {
+            if (p.y == i || p.y + p.x == curRow + i || p.y - p.x == i - curRow) {
+                return false;
+            }
+        }
+        return true;
     }
 }
