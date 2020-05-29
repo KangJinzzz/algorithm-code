@@ -2440,3 +2440,48 @@ class Solution14 {
         }
     }
 }
+
+//51. N皇后
+class Solution145{
+    class Pair {
+        public int x = 0;
+        public int y = 0;
+
+        public Pair(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    public List<List<String>> solveNQueens(int n) {
+        if (n == 0) {
+            return new ArrayList<>();
+        }
+        //保存所有的结果
+        List<List<Pair>> solutions = new ArrayList<>();
+        //保存结果中的一种
+        List<Pair> solution = new ArrayList<>();
+        queensTransBack(solutions, solution, 0, n);
+        return pairToString(solutions);
+    }
+
+    private List<List<String>> pairToString(List<List<Pair>> solutions) {
+    }
+
+    private void queensTransBack(List<List<Pair>> solutions, List<Pair> solution, int curRow, int n) {
+        if (curRow == n) {
+            List<Pair> list = new ArrayList<>(solution);
+            solutions.add(list);
+            return;
+        }
+        
+        for (int i = 0; i < n; i++) {
+            if (isSafe(solution, curRow, i)) {
+                
+            }
+        }
+    }
+
+    private boolean isSafe(List<Pair> solution, int curRow, int i) {
+    }
+}
