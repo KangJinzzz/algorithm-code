@@ -698,3 +698,18 @@ class Solution34 {
 
     }
 }
+
+//面试题35. 复杂链表的复制
+class Solution35 {
+    public Node copyRandomList(Node head) {
+        Map<Node, Node> map = new HashMap();
+        for (Node node = head; node != null; node = node.next) {
+            map.put(node, new Node(node.val));
+        }
+        for (Node node = head; node != null; node = node.next) {
+            map.get(node).next = map.get(node.next);
+            map.get(node).random = map.get(node.random);
+        }
+        return map.get(head);
+    }
+}
