@@ -667,3 +667,34 @@ class Solution {
         return m == j && helper(arr, i, m - 1) && helper(arr, m, j);
     }
 }
+
+//面试题34. 二叉树中和为某一值的路径
+class Solution34 {
+    List<List<Integer>> solutions = new ArrayList<>();
+    List<Integer> solution = new ArrayList<>();
+    int curSum = 0;
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        backTrack(root, sum);
+        return solutions;
+    }
+
+    public void backTrack(TreeNode root, int sum) {
+        if (root == null) {
+            return;
+        }
+        solution.add(root.val);
+        curSum += root.val;
+        if (curSum == sum && root.right == null && root.left == null) {
+            List<Integer> tmp = new ArrayList<>(solution);
+            solutions.add(tmp);
+        }
+        backTrack(root.left, sum);
+        backTrack(root.right, sum);
+        solution.remove(solution.size() - 1);
+        curSum -= root.val;
+
+    }
+}
