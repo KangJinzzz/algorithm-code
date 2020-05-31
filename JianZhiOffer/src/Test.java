@@ -700,6 +700,7 @@ class Solution34 {
 }
 
 //面试题35. 复杂链表的复制
+//方法一：
 class Solution35 {
     public Node copyRandomList(Node head) {
         Map<Node, Node> map = new HashMap();
@@ -711,5 +712,49 @@ class Solution35 {
             map.get(node).random = map.get(node.random);
         }
         return map.get(head);
+    }
+}
+//方法二：
+/**
+ * 原链表：node1->node2->node3->....
+ * 1.新链表：node1->copyNode1->node2->copyNode2->node3->copyNode3->...
+ * 2.copyNodei.random = nodei.random.next;
+ * 3.奇数位置是原链表,偶数位置是新链表
+ */
+class Solution35_2 {
+    public Node copyRandomList(Node head) {
+        if (head == null) {
+            return null;
+        }
+        //步骤一：
+        for (Node node = head; node != null; node = node.next.next) {
+            Node newNode = new Node(node.val);
+            newNode.next = node.next;
+            node.next = newNode;
+        }
+        //步骤二：
+        for (Node node = head; node != null; node = node.next.next) {
+            if (node.random != null) {
+                node.next.random = node.random.next;
+            } else {
+                node.next.random = null;
+            }
+
+        }
+        //步骤三：
+        Node newHead = head.next;
+        Node node = newHead;
+        while (head != null) {
+            if (node.next == null) {
+                head.next = null;
+                break;
+            } else {
+                head.next = node.next;
+                node.next = head.next.next;
+                head = head.next;
+                node = node.next;
+            }
+        }
+        return newHead;
     }
 }
