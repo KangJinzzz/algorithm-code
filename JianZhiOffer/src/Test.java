@@ -758,3 +758,37 @@ class Solution35_2 {
         return newHead;
     }
 }
+
+//面试题36. 二叉搜索树与双向链表
+
+//中序遍历的结果是从小到大，每次遍历都记录下前一个遍历的节点pre，只需将当前节点与pre连接即可
+//class Solution36 {
+//    Node pre = null;
+//    Node head = null;
+//    public Node treeToDoublyList(Node root) {
+//        if (root == null) {
+//            return null;
+//        }
+//        dfs(root);
+//        head.left = pre;
+//        pre.right = head;
+//        return head;
+//    }
+//
+//    public void dfs(Node cur) {
+//        if (cur == null) {
+//            return;
+//        }
+//        dfs(cur.left);
+//        if (pre == null) {
+//            head = cur;
+//            pre = head;
+//        } else {
+//            cur.left = pre;
+//            pre.right = cur;
+//            pre = cur;
+//        }
+//        dfs(cur.right);
+//    }
+//}
+
