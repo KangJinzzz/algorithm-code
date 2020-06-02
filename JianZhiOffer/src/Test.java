@@ -884,3 +884,25 @@ class Solution38 {
         chars[b] = tmp;
     }
 }
+
+//面试题39. 数组中出现次数超过一半的数字
+class Solution39 {
+    public int majorityElement(int[] nums) {
+
+        int x = nums[0];
+        int times = 0;
+        for (int num : nums) {
+            if (times == 0) {
+                x = num;
+                times++;
+            } else {
+                if (num == x) {
+                    times++;
+                } else {
+                    times--;
+                }
+            }
+        }
+        return x;
+    }
+}
