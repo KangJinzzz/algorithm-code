@@ -847,3 +847,40 @@ class Codec {
         return root;
     }
 }
+
+//面试题38. 字符串的排列
+class Solution38 {
+    Set<String> set = new HashSet<>();
+    public String[] permutation(String s) {
+        if (s.length() == 0) {
+            return new String[0];
+        }
+        char[] chars = s.toCharArray();
+        dfs(chars, 0);
+        String[] res = new String[set.size()];
+        int i = 0;
+        for (String str : set) {
+            res[i++] = str;
+        }
+        return res;
+    }
+
+    private void dfs(char[] chars, int index) {
+        if (index == chars.length - 1) {
+            set.add(String.valueOf(chars));
+            return;
+        }
+
+        for (int i = index; i < chars.length; i++) {
+            swap(chars, index, i);
+            dfs(chars, index + 1);
+            swap(chars, i, index);
+        }
+    }
+
+    private void swap(char[] chars, int a, int b) {
+        char tmp = chars[a];
+        chars[a] = chars[b];
+        chars[b] = tmp;
+    }
+}
