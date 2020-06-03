@@ -908,6 +908,7 @@ class Solution39 {
 }
 
 //面试题40. 最小的k个数
+//方法一：快排思想
 class Solution40 {
     public int[] getLeastNumbers(int[] arr, int k) {
         int[] res = new int[k];
@@ -951,5 +952,30 @@ class Solution40 {
         int temp = arr[a];
         arr[a] = arr[b];
         arr[b] = temp;
+    }
+}
+//大堆
+class Solution40_2 {
+
+    public int[] getLeastNumbers(int[] arr, int k) {
+        if (k == 0 || arr.length == 0) {
+            return new int[0];
+        }
+        int[] res = new int[k];
+        Queue<Integer> heap = new PriorityQueue<>((n1, n2) -> (n2 - n1));
+        for (int x : arr) {
+            if (heap.size() < k) {
+                heap.offer(x);
+            } else {
+                if (x < heap.peek()) {
+                    heap.poll();
+                    heap.offer(x);
+                }
+            }
+        }
+        for (int i = 0; i < k; i++) {
+            res[i] = heap.poll();
+        }
+        return res;
     }
 }
