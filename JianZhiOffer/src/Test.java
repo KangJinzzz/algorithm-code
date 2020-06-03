@@ -906,3 +906,50 @@ class Solution39 {
         return x;
     }
 }
+
+//面试题40. 最小的k个数
+class Solution40 {
+    public int[] getLeastNumbers(int[] arr, int k) {
+        int[] res = new int[k];
+        int left = 0;
+        int right = arr.length - 1;
+        int index = partion(arr, left, right);
+
+        while (index != k - 1) {
+            if (index > k - 1) {
+                right = index - 1;
+                index = partion(arr, left, right);
+            } else {
+                left = index + 1;
+                index = partion(arr, left, right);
+            }
+        }
+        for (int i = 0; i <= k - 1; i++) {
+            res[i] = arr[i];
+        }
+        return res;
+    }
+
+    private int partion(int[] arr, int left, int right) {
+        int i = left;
+        int j = right;
+        int n = arr[left];
+        while (i < j) {
+            while (i < j && arr[j] >= n) {
+                j--;
+            }
+            while (i < j && arr[i] <= n) {
+                i++;
+            }
+            swap(arr, i, j);
+        }
+        swap(arr, left, i);
+        return j;
+    }
+
+    private void swap(int[] arr, int a, int b) {
+        int temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    }
+}
