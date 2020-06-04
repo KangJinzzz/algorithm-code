@@ -979,3 +979,33 @@ class Solution40_2 {
         return res;
     }
 }
+
+//面试题41. 数据流中的中位数
+class MedianFinder {
+
+    //小堆，存储较大分元素，堆顶总是最小的元素
+    Queue<Integer> A;
+    //大堆，存储较小的元素，堆顶总是最大的元素
+    Queue<Integer> B;
+    /** initialize your data structure here. */
+    public MedianFinder() {
+        A = new PriorityQueue<>();
+        B = new PriorityQueue<>((x, y) -> (y - x));
+    }
+
+    public void addNum(int num) {
+        //N为奇数时，A存储（N + 1） / 2, N为偶数时，存储 N / 2;
+        //A中的数量与B的数量不相等，说明此时A的数量比B大1，此时给B中加元素
+        if (A.size() != B.size()) {
+            A.offer(num);   //此时不知num的大小，因此先加到A中，再把A中最小的加到B中
+            B.offer(A.poll());
+        } else {
+            B.offer(num);
+            A.offer(B.poll());
+        }
+    }
+
+    public double findMedian() {
+        return A.size() == B.size() ? ((double)(A.peek() + B.peek()) / 2) : A.peek();
+    }
+}
