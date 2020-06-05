@@ -1033,3 +1033,25 @@ class Solution42 {
         return max;
     }
 }
+
+//面试题43. 1～n整数中1出现的次数
+class Solution43 {
+    public int countDigitOne(int n) {
+
+        return f(n);
+    }
+    private int f(int n ) {
+        if (n <= 0) {
+            return 0;
+        }
+        String str = String.valueOf(n);
+        int high = str.charAt(0) - '0';
+        int pow = (int) Math.pow(10, str.length() - 1);
+        int low = n - high * pow;
+        if (high == 1) {
+            return f(pow - 1) + low + 1 + f(low);
+        } else {
+            return high * f(pow - 1) + pow + f(low);
+        }
+    }
+}
