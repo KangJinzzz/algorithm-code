@@ -1009,3 +1009,27 @@ class MedianFinder {
         return A.size() == B.size() ? ((double)(A.peek() + B.peek()) / 2) : A.peek();
     }
 }
+
+//面试题42. 连续子数组的最大和
+class Solution42 {
+    /*
+    状态：F(i)表示以nums[i]为结尾的最大连续和
+    转移方程：F(i) = F(i - 1) > 0 ? F(i - 1) + nums[i] : nums[i];
+    记录下每个F(i)，最大F(i)就位最终结果
+    */
+    public int maxSubArray(int[] nums) {
+        int max = nums[0];
+        int sum = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (sum > 0) {
+                sum = sum + nums[i];
+            } else {
+                sum = nums[i];
+            }
+            if (sum > max) {
+                max = sum;
+            }
+        }
+        return max;
+    }
+}
