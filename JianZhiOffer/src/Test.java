@@ -1055,3 +1055,29 @@ class Solution43 {
         }
     }
 }
+
+//面试题44. 数字序列中某一位的数字
+class Solution44 {
+//    解题思路：
+//    将 101112 \cdots101112⋯ 中的每一位称为 数位 ，记为 nn ；
+//    将 10, 11, 12, \cdots10,11,12,⋯ 称为 数字 ，记为 numnum ；
+//    数字 1010 是一个两位数，称此数字的 位数 为 22 ，记为 digitdigit ；
+//    每 digitdigit 位数的起始数字（即：1, 10, 100, \cdots1,10,100,⋯），记为 startstart 。
+//    可推出各 digitdigit 下的数位数量 count 的计算公式：
+//    count=9×start×digit
+
+    public int findNthDigit(int n) {
+        int digit = 1;
+        long start = 1;
+        long count = 9;
+        while (n > count) { // 1.
+            n -= count;
+            digit += 1;
+            start *= 10;
+            count = digit * start * 9;
+        }
+        long num = start + (n - 1) / digit; // 2.
+        return Long.toString(num).charAt((n - 1) % digit) - '0'; // 3.
+    }
+
+}
