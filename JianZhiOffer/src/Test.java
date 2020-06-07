@@ -1081,3 +1081,51 @@ class Solution44 {
     }
 
 }
+
+//面试题45. 把数组排成最小的数
+//把nums转成字符串数组strs
+//将strs中的元素按从小到大排序
+//比较“大小”的规则：这里的大小指的是 m 和 n 拼接后的小大
+//比如：m：3  n：30  3 + 30 > 30 + 3, 因此 30 < 3
+//这样排序后的strs拼接后就是我们要的最小的数
+class Solution45 {
+
+    public String minNumber(int[] nums) {
+        String[] strs = new String[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            strs[i] = String.valueOf(nums[i]);
+        }
+        quickSort(strs, 0, strs.length - 1);
+        StringBuilder builder = new StringBuilder();
+        for (String s : strs) {
+            builder.append(s);
+        }
+        return builder.toString();
+    }
+
+    public void quickSort(String[] strs, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int i = left;
+        int j = right;
+        while (i < j) {
+            while (i < j && (strs[j] + strs[left]).compareTo(strs[left] + strs[j]) >= 0) {
+                j--;
+            }
+            while (i < j && (strs[i] + strs[left]).compareTo(strs[left] + strs[i]) <= 0) {
+                i++;
+            }
+            swap(strs, i, j);
+        }
+        swap(strs, i, left);
+        quickSort(strs, left, i - 1);
+        quickSort(strs, i + 1, right);
+    }
+
+    public void swap(String[] strs, int i, int j) {
+        String tmp = strs[i];
+        strs[i] = strs[j];
+        strs[j] = tmp;
+    }
+}
