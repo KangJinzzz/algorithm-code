@@ -1129,3 +1129,38 @@ class Solution45 {
         strs[j] = tmp;
     }
 }
+
+//面试题46. 把数字翻译成字符串
+
+/**
+ * 思路：动态规划
+ * 状态：F(i)：前 i 个数字可翻译的数量
+ * 转移方程：1) 当 第 i - 1 和第 i 个数字可翻译成一个字母时：
+ *              F(i) = F(i - 2) + F(i - 1)
+ *           2) 当 第 i - 1 和第 i 个数字不能翻译成一个字母时：
+ *              F(i) = F(i - 1)
+ * 初始化：F(0) = 1, F(1) = 1
+ * 返回值：F(num.length)
+ */
+
+class Solution46 {
+    public int translateNum(int num) {
+        String str = String.valueOf(num);
+        int f2 = 1;
+        int f1 = 1;
+        int fi = 1;
+        for (int i = 1; i < str.length(); i++) {
+            StringBuilder builder = new StringBuilder().append(str.charAt(i - 1)).append(str.charAt(i));
+            int n = Integer.valueOf(builder.toString());
+            if (n >= 10 && n <= 25) {
+                fi = f2 + f1;
+            } else {
+                fi = f1;
+            }
+            f2 = f1;
+            f1 = fi;
+
+        }
+        return fi;
+    }
+}
