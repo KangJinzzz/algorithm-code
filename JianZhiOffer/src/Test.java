@@ -1192,3 +1192,34 @@ class Solution47 {
         return maxValue[m - 1][n - 1];
     }
 }
+
+//面试题48. 最长不含重复字符的子字符串
+
+/**
+ * 用 i 标记 s[j] 左边距离 s[j] 最近的相同的字符
+ * 状态：F(j):以 s[j] 结尾的最大不含重复字符的数量
+ * 转移方程：1) 当 dp[j - 1] < j - i ，说明字符 s[i]在子字符串 dp[j-1]区间之外
+ *                  ，则 dp[j] = dp[j - 1] + 1；
+ *           2) 当 dp[j - 1] ≥ j − i ，说明字符 s[i]在子字符串 dp[j-1] 区间之中
+ *                  ，则 dp[j]m的左边界由 s[i] 决定，即 dp[j] = j - i；
+ */
+class Solution48 {
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        int tmp = 0;
+        int max = 0;
+        for (int j = 0; j < s.length(); j++) {
+            int i = map.getOrDefault(s.charAt(j), -1);
+            if (j - i > tmp) {
+                tmp += 1;
+            } else {
+                tmp = j - i;
+            }
+            map.put(s.charAt(j), j);
+            if (tmp > max) {
+                max = tmp;
+            }
+        }
+        return max;
+    }
+}
