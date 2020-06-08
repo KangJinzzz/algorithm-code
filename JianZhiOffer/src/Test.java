@@ -1164,3 +1164,31 @@ class Solution46 {
         return fi;
     }
 }
+
+//面试题47. 礼物的最大价值
+
+/**
+ * 状态：F(i):从 (0, 0) 到 (i, j)拿到礼物的最大价值
+ * 转移方程：F(i, j) = max(F(i - 1, j), F(i, j - 1)) + grid[i][j]
+ */
+class Solution47 {
+    public int maxValue(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int[][] maxValue = new int[m][n];
+        maxValue[0][0] = grid[0][0];
+        //初始化
+        for (int i = 1; i < m; i++) {
+            maxValue[i][0] = maxValue[i - 1][0] + grid[i][0];
+        }
+        for (int j = 1; j < n; j++) {
+            maxValue[0][j] = maxValue[0][j - 1] + grid[0][j];
+        }
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                maxValue[i][j] = Math.max(maxValue[i - 1][j], maxValue[i][j - 1]) + grid[i][j];
+            }
+        }
+        return maxValue[m - 1][n - 1];
+    }
+}
