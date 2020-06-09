@@ -1223,3 +1223,33 @@ class Solution48 {
         return max;
     }
 }
+
+//面试题49. 丑数
+
+/**
+ * 剑指offer解法：
+ * 对于每一个丑数，都是之前某一个丑数 *2, *3 或 *5 得到的
+ * 假设要求 第 i - 1 个丑数 ugly[i], 只要从前往后找到第一个 ugly[a] * 2 大于 ugly[i - 1]
+ * 、ugly[b] * 3 大于 ugly[i - 1]、ugly[c] * 5 大于 ugly[i - 1] 的 三个数，则 ugly = min(ugly[a], ugly[b], ugly[c])
+ */
+class Solution49 {
+    public int nthUglyNumber(int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        int[] ugly = new int[n];
+        ugly[0] = 1;
+        int index2 = 0;
+        int index3 = 0;
+        int index5 = 0;
+        int i = 1;
+        while (i < n) {
+            ugly[i] = Math.min(ugly[index2] * 2, Math.min(ugly[index3] * 3, ugly[index5] * 5));
+            while (ugly[index2] * 2 <= ugly[i]) index2++;
+            while (ugly[index3] * 3 <= ugly[i]) index3++;
+            while (ugly[index5] * 5 <= ugly[i]) index5++;
+            i++;
+        }
+        return ugly[i - 1];
+    }
+}
