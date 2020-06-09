@@ -2521,3 +2521,271 @@ class Solution145{
     }
 }
 
+//203. 移除链表元素
+class Solution203 {
+    public ListNode removeElements(ListNode head, int val) {
+        if (head == null) {
+            return null;
+        }
+        ListNode sen = new ListNode(-1);
+        sen.next = head;
+        ListNode prev = sen;
+        ListNode node = head;
+        while (node != null) {
+            if (node.val == val) {
+                prev.next = node.next;
+            } else {
+                prev = node;
+            }
+            node = node.next;
+        }
+        return sen.next;
+    }
+}
+
+//206. 反转链表
+class Solution206 {
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode prev = null;
+        ListNode cur = head;
+        ListNode tail = head.next;
+        while (tail != null) {
+            cur.next = prev;
+            prev = cur;
+            cur = tail;
+            tail = tail.next;
+        }
+        cur.next = prev;
+        return cur;
+    }
+}
+
+//876. 链表的中间结点
+class Solution876 {
+    public ListNode middleNode(ListNode head) {
+        if (head.next == null) {
+            return head;
+        }
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+}
+
+//链表中倒数第k个结点
+class Solution876_1 {
+    public ListNode FindKthToTail(ListNode head,int k) {
+        if (head == null) {
+            return null;
+        }
+        ListNode fast = head;
+        ListNode slow = head;
+        for (int i = 0; i < k; i++) {
+            if (fast == null) {
+                return null;
+            }
+            fast = fast.next;
+        }
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+}
+
+//21. 合并两个有序链表
+class Solution21 {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            return l2;
+        }
+        if (l2 == null) {
+            return l1;
+        }
+        ListNode head = new ListNode(-1);
+        ListNode tail = head;
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                tail.next = new ListNode(l1.val);
+                l1 = l1.next;
+            } else {
+                tail.next = new ListNode(l2.val);
+                l2 = l2.next;
+            }
+            tail = tail.next;
+        }
+        if (l1 != null) {
+            tail.next = l1;
+        } else {
+            tail.next = l2;
+        }
+        return head.next;
+    }
+}
+
+//链表分割
+class Partition {
+    public ListNode partition(ListNode pHead, int x) {
+        if (pHead == null) {
+            return null;
+        }
+        ListNode smallHead = new ListNode(-1);
+        ListNode smallTail = smallHead;
+        ListNode bigHead = new ListNode(-1);
+        ListNode bigTail = bigHead;
+        for (ListNode node = pHead; node != null; node = node.next) {
+            if (node.val < x) {
+                smallTail.next = new ListNode(node.val);
+                smallTail = smallTail.next;
+            } else {
+                bigTail.next = new ListNode(node.val);
+                bigTail = bigTail.next;
+            }
+        }
+        smallTail.next = bigHead.next;
+        return smallHead.next;
+    }
+}
+
+//删除链表中重复的结点
+class Solution22 {
+    public ListNode deleteDuplication(ListNode pHead) {
+        if (pHead == null) {
+            return null;
+        }
+        ListNode pTail = pHead;
+        ListNode head = new ListNode(-1);
+        ListNode tail = head;
+        while (pTail.next != null) {
+            if (pTail.val != pTail.next.val) {
+                tail.next = new ListNode(pTail.val);
+                tail = tail.next;
+            } else {
+                while (pTail.val == pTail.next.val) {
+                    pTail = pTail.next;
+                    if (pTail.next == null) {
+                        return head.next;
+                    }
+                }
+            }
+            pTail = pTail.next;
+        }
+        tail.next = new ListNode(pTail.val);
+        return head.next;
+    }
+}
+
+//链表的回文结构
+class PalindromeList {
+    public boolean chkPalindrome(ListNode A) {
+        if (A == null || A.next == null) {
+            return true;
+        }
+        ListNode fast = A;
+        ListNode slow = A;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode prev = null;
+        ListNode cur = slow;
+        ListNode tail = cur.next;
+        while (tail != null) {
+            cur.next = prev;
+            prev = cur;
+            cur = tail;
+            tail = tail.next;
+        }
+        cur.next = prev;
+        for (ListNode node = cur; node != null; node = node.next) {
+            if (node.val != A.val) {
+                return false;
+            }
+            A = A.next;
+        }
+        return true;
+    }
+}
+
+//160. 相交链表
+class Solution160 {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode A = headA;
+        ListNode B = headB;
+        while (A != B) {
+            A = A != null ? A.next : headB;
+            B = B != null ? B.next : headA;
+        }
+        return A;
+    }
+}
+
+//141. 环形链表
+class Solution141 {
+    public boolean hasCycle(ListNode head) {
+        if (head == null) {
+            return false;
+        }
+        ListNode fast = head.next;
+        ListNode slow = head;
+        while (fast != slow) {
+            if (fast == null || fast.next == null) {
+                return false;
+            }
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return true;
+    }
+}
+
+//142. 环形链表 II
+class Solution142 {
+    public ListNode detectCycle(ListNode head) {
+        int size = cycSzie(head);
+        if (size == -1) {
+            return null;
+        }
+        ListNode fast = head;
+        ListNode slow = head;
+        while (size > 0) {
+            fast = fast.next;
+            size--;
+        }
+        while (slow != fast) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return fast;
+    }
+
+    public int cycSzie(ListNode head) {
+        if (head == null || head.next == null) {
+            return -1;
+        }
+        int size = 1;
+        ListNode fast = head.next;
+        ListNode slow = head;
+        while (fast != slow) {
+            if (fast == null || fast.next == null) {
+                return -1;
+            }
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        fast = fast.next;
+        while (slow != fast) {
+            fast = fast.next;
+            size++;
+        }
+        return size;
+    }
+}
