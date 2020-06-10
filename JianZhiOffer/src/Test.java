@@ -1253,3 +1253,19 @@ class Solution49 {
         return ugly[i - 1];
     }
 }
+
+//面试题50. 第一个只出现一次的字符
+class Solution50 {
+    public char firstUniqChar(String s) {
+        int[] times = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            times[s.charAt(i) - 'a']++;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            if (times[s.charAt(i) - 'a'] == 1) {
+                return s.charAt(i);
+            }
+        }
+        return ' ';
+    }
+}
