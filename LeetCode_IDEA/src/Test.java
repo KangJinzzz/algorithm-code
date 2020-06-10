@@ -2789,3 +2789,446 @@ class Solution142 {
         return size;
     }
 }
+
+//20. 有效的括号
+class Solution20 {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '(' || c == '[' || c == '{') {
+                stack.push(c);
+            } else {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+                char ch = stack.peek();
+                if (ch == '(' && c == ')' || ch == '{' && c == '}' || ch == '[' && c == ']') {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+    }
+}
+
+//225. 用队列实现栈
+class MyStack2 {
+    Queue<Integer> queue1;
+    Queue<Integer> queue2;
+
+    /** Initialize your data structure here. */
+    public MyStack2() {
+        queue1 = new LinkedList<>();
+        queue2 = new LinkedList<>();
+    }
+
+    /** Push element x onto stack. */
+    public void push(int x) {
+        if (queue1.isEmpty()) {
+            queue2.offer(x);
+        } else {
+            queue1.offer(x);
+        }
+    }
+
+    /** Removes the element on top of the stack and returns that element. */
+    public int pop() {
+        if (!queue1.isEmpty()) {
+            while (queue1.size() > 1) {
+                queue2.offer(queue1.poll());
+            }
+            return queue1.poll();
+        } else if (!queue2.isEmpty()) {
+            while (queue2.size() > 1) {
+                queue1.offer(queue2.poll());
+            }
+            return queue2.poll();
+        }
+        return -1;
+    }
+
+    /** Get the top element. */
+    public int top() {
+        if (!queue1.isEmpty()) {
+            while (queue1.size() > 1) {
+                queue2.offer(queue1.poll());
+            }
+            int x = queue1.poll();
+            queue2.offer(x);
+            return x;
+        } else if (!queue2.isEmpty()) {
+            while (queue2.size() > 1) {
+                queue1.offer(queue2.poll());
+            }
+            int x = queue2.poll();
+            queue1.offer(x);
+            return x;
+        }
+        return -1;
+    }
+
+    /** Returns whether the stack is empty. */
+    public boolean empty() {
+        return queue1.isEmpty() && queue2.isEmpty();
+    }
+}
+
+//232. 用栈实现队列
+class MyQueue2 {
+    Stack<Integer> stack1;
+    Stack<Integer> stack2;
+    /** Initialize your data structure here. */
+    public MyQueue2() {
+        stack1 = new Stack<>();
+        stack2 = new Stack<>();
+    }
+
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        stack1.push(x);
+    }
+
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        while (stack1.size() > 1) {
+            stack2.push(stack1.pop());
+        }
+        int ret = stack1.pop();
+        while (!stack2.isEmpty()) {
+            stack1.push(stack2.pop());
+        }
+        return ret;
+    }
+
+    /** Get the front element. */
+    public int peek() {
+        while (stack1.size() > 1) {
+            stack2.push(stack1.pop());
+        }
+        int ret = stack1.peek();
+        while (!stack2.isEmpty()) {
+            stack1.push(stack2.pop());
+        }
+        return ret;
+    }
+
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return stack1.isEmpty();
+    }
+}
+
+//155. 最小栈
+class MinStack2 {
+
+    Stack<Integer> A = new Stack<>();
+    Stack<Integer> B = new Stack<>();
+    /** initialize your data structure here. */
+    public MinStack2() {
+
+    }
+
+    public void push(int x) {
+        A.push(x);
+        if (B.isEmpty()) {
+            B.push(x);
+        } else {
+            if (x < B.peek()) {
+                B.push(x);
+            } else {
+                B.push(B.peek());
+            }
+        }
+    }
+
+    public void pop() {
+        B.pop();
+        A.pop();
+    }
+
+    public int top() {
+        return A.peek();
+    }
+
+    public int getMin() {
+        return B.peek();
+    }
+}
+
+
+class MyCircularQueue2 {
+
+
+    int[] arr;
+    int front = 0;
+    int rear = 0;
+    int size = 0;
+    /** Initialize your data structure here. Set the size of the queue to be k. */
+    public MyCircularQueue2(int k) {
+        arr = new int[k];
+    }
+
+    /** Insert an element into the circular queue. Return true if the operation is successful. */
+    public boolean enQueue(int value) {
+        if (isFull()) {
+            return false;
+        }
+        arr[rear] = value;
+        rear = (rear + 1) % arr.length;
+        size++;
+        return true;
+    }
+
+    /** Delete an element from the circular queue. Return true if the operation is successful. */
+    public boolean deQueue() {
+        if (isEmpty()) {
+            return false;
+        }
+        front = (front + 1) % arr.length;
+        size--;
+        return true;
+    }
+
+    /** Get the front item from the queue. */
+    public int Front() {
+        if (isEmpty()) {
+            return -1;
+        }
+        return arr[front];
+    }
+
+    /** Get the last item from the queue. */
+    public int Rear() {
+        if (isEmpty()) {
+            return -1;
+        }
+        int index = (rear + arr.length - 1) % arr.length;
+        return arr[index];
+    }
+
+    /** Checks whether the circular queue is empty or not. */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    /** Checks whether the circular queue is full or not. */
+    public boolean isFull() {
+        return size == arr.length;
+    }
+    public static void main(String[] args) {
+        MyCircularQueue2 queue = new MyCircularQueue2(7);
+        queue.enQueue(0);
+        queue.enQueue(4);
+        queue.enQueue(6);
+        queue.enQueue(3);
+        System.out.println(Arrays.toString(queue.arr));
+    }
+}
+
+//144. 二叉树的前序遍历
+class Solution144 {
+    List<Integer> res = new ArrayList<>();
+    public List<Integer> preorderTraversal(TreeNode root) {
+        if (root == null) {
+            return res;
+        }
+        preorder(root);
+        return res;
+    }
+
+    public void preorder(TreeNode root) {
+        if (root == null) {
+            return ;
+        }
+        res.add(root.val);
+        preorder(root.left);
+        preorder(root.right);
+    }
+}
+
+//94. 二叉树的中序遍历
+class Solution94 {
+    List<Integer> res = new ArrayList<>();
+    public List<Integer> inorderTraversal(TreeNode root) {
+        if (root == null) {
+            return res;
+        }
+        inorder(root);
+        return res;
+    }
+
+    public void inorder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.left);
+        res.add(root.val);
+        inorder(root.right);
+    }
+}
+
+//100. 相同的树
+class Solution100 {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return true;
+        }
+        if (p == null) {
+            return false;
+        }
+        if (q == null) {
+            return false;
+        }
+        if (p.val != q.val) {
+            return false;
+        }
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+}
+
+//572. 另一个树的子树
+class Solution572 {
+    public boolean isSubtree(TreeNode s, TreeNode t) {
+        if (s == null && t != null) {
+            return false;
+        }
+        if (t == null) {
+            return true;
+        }
+        boolean flag = false;
+        if (s.val == t.val) {
+            flag = isSameTree(s, t);
+        }
+        if (flag) {
+            return true;
+        }
+        return isSubtree(s.left, t) || isSubtree(s.right, t);
+    }
+
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return true;
+        }
+        if (p == null || q == null) {
+            return false;
+        }
+        if (p.val != q.val) {
+            return false;
+        }
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+}
+
+//104. 二叉树的最大深度
+class Solution104 {
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+    }
+}
+
+//110. 平衡二叉树
+class Solution110 {
+    public boolean isBalanced(TreeNode root) {
+        if (root == null || root.left == null && root.right == null) {
+            return true;
+        }
+        int leftHigh = maxDeep(root.left);
+        int rightHigh = maxDeep(root.right);
+        if (leftHigh - rightHigh >= 2 || rightHigh - leftHigh >= 2) {
+            return false;
+        }
+        return isBalanced(root.left) && isBalanced(root.right);
+    }
+
+    public int maxDeep(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.max(maxDeep(root.left), maxDeep(root.right));
+    }
+}
+
+//101. 对称二叉树
+class Solution101 {
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null || root.left == null && root.right == null) {
+            return true;
+        }
+        return helper(root.left, root.right);
+    }
+    public boolean helper(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return true;
+        }
+        if (p == null || q == null) {
+            return false;
+        }
+        if (p.val != q.val) {
+            return false;
+        }
+        return helper(p.left, q.right) && helper(p.right, q.left);
+    }
+}
+
+//面试题07. 重建二叉树
+class Solution07 {
+    Map<Integer, Integer> map = new HashMap<>();
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder == null || preorder.length == 0) {
+            return null;
+        }
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+        TreeNode root = build(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+        return root;
+    }
+
+    public TreeNode build(int[] preorder, int l1, int r1, int[] inorder, int l2, int r2) {
+        if (l1 > r1) {
+            return null;
+        }
+        int rootVal = preorder[l1];
+        TreeNode root = new TreeNode(rootVal);
+
+        int rootIndex = map.get(rootVal);
+        int leftNodes = rootIndex - l2;
+        int rightNodes = r2 - rootIndex;
+
+        root.left = build(preorder, l1 + 1, l1 + leftNodes, inorder, l2, rootIndex - 1);
+
+        root.right = build(preorder, r1 - rightNodes + 1, r1, inorder, rootIndex + 1, r2);
+        return root;
+    }
+}
+
+//102. 二叉树的层序遍历
+class Solution102 {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> tmp = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                tmp.add(node.val);
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+            }
+            res.add(tmp);
+        }
+        return res;
+    }
+}
