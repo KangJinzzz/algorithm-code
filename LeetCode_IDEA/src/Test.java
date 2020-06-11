@@ -3232,3 +3232,191 @@ class Solution102 {
         return res;
     }
 }
+
+//236. 二叉树的最近公共祖先
+class Solution236 {
+    TreeNode lca;
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        helper(root, p, q);
+        return lca;
+    }
+    public boolean helper(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return false;
+        }
+        int mid = (root == p || root == q) ? 1 : 0;
+        int left = helper(root.left, p, q) ? 1 : 0;
+        int right = helper(root.right, p, q) ? 1 : 0;
+        if (mid + left + right >= 2) {
+            lca = root;
+        }
+        return left + right  + mid > 0;
+    }
+}
+
+//二叉搜索树与双向链表
+class Solution23 {
+    TreeNode head;
+    TreeNode prev;
+    public TreeNode Convert(TreeNode pRootOfTree) {
+        if (pRootOfTree == null) {
+            return null;
+        }
+        transform(pRootOfTree);
+        return head;
+    }
+    public void transform(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        transform(root.left);
+        if (head == null) {
+            head = root;
+            prev = root;
+        } else {
+            prev.right = root;
+            root.left = prev;
+            prev = root;
+        }
+        transform(root.right);
+    }
+}
+
+//105. 从前序与中序遍历序列构造二叉树
+class Solution105 {
+    Map<Integer, Integer> map = new HashMap<>();
+    int preorderIndex = 0;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder == null || preorder.length == 0) {
+            return null;
+        }
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+        TreeNode root = build(preorder, inorder, 0, inorder.length - 1);
+        return root;
+    }
+
+    public TreeNode build(int[] preorder, int[] inorder, int inStart, int inEnd) {
+        if (preorderIndex >= preorder.length) {
+            return null;
+        }
+        if (inStart > inEnd) {
+            return null;
+        }
+        TreeNode root = new TreeNode(preorder[preorderIndex]);
+        int inorderIndex = map.get(preorder[preorderIndex]);
+        preorderIndex++;
+        root.left = build(preorder, inorder, inStart, inorderIndex - 1);
+        root.right = build(preorder, inorder, inorderIndex + 1, inEnd);
+        return root;
+    }
+}
+
+//106. 从中序与后序遍历序列构造二叉树
+//前序遍历为先访问当前节点，再访问左子树，最后访问右子树
+//后续遍历的结果倒着看为：先访问当前节点，再访问右子树，最后访问左子树
+class Solution106 {
+    Map<Integer, Integer> map = new HashMap<>();
+    int index;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if (inorder == null || inorder.length == 0) {
+            return null;
+        }
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+        index = postorder.length - 1;
+        return build(inorder, postorder, 0, inorder.length - 1);
+    }
+
+    public TreeNode build(int[] inorder, int[] postorder, int inorderStart, int inorderEnd) {
+        if (inorderStart > inorderEnd) {
+            return null;
+        }
+        if (index < 0) {
+            return null;
+        }
+        TreeNode root = new TreeNode(postorder[index]);
+        int inorderIndex = map.get(postorder[index]);
+        index--;
+        root.right = build(inorder, postorder, inorderIndex + 1, inorderEnd);
+        root.left = build(inorder, postorder, inorderStart, inorderIndex - 1);
+        return root;
+    }
+}
+
+//606. 根据二叉树创建字符串
+class Solution606 {
+    StringBuilder builder = new StringBuilder();
+    public String tree2str(TreeNode t) {
+        if (t == null) {
+            return "";
+        }
+        helper(t);
+        builder.deleteCharAt(0);
+        builder.deleteCharAt(builder.length() - 1);
+        return builder.toString();
+    }
+    public void helper(TreeNode t) {
+        if (t == null) {
+            return;
+        }
+        builder.append("(");
+        builder.append(t.val);
+        if (t.left == null && t.right != null) {
+            builder.append("()");
+        }
+        helper(t.left);
+        helper(t.right);
+        builder.append(")");
+    }
+}
+
+//144. 二叉树的前序遍历
+class Solution144_2 {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> list = new ArrayList<>();
+        if (root == null) {
+            return list;
+        }
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            list.add(node.val);
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
+        return list;
+    }
+}
+
+//94. 二叉树的中序遍历
+class Solution94_2 {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if (root == null) {
+            return list;
+        }
+        TreeNode cur = root;
+        while (true) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            if (stack.isEmpty()) {
+                break;
+            }
+            cur = stack.pop();
+            list.add(cur.val);
+            cur = cur.right;
+        }
+        return list;
+    }
+}
