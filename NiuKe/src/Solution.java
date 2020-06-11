@@ -3034,7 +3034,7 @@ class Solution11 {
         }
         for (int i = 1; i <= row; i++) {
             for (int j = 1; j <= col; j++) {
-                if (S.charAt(i - 1) == T.charAt(j - 1)) {F
+                if (S.charAt(i - 1) == T.charAt(j - 1)) {
                     //S的第i个字符和T的第j个字符相等，可以选择把S的第i个字符放入子串或不放
                     dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
                 } else {

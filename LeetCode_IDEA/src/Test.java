@@ -3420,3 +3420,47 @@ class Solution94_2 {
         return list;
     }
 }
+
+//面试题51. 数组中的逆序对
+class Solution51 {
+    int count = 0;
+    public int reversePairs(int[] nums) {
+        mergeSort(nums, 0, nums.length);
+        return count;
+    }
+
+    private void mergeSort(int[] nums, int left, int right) {
+        if (left >= right - 1) {
+            return;
+        }
+        int mid = (left + right) / 2;
+        mergeSort(nums, left, mid);
+        mergeSort(nums, mid, right);
+        merge(nums, left, mid, right);
+    }
+
+    private void merge(int[] nums, int left, int mid, int right) {
+        int[] arr = new int[right - left];
+        int index = 0;
+        int i = left;
+        int j = right;
+        int m = mid;
+        while (i < mid && m < j) {
+            if (nums[i] <= nums[m]) {
+                arr[index++] = nums[i++];
+            } else {
+                arr[index++] = nums[m++];
+                count += (mid - i);
+            }
+        }
+        while (i < mid) {
+            arr[index++] = nums[i++];
+        }
+        while (m < j) {
+            arr[index++] = nums[m++];
+        }
+        for (int x : arr) {
+            nums[left++] = x;
+        }
+    }
+}
