@@ -3464,3 +3464,70 @@ class Solution51 {
         }
     }
 }
+
+//面试题52. 两个链表的第一个公共节点
+class Solution52 {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode A = headA;
+        ListNode B = headB;
+        while (A != B) {
+            if (A == null) {
+                A = headA;
+            } else {
+                A = A.next;
+            }
+            if (B == null) {
+                B = headB;
+            } else {
+                B = B.next;
+            }
+        }
+        return A;
+    }
+}
+
+//373. 查找和最小的K对数字
+class Solution373 {
+    class Pair implements Comparable<Pair>{
+        public int n1;
+        public int n2;
+        public int sum;
+
+        public Pair(int n1, int n2) {
+            this.n1 = n1;
+            this.n2 = n2;
+            this.sum = n1 + n2;
+        }
+
+
+        @Override
+        public int compareTo(Pair o) {
+            return this.sum - o.sum;
+        }
+    }
+
+    public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        List<List<Integer>> res = new ArrayList<>();
+        Queue<Pair> heap = new PriorityQueue<>((n1, n2) -> (n2.sum - n1.sum));
+        for (int i = 0; i < nums1.length; i++) {
+            for (int j = 0; j < nums2.length; j++) {
+                if(heap.size() < k) {
+                    heap.offer(new Pair(nums1[i], nums2[j]));
+                } else {
+                    if (heap.peek().sum > nums1[i] + nums2[j]) {
+                        heap.poll();
+                        heap.offer(new Pair(nums1[i], nums2[j]));
+                    }
+                }
+            }
+        }
+        while (!heap.isEmpty()) {
+            List<Integer> tmp = new ArrayList<>();
+            Pair pair = heap.poll();
+            tmp.add(pair.n1);
+            tmp.add(pair.n2);
+            res.add(tmp);
+        }
+        return res;
+    }
+}
