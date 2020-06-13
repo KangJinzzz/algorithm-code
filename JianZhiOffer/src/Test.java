@@ -1269,3 +1269,43 @@ class Solution50 {
         return ' ';
     }
 }
+
+//面试题53 - I. 在排序数组中查找数字 I
+class Solution53 {
+    public static int search(int[] nums, int target) {
+        if (nums == null || nums.length <= 0) {
+            return 0;
+        }
+        int left = 0;
+        int right = nums.length - 1;
+        int index = 0;
+        //用二分查找找到target
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] == target) {
+                index = mid;
+                break;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        //没找到，返回0
+        if (left > right) return 0;
+        left = index;
+        right = index;
+        //找nums中target的左右边界
+        while (left >= 0 && nums[left] == target) {
+            left--;
+        }
+        while (right <= nums.length - 1 && nums[right] == target) {
+            right++;
+        }
+        return right - left - 1;
+    }
+    public static void main(String[] args) {
+        int[] arr = new int[] {1};
+        System.out.println(search(arr, 1));
+    }
+}
