@@ -1270,6 +1270,71 @@ class Solution50 {
     }
 }
 
+//面试题51. 数组中的逆序对
+class Solution51 {
+    int count = 0;
+    public int reversePairs(int[] nums) {
+        mergeSort(nums, 0, nums.length);
+        return count;
+    }
+
+    private void mergeSort(int[] nums, int left, int right) {
+        if (left >= right - 1) {
+            return;
+        }
+        int mid = (left + right) / 2;
+        mergeSort(nums, left, mid);
+        mergeSort(nums, mid, right);
+        merge(nums, left, mid, right);
+    }
+
+    private void merge(int[] nums, int left, int mid, int right) {
+        int[] arr = new int[right - left];
+        int index = 0;
+        int i = left;
+        int j = right;
+        int m = mid;
+        while (i < mid && m < j) {
+            if (nums[i] <= nums[m]) {
+                arr[index++] = nums[i++];
+            } else {
+                arr[index++] = nums[m++];
+                count += (mid - i);
+            }
+        }
+        while (i < mid) {
+            arr[index++] = nums[i++];
+        }
+        while (m < j) {
+            arr[index++] = nums[m++];
+        }
+        for (int x : arr) {
+            nums[left++] = x;
+        }
+    }
+}
+
+//面试题52. 两个链表的第一个公共节点
+class Solution52 {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode A = headA;
+        ListNode B = headB;
+        while (A != B) {
+            if (A == null) {
+                A = headA;
+            } else {
+                A = A.next;
+            }
+            if (B == null) {
+                B = headB;
+            } else {
+                B = B.next;
+            }
+        }
+        return A;
+    }
+}
+
 //面试题53 - I. 在排序数组中查找数字 I
 class Solution53 {
     public static int search(int[] nums, int target) {
@@ -1309,3 +1374,73 @@ class Solution53 {
         System.out.println(search(arr, 1));
     }
 }
+
+//面试题53 - II. 0～n-1中缺失的数字
+class Solution53_2 {
+    public int missingNumber(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != i) {
+                return i;
+            }
+        }
+        return nums.length;
+    }
+}
+
+//面试题54. 二叉搜索树的第k大节点
+class Solution54 {
+    int res;
+    int K = 0;
+    public int kthLargest(TreeNode root, int k) {
+        if (root == null) {
+            return -1;
+        }
+        inorder(root, k);
+        return res;
+    }
+
+    public void inorder(TreeNode root, int k) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.right, k);
+        if (++K == k) {
+            res = root.val;
+        }
+        inorder(root.left, k);
+    }
+}
+
+//面试题55 - I. 二叉树的深度
+class Solution55 {
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+    }
+}
+
+//面试题55 - II. 平衡二叉树
+class Solution55_2 {
+    public boolean isBalanced(TreeNode root) {
+        if (root == null || root.left == null && root.right == null) {
+            return true;
+        }
+        int leftDepth = maxDepth(root.left);
+        int rightDepth = maxDepth(root.right);
+        if (leftDepth - rightDepth > 1 || rightDepth - leftDepth > 1) {
+            return false;
+        }
+        return isBalanced(root.left) && isBalanced(root.right);
+
+    }
+
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+    }
+}
+
