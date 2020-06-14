@@ -1444,3 +1444,30 @@ class Solution55_2 {
     }
 }
 
+//面试题56 - I. 数组中数字出现的次数
+class Solution56 {
+    class Solution {
+        public int[] singleNumbers(int[] nums) {
+            int[] res = new int[2];
+            int tmp = 0;
+            for (int x : nums) {
+                tmp ^= x;
+            }
+            int times = 0;
+            for (int i = 0; i < 32; i++) {
+                if (((tmp >> i) & 1) == 1) {
+                    times = i;
+                    break;
+                }
+            }
+            for (int x : nums) {
+                if (((x >> times) & 1) == 1) {
+                    res[0] ^= x;
+                } else {
+                    res[1] ^= x;
+                }
+            }
+            return res;
+        }
+    }
+}
