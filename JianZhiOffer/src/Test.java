@@ -1471,3 +1471,73 @@ class Solution56 {
         }
     }
 }
+
+//面试题56 - II. 数组中数字出现的次数 II
+//考虑数字的二进制形式，对于出现三次的数字，各 二进制位 出现的次数都是 33 的倍数。
+//因此，统计所有数字的各二进制位中 11 的出现次数，并对 33 求余，结果则为只出现一次的数字。
+class Solution56_2 {
+    public int singleNumber(int[] nums) {
+        int[] count = new int[32];
+        for (int x : nums) {
+            for (int i = 0; i < 32; i++) {
+                if (((x >> i) & 1) == 1) {
+                    count[i]++;
+                }
+            }
+        }
+        int res = 0;
+        for (int i = 0; i < count.length; i++) {
+            res += ((count[i] % 3) << i);
+        }
+        return res;
+    }
+}
+
+//面试题57. 和为s的两个数字
+class Solution57 {
+    public int[] twoSum(int[] nums, int target) {
+        int[] res = new int[2];
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            if (nums[left] + nums[right] == target) {
+                break;
+            } else if (nums[left] + nums[right] > target) {
+                right--;
+            } else {
+                left++;
+            }
+        }
+        res[0] = nums[left];
+        res[1] = nums[right];
+        return res;
+    }
+}
+
+//面试题57 - II. 和为s的连续正数序列
+class Solution57_2 {
+    public int[][] findContinuousSequence(int target) {
+        List<int[]> res = new ArrayList<>();
+        int small = 1;
+        int big = 2;
+        int sum = 3;
+        while (big <= (target + 1) / 2) {
+            if (sum < target) {
+                big++;
+                sum += big;
+            } else if(sum > target) {
+                sum -= small;
+                small++;
+            } else {
+                int[] tmp = new int[big - small + 1];
+                for (int i = 0; i < tmp.length; i++) {
+                    tmp[i] = small + i;
+                }
+                res.add(tmp);
+                big++;
+                sum += big;
+            }
+        }
+        return res.toArray(new int[res.size()][]);
+    }
+}
