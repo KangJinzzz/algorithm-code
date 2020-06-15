@@ -1541,3 +1541,58 @@ class Solution57_2 {
         return res.toArray(new int[res.size()][]);
     }
 }
+
+//面试题58 - I. 翻转单词顺序
+//可以倒序遍历字符串的每个单词
+class Solution58 {
+    public String reverseWords(String s) {
+        StringBuilder builder = new StringBuilder(s.trim());
+        String str = builder.reverse().toString();
+        String[] strs = str.split(" ");
+        StringBuilder res = new StringBuilder();
+        for (String string : strs) {
+            StringBuilder builder1 = new StringBuilder(string);
+            if (!builder1.toString().equals("")) {
+                res.append(builder1.reverse()).append(" ");
+            }
+        }
+        return res.deleteCharAt(res.length() - 1).toString();
+    }
+}
+
+//面试题58 - II. 左旋转字符串
+class Solution58_2 {
+    public String reverseLeftWords(String s, int n) {
+        String str1 = s.substring(0, n);
+        return s.substring(n, s.length()) + str1;
+    }
+}
+
+//面试题59 - I. 滑动窗口的最大值
+class Solution59 {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums.length == 0 || k == 0) {
+            return new int[0];
+        }
+        int[] res = new int[nums.length - k + 1];
+        Deque<Integer> deque = new LinkedList<>();
+        for (int i = 0; i < k; i++) {   //未形成窗口
+            while (!deque.isEmpty() && deque.peekLast() < nums[i]) {
+                deque.removeLast();
+            }
+            deque.addLast(nums[i]);
+        }
+        res[0] = deque.peekFirst();
+        for (int i = k; i < nums.length; i++) {   //形成窗口
+            if (nums[i - k] == deque.peekFirst()) {
+                deque.removeFirst();
+            }
+            while (!deque.isEmpty() && deque.peekLast() < nums[i]) {
+                deque.removeLast();
+            }
+            deque.addLast(nums[i]);
+            res[i - k + 1] = deque.peekFirst();
+        }
+        return res;
+    }
+}
