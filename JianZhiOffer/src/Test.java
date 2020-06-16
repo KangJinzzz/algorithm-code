@@ -1596,3 +1596,38 @@ class Solution59 {
         return res;
     }
 }
+
+//面试题59 - II. 队列的最大值
+class MaxQueue {
+    Queue<Integer> queue;
+    Deque<Integer> deque;
+    public MaxQueue() {
+        queue = new LinkedList<>();
+        deque = new LinkedList<>();
+    }
+
+    public int max_value() {
+        if (deque.isEmpty()) {
+            return -1;
+        }
+        return deque.peekFirst();
+    }
+
+    public void push_back(int value) {
+        queue.offer(value);
+        while (!deque.isEmpty() && deque.peekLast() < value) {
+            deque.removeLast();
+        }
+        deque.addLast(value);
+    }
+
+    public int pop_front() {
+        if (queue.isEmpty()) {
+            return -1;
+        }
+        if (queue.peek().equals(deque.peekFirst())) {
+            deque.removeFirst();
+        }
+        return queue.poll();
+    }
+}
