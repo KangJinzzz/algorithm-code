@@ -1631,3 +1631,40 @@ class MaxQueue {
         return queue.poll();
     }
 }
+
+//面试题60. n个骰子的点数
+
+/**
+ * 状态：F(i, j): 掷完第 i 个骰子点数为 j 的次数
+ *
+ *  单单看第 nn 枚骰子，它的点数可能为 1 , 2, 3, ... , 61,2,3,...,6 ，因此投掷完 nn 枚骰子后点数 jj 出现的次数，
+ *  可以由投掷完 n-1n−1 枚骰子后，对应点数 j-1, j-2, j-3, ... , j-6j−1,j−2,j−3,...,j−6 出现的次数之和转化过来。
+ * 转移方程：F(i, j) = F(i - 1, j - 1) + F(i - 1, j - 2) + F(i - 1, j - 3) + F(i - 1, j - 4)
+ *                          + F(i - 1, j - 5) + F(i - 1, j - 6)
+ * 返回值：F(n, j) / 6^n (j = n, n + 1, .... , n * 6);
+ *      6^n 为可能出现的所有情况
+ */
+class Solution60 {
+    public double[] twoSum(int n) {
+        int[][] dp = new int[n + 1][6 * n + 1];
+        for (int i = 1; i <= 6; i++) {
+            dp[1][i] = 1;
+        }
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j <= 6 * n; j++) {
+                if (j >= i && j <= 6 * i) {
+                    for (int t = 1; t <= 6; t++) {
+                        if (j - t >= i - 1)
+                            dp[i][j] += dp[i - 1][j - t];
+                    }
+                }
+            }
+        }
+        double[] res = new double[6 * n - n + 1];
+        int index  =0;
+        for (int j = n; j <= 6 * n; j++) {
+            res[index++] = (double)dp[n][j] / Math.pow(6, n);
+        }
+        return res;
+    }
+}
