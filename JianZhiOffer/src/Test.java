@@ -1668,3 +1668,37 @@ class Solution60 {
         return res;
     }
 }
+
+//面试题61. 扑克牌中的顺子
+class Solution61 {
+    //用set，如果数组中有重复元素，返回false， 记录数组中的最大值与最小值（0除外），最大值 - 最小值 < 5 则可组成顺子
+    public boolean isStraight(int[] nums) {
+        int max = 0;
+        int min = 14;
+        Set<Integer> set = new HashSet<>();
+        for (int x : nums) {
+            if (x == 0) continue;
+            max = Math.max(max, x);
+            min = Math.min(min, x);
+            if (set.contains(x)) return false;  //有重复元素，不可能为顺子
+            set.add(x);
+        }
+        return max - min < 5;
+    }
+    //排序
+    public boolean isStraight2(int[] nums) {
+        Arrays.sort(nums);
+        int index = 0;  //用来保存第一个不是 0 的元素的下标
+        for (int i = 0; i < 4; i++) {
+            if (nums[i] == 0) {
+                index++;
+                continue;
+            }
+            if (nums[i] == nums[i + 1]) {
+                return false;
+            }
+
+        }
+        return nums[4] - nums[index] < 5;
+    }
+}
