@@ -1702,3 +1702,38 @@ class Solution61 {
         return nums[4] - nums[index] < 5;
     }
 }
+
+//面试题62. 圆圈中最后剩下的数字
+//递推公式：f(n, m) = 1, n == 1
+//                  = f((n - 1, m) + m) % n, n >= 1
+class Solution62 {
+    public int lastRemaining(int n, int m) {
+        //F(1, 3) = 0;
+        int pos = 0;
+        for (int i = 2; i <= n; i++) {
+            pos = (pos + m) % i;
+        }
+        return pos;
+    }
+}
+//面试题63. 股票的最大利润
+
+/**
+ * 状态: F(i): 第 i 天可获得的最大利润（i = 0, 1, 2...)
+ * 状态转移方程：F(i) = max(F(i - 1), prices[i] - minPrices)   minPrices:前 i 天之前最低的股票价
+ *
+ */
+class Solution63 {
+    public int maxProfit(int[] prices) {
+        if (prices.length == 0) {
+            return 0;
+        }
+        int minValue = prices[0];
+        int maxCost = 0;
+        for (int i = 1; i < prices.length; i++) {
+            maxCost = Math.max(maxCost, prices[i] - minValue);
+            minValue = Math.min(minValue, prices[i]);
+        }
+        return maxCost;
+    }
+}
