@@ -1737,3 +1737,15 @@ class Solution63 {
         return maxCost;
     }
 }
+
+
+//剑指 Offer 64. 求1+2+…+n
+class Solution64 {
+    public int sumNums(int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        boolean falg = (n >= 1 && (n += sumNums(n - 1)) < 0);
+        return n;
+    }
+}
