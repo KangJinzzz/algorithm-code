@@ -1742,10 +1742,25 @@ class Solution63 {
 //剑指 Offer 64. 求1+2+…+n
 class Solution64 {
     public int sumNums(int n) {
-        if (n <= 0) {
-            return 0;
-        }
+
         boolean falg = (n >= 1 && (n += sumNums(n - 1)) < 0);
         return n;
+    }
+}
+
+// 剑指 Offer 65. 不用加减乘除做加法
+//A ^ B = A + B (但没有包括进位) 1 ^ 1 = 0, 1 ^ 0 = 1, 0 ^ 0, = 0
+//A & B = A + B 各位的进位   1 & 1 = 1, 1 & 0 = 0, 0 & 0 = 0
+class Solution65 {
+    public int add(int a, int b) {
+        int xor = 0;
+        int and = 0;
+        while (b != 0) {    //判断是否还有进位，有进位还需再次相加
+            xor = a ^ b;    //存放各位相加的结果
+            and = (a & b) << 1;     //存放各位相加后，上位的进位
+            a = xor;    //继续计算 a + b
+            b = and;
+        }
+        return a;
     }
 }
