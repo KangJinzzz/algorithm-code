@@ -1,34 +1,42 @@
 package crawler;
 
 import dao.Project;
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Crawler {
 
+    private static OkHttpClient okHttpClient = new OkHttpClient();
+
     private static String URL = "https://github.com/akullpp/awesome-java/blob/master/README.md";
+    private static String USERNAME = "Kangzzz";
+    private static String PASSWORD = "kjw19971020";
     
     public static void main(String[] args) throws IOException {
         Crawler crawler = new Crawler();
         String html = crawler.getHtmlPage(URL);
         List<Project> projects = crawler.getProjects(html);
-        System.out.println(projects);
-        System.out.println(projects.size());
+        for (int i = 0; i < projects.size() && i < 5; i++) {
+            Project project = projects.get(i);
+            crawler.getResponInfo(project);
+            System.out.println(project);
+            System.out.println("==============================");
+        }
+//        System.out.println(projects);
+//        System.out.println(projects.size());
     }
 
     //通过 OkHttp 获取指定 url 的网页内容
     public String getHtmlPage(String url) throws IOException {
-        OkHttpClient okHttpClient = new OkHttpClient();
+
 
         Request request = new Request.Builder().url(url).build();
         //创建一个Call对象（这个对象负责进行一次网络访问操作）
@@ -80,4 +88,31 @@ public class Crawler {
         }
         return result;
     }
+
+    //通过 github API (https://api.github.com/repos/doov-io/doov)获取每个项目的 starCount, forkCount....
+    //使用 OkHttp 给指定的项目发送请求
+    private void getResponInfo(Project project) throws IOException {
+
+        String proName = getProjectName(project.getUrl());
+        String url = "https://api.github.com/repos/" + proName;
+        //通过 header() 方法将验证的身份信息存储在请求头中,设置身份信息
+        String credential = Credentials.basic(USERNAME, PASSWORD);
+        Request request = new Request.Builder().url(url).header("Authorization", credential).build();
+        Call call = okHttpClient.newCall(request);
+        Response response = call.execute();
+        //解析获取到的 json 格式的数据转化成哈希表的形式，从中提取 starCount 的信息
+
+    }
+
+    //获取项目的 用户名/项目名，如 doov-io/doov
+    private String getProjectName(String url) {
+        int lastOneIndex = url.lastIndexOf("/");
+        int lastTwoIndex = url.lastIndexOf("/", lastOneIndex - 1);
+        if (lastOneIndex == -1 || lastTwoIndex == -1) {
+            System.out.println("非法项目，无法获取项目名称: url = " + url);
+            return null;
+        }
+        return url.substring(lastTwoIndex + 1);
+    }
+
 }
