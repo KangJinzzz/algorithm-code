@@ -1,5 +1,7 @@
 package crawler;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import dao.Project;
 import okhttp3.*;
 import org.jsoup.Jsoup;
@@ -10,11 +12,13 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Crawler {
 
     private static OkHttpClient okHttpClient = new OkHttpClient();
+    private static Gson gson = new Gson();
 
     private static String URL = "https://github.com/akullpp/awesome-java/blob/master/README.md";
     private static String USERNAME = "Kangzzz";
@@ -24,14 +28,13 @@ public class Crawler {
         Crawler crawler = new Crawler();
         String html = crawler.getHtmlPage(URL);
         List<Project> projects = crawler.getProjects(html);
-        for (int i = 0; i < projects.size() && i < 5; i++) {
+        for (int i = 0; i < projects.size() && i < 10; i++) {
             Project project = projects.get(i);
-            crawler.getResponInfo(project);
+            crawler.setResponInfo(project);
             System.out.println(project);
             System.out.println("==============================");
         }
-//        System.out.println(projects);
-//        System.out.println(projects.size());
+
     }
 
     //通过 OkHttp 获取指定 url 的网页内容
@@ -91,7 +94,7 @@ public class Crawler {
 
     //通过 github API (https://api.github.com/repos/doov-io/doov)获取每个项目的 starCount, forkCount....
     //使用 OkHttp 给指定的项目发送请求
-    private void getResponInfo(Project project) throws IOException {
+    private void setResponInfo(Project project) throws IOException {
 
         String proName = getProjectName(project.getUrl());
         String url = "https://api.github.com/repos/" + proName;
@@ -100,9 +103,14 @@ public class Crawler {
         Request request = new Request.Builder().url(url).header("Authorization", credential).build();
         Call call = okHttpClient.newCall(request);
         Response response = call.execute();
-        //解析获取到的 json 格式的数据转化成哈希表的形式，从中提取 starCount 的信息
-
+        //解析获取到的 json 格式的数据转化成哈希表的形式，从中提取 starCount 的信息并设置到对应 project 中
+        if (!response.isSuccessful()) {
+            System.out.println("获取项目信息失败：" + project.getUrl());
+        }
+        praseProInfo(response.body().string(), project);
     }
+
+
 
     //获取项目的 用户名/项目名，如 doov-io/doov
     private String getProjectName(String url) {
@@ -113,6 +121,22 @@ public class Crawler {
             return null;
         }
         return url.substring(lastTwoIndex + 1);
+    }
+
+    /**
+     *
+     * @param jsonString    将对应项目转换成的 json 数据，之后将 jsonString 转化成 HashMap，在哈希表中查找 starCount, forkCount, openIssueCount
+     * @param project       将对应的 starCount, forkCount, openIssueCount 设置到 project 中
+     */
+    private void praseProInfo(String jsonString, Project project) {
+        Type type = new TypeToken<HashMap<String, Object>>(){}.getType();
+        HashMap<String, Object> hashMap = gson.fromJson(jsonString, type);
+        Double starCount = (Double)hashMap.get("stargazers_count");
+        project.setStarCount(starCount.intValue());
+        Double forkCount = (Double) hashMap.get("forks_count");
+        project.setForkCount(forkCount.intValue());
+        Double openIssueCount = (Double) hashMap.get("open_issues_count");
+        project.setOppendIssueCount(openIssueCount.intValue());
     }
 
 }
