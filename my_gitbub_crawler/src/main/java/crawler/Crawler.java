@@ -120,7 +120,7 @@ public class Crawler {
 
     //通过 github API (https://api.github.com/repos/doov-io/doov)获取每个项目的 starCount, forkCount....
     //使用 OkHttp 给指定的项目发送请求
-    private void setResponInfo(Project project) throws IOException {
+    public void setResponInfo(Project project) throws IOException {
 
         String proName = getProjectName(project.getUrl());
         String url = "https://api.github.com/repos/" + proName;
