@@ -49,7 +49,8 @@ public class ProjectDao {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        String sql = "select name, url, starCount, forkCount, openIssueCount from project where date =  ? order by starCount desc";
+        String sql = "select name, url, starCount, forkCount, openIssueCount " +
+                "from project where date = ? order by starCount desc";
 
         try {
             connection = DBUtil.getConnection();
@@ -72,4 +73,5 @@ public class ProjectDao {
         }
         return projects;
     }
+
 }
