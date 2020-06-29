@@ -3,6 +3,7 @@ package kang.mapper;
 import java.util.List;
 import kang.model.Comment;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface CommentMapper {
@@ -15,4 +16,6 @@ public interface CommentMapper {
     List<Comment> selectAll();
 
     int updateByPrimaryKey(Comment record);
+
+    List<Comment> queryCommentsByArticleId(Long id);
 }

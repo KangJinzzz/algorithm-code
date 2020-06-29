@@ -11,10 +11,25 @@ import java.util.List;
 @Service
 public class ArticleService {
 
+//    @Autowired
+//    private ArticleMapper articleMapper;
+//
+//    public List<Article> queryArticles() {
+//        return articleMapper.selectAll();
+//    }
+//
+//    public Article selectByPrimaryKey(Long id) {
+//        return articleMapper.selectByPrimaryKey(id);
+//    }
+
     @Autowired
     private ArticleMapper articleMapper;
 
     public List<Article> queryArticles() {
         return articleMapper.selectAll();
+    }
+
+    public Article queryArticle(Long id) {
+        return articleMapper.selectByPrimaryKey(id);
     }
 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Setter
 @Getter
@@ -33,4 +34,6 @@ public class Article {
     private User author;
     //文章的评论数
     private Integer commentCount;
+
+    private List<Comment> commentList;
 }
