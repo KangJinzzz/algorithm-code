@@ -12,6 +12,8 @@ public class BlogConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //添加拦截器，排除拦截一些资源，如首页,登录页面和一些静态资源不需要拦截
+        // **: 可以匹配多级目录
+        // *: 只能匹配一级目录
         registry.addInterceptor(new LoginInterceptor())
                 .excludePathPatterns("/css/**")
                 .excludePathPatterns("/fronts/**")
