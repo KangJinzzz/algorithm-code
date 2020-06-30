@@ -16,9 +16,10 @@ public class BlogConfig implements WebMvcConfigurer {
         // *: 只能匹配一级目录
         registry.addInterceptor(new LoginInterceptor())
                 .excludePathPatterns("/css/**")
-                .excludePathPatterns("/fronts/**")
+                .excludePathPatterns("/fonts/**")
                 .excludePathPatterns("/images/**")
                 .excludePathPatterns("/js/**")
+                .excludePathPatterns("/plugins/editor/**")
                 .excludePathPatterns("/")
                 .excludePathPatterns("/login")
                 .excludePathPatterns("/a/*");

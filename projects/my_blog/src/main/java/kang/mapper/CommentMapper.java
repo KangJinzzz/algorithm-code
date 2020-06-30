@@ -13,7 +13,7 @@ public interface CommentMapper {
 
     Comment selectByPrimaryKey(Long id);
 
-    List<Comment> selectAll();
+    List<Comment> selectAll(Long id);
 
     int updateByPrimaryKey(Comment record);
 

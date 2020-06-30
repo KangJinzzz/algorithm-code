@@ -3,6 +3,7 @@ package kang.mapper;
 import java.util.List;
 import kang.model.Category;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface CategoryMapper {
@@ -14,5 +15,9 @@ public interface CategoryMapper {
 
     List<Category> selectAll();
 
+
     int updateByPrimaryKey(Category record);
+
+
+    List<Category> queryByUserId(Long id);
 }
