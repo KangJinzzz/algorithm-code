@@ -26,4 +26,8 @@ public class ArticleService {
     public List<Article> queryArticlesByUserId(Long id) {
         return articleMapper.queryArticlesByUserId(id);
     }
+
+    public Article selectByPrimaryKet(Integer id) {
+        return articleMapper.selectByPrimaryKey(id.longValue());
+    }
 }

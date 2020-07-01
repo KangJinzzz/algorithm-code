@@ -64,7 +64,28 @@ public class ArticleController {
         return "writer";
     }
 
+
+    /**
+     * 进入编辑页面
+     * @param type  type 为 1：新增文章  type 为 2：修改文章
+     * @param id    type 为 1 时，id为分类id：categoryId   type为2时，id为文章id：articleId
+     * @param model     type 两种情况都需要添加，activeCid 在 type 为1时需要添加
+     * @return
+     */
     @RequestMapping("/writer/forward/{type}/{id}/editor")
-    public String
+    public String editor(@PathVariable("type") Integer type, @PathVariable("id") Integer id, Model model) {
+        Category category = null;
+        if (type == 1) {    //新增文章,需要查找到当前分类
+            model.addAttribute("activeCid", id);
+            category = categoryService.selectByPrimaryKey(id);
+        } else {    //修改文章，需要查找当前的文章和分类
+            Article article = articleService.selectByPrimaryKet(id);
+            category = categoryService.selectByPrimaryKey(article.getCategoryId());
+            model.addAttribute("article", article);
+        }
+        model.addAttribute("type", type);
+        model.addAttribute("category", category);
+        return "editor";
+    }
 
 }
