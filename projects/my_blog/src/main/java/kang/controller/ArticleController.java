@@ -64,4 +64,7 @@ public class ArticleController {
         return "writer";
     }
 
+    @RequestMapping("/writer/forward/{type}/{id}/editor")
+    public String
+
 }

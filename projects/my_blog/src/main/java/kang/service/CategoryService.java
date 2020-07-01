@@ -14,7 +14,11 @@ public class CategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
 
-    public List<Category> queryByUserId(Long id) {
-        return categoryMapper.queryByUserId(id);
+    public List<Category> queryByUserId(Long userId) {
+        return categoryMapper.queryByUserId(userId);
+    }
+
+    public int insert(Category category) {
+        return categoryMapper.insert(category);
     }
 }

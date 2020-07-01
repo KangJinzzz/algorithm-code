@@ -19,5 +19,5 @@ public interface CategoryMapper {
     int updateByPrimaryKey(Category record);
 
 
-    List<Category> queryByUserId(Long id);
+    List<Category> queryByUserId(Long userId);
 }
