@@ -5,8 +5,8 @@ import lombok.Setter;
 
 import java.util.Date;
 
-@Setter
 @Getter
+@Setter
 public class Comment {
     private Long id;
 
@@ -19,5 +19,4 @@ public class Comment {
     private Date createdAt;
 
     private User user;
-
 }

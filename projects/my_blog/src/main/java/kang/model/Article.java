@@ -6,8 +6,8 @@ import lombok.Setter;
 import java.util.Date;
 import java.util.List;
 
-@Setter
 @Getter
+@Setter
 public class Article {
     private Long id;
 
@@ -29,11 +29,12 @@ public class Article {
 
     private Date updatedAt;
 
-    //页面需要的属性，需要自行添加
-    //文章的作者
+    /**
+     * 页面需要的属性，需自行添加
+     */
     private User author;
-    //文章的评论数
-    private Integer commentCount;
+
+    private Integer commentCount;   //评论数
 
     private List<Comment> commentList;
 }

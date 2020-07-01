@@ -1,11 +1,10 @@
 package kang.model;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 public class User {
     private Long id;
 
@@ -16,5 +15,6 @@ public class User {
     private String nickname;
 
     private String avatar;
+
 
 }

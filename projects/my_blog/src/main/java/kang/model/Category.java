@@ -1,11 +1,10 @@
 package kang.model;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 public class Category {
     private Long id;
 
