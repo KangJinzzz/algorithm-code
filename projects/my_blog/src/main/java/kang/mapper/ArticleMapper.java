@@ -19,4 +19,6 @@ public interface ArticleMapper {
 
 
     List<Article> queryArticlesByUserId(Long id);
+
+    int updateByCondition(Article article);
 }

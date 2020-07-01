@@ -30,4 +30,12 @@ public class ArticleService {
     public Article selectByPrimaryKet(Integer id) {
         return articleMapper.selectByPrimaryKey(id.longValue());
     }
+
+    public int updateByCondition(Article article) {
+        return articleMapper.updateByCondition(article);
+    }
+
+    public int insert(Article article) {
+        return articleMapper.insert(article);
+    }
 }
