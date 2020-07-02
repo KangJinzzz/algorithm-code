@@ -32,4 +32,8 @@ public class ArticleService {
     public int updateByCondition(Article article) {
         return articleMapper.updateByCondition(article);
     }
+
+    public int deleteByPrimaryKey(Long id) {
+        return articleMapper.deleteByPrimaryKey(id);
+    }
 }

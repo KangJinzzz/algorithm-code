@@ -119,7 +119,14 @@ public class ArticleController {
         } else {    //修改文章，此时通过 id 查询到对应的文章，将其他不用变的属性设置如 article
             int num = articleService.updateByCondition(article);
         }
-        return String.format("redirect:/writer/forward/2/%s/editor", id);
+//        return String.format("redirect:/writer/forward/2/%s/editor", id);
+        return "redirect:/writer";
+    }
+
+    @RequestMapping("/writer/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        int num = articleService.deleteByPrimaryKey(id);
+        return "redirect:/writer";
     }
 
 }
