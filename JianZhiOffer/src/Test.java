@@ -1784,3 +1784,35 @@ class Solution66 {
         return b;
     }
 }
+
+// 剑指 Offer 67. 把字符串转换成整数
+class Solution67 {
+    public int strToInt(String str) {
+        char[] chars = str.trim().toCharArray();
+        //正负号，默认为 +
+        int sign = 1;
+        int res = 0;
+        int border = Integer.MAX_VALUE / 10;
+        int i = 1;
+        if (chars.length == 0) return 0;
+        if (chars[0] == '-') {
+            sign = -1;
+        } else if (chars[0] != '+') {    //如果没进到这个条件中，说明没有符号，直接从下标0来开始判断
+            i = 0;
+        }
+        for (; i < chars.length; i++) {
+            //不是数字，直接退出循环
+            if (chars[i] < '0' || chars[i] > '9') {
+                break;
+            }
+            int x = chars[i] - '0';
+            //在res更新前需要判断是否会越界，
+            //res更新后再判断，这时如果已经越界会的到一个随机数，无法判断
+            if (res > border || (res == border && x > 7)) {   //越界
+                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+            res = res * 10 + x;
+        }
+        return  res * sign;
+    }
+}
