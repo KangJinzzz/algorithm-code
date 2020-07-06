@@ -1816,3 +1816,29 @@ class Solution67 {
         return  res * sign;
     }
 }
+
+//  剑指 Offer 68 - I. 二叉搜索树的最近公共祖先
+/**
+ * root是最近公共祖先的情况：
+ * 1.因为是二叉搜索树，如果 p.val < root.val && q.val > root.val,说明p和q分别在root的两侧，root为最近公共祖先
+ * 2.如果root是q或p中的一个，则root为最近公共祖先
+ * root不是的情况：
+ * 1.p和q在root的左侧
+ * 2.p和q在root的右侧
+ */
+class Solution68_1 {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) return null;
+        //根节点是最近公共祖先的情况
+        if (root.val == p.val || root.val == q.val || (p.val < root.val && q.val > root.val)
+                || (q.val < root.val && p.val > root.val)) {
+            return root;
+        }
+        //p,q在root的左侧
+        if (p.val < root.val) {
+            return lowestCommonAncestor(root.left, p, q);
+        }
+        //p，q在root的右侧
+        return lowestCommonAncestor(root.right, p, q);
+    }
+}
