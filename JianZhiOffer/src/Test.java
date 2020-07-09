@@ -1877,3 +1877,30 @@ class Solution55_3 {
         return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
     }
 }
+
+//    剑指 Offer 09. 用两个栈实现队列
+class CQueue {
+    //实现入队列的逻辑
+    Stack<Integer> stack1 = new Stack<>();
+    //实现出队列的逻辑
+    Stack<Integer> stack2 = new Stack<>();
+    public CQueue() {
+
+    }
+
+    public void appendTail(int value) {
+        stack1.push(value);
+    }
+
+    public int deleteHead() {
+        if (stack1.isEmpty() && stack2.isEmpty()) {
+            return -1;
+        }
+        if (stack2.isEmpty()) {
+            while (!stack1.isEmpty()) {
+                stack2.push(stack1.pop());
+            }
+        }
+        return stack2.pop();
+    }
+}
