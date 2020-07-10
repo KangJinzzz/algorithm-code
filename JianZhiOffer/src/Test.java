@@ -1904,3 +1904,42 @@ class CQueue {
         return stack2.pop();
     }
 }
+
+//    剑指 Offer 12. 矩阵中的路径
+class Solution12 {
+    public boolean exist(char[][] board, String word) {
+        char[] words = word.toCharArray();
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (dfs(board, words, i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean dfs(char[][] board, char[] words, int i, int j, int index) {
+        int row = board.length - 1;
+        int col = board[0].length - 1;
+        //说明已经找到了一条路径
+        if (index >= words.length) {
+            return true;
+        }
+        //越界，或当前位置已经访问过，返回false
+        if (i < 0 || i > row || j < 0 || j > col) {
+            return false;
+        }
+        //与当前字母不匹配或者当前位置被访问过，返回false
+        if (board[i][j] != words[index]) {
+            return false;
+        }
+        char tmp = board[i][j];
+        board[i][j] = '/';
+        //当前位置满足条件，向当前位置的上下左右继续搜索
+        boolean res = dfs(board, words, i + 1, j, index + 1) || dfs(board, words, i - 1, j, index + 1)
+                || dfs(board, words, i, j + 1, index + 1) || dfs(board, words, i, j - 1, index + 1);
+        board[i][j] = tmp;
+        return res;
+    }
+}
