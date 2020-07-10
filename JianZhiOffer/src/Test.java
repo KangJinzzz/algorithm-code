@@ -1943,3 +1943,28 @@ class Solution12 {
         return res;
     }
 }
+
+//    剑指 Offer 13. 机器人的运动范围
+class Solution13 {
+    int[][] position = new int[][] {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    int res = 0;
+    public int movingCount(int m, int n, int k) {
+        int[][] book = new int[m][n];
+        dfs(book, m, n, 0, 0, k);
+        return res;
+    }
+
+    public void dfs(int[][] book, int m, int n, int i, int j, int k) {
+        if (i < 0 || i >= m || j < 0 || j >= n || book[i][j] == 1)  {
+            return;
+        }
+        if ((i % 10 + (i / 10 % 10) + j % 10 + (j / 10 % 10)) > k) {
+            return;
+        }
+        res++;
+        book[i][j] = 1;
+        for (int x = 0; x < 4; x++) {
+            dfs(book, m, n, i + position[x][0], j + position[x][1], k);
+        }
+    }
+}
