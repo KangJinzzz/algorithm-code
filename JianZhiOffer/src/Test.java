@@ -1980,3 +1980,82 @@ class Solution17 {
         return res;
     }
 }
+
+//    剑指 Offer 19. 正则表达式匹配
+
+/**
+ * 动态规划：
+ * 状态：F(i, j):s前i个字符与p前j个字符是否匹配
+ * 转移方程：1.当 p[j - 1] 是普通字符时：若 s[i - 1] = p[j - 1], F(i, j) = F(i - 1, j -1), 否则等于 false
+ *           2.当 p[j - 1] 是 '.' 时：F(i, j) = F(i - 1, j - 1)
+ *           3.当 p[j - 1] 是 '*' 时：a):当 p[j - 2] != s[i - 1],即 * == 0，F(i, j) = F(i, j - 2)
+ *                                    b):当 p[j - 2] == s[i - 1],即 * > 0，F(i, j) = F(i - 1, j)
+ * 初始化：看 s 的第一个字母与 p 的第一个字母是否可以匹配
+ * 返回值：F(m, n)
+ */
+//class Solution19 {
+//    public boolean isMatch(String s, String p) {
+//        int m = s.length();
+//        int n = p.length();
+//        boolean[][] dp = new boolean[m + 1][n + 1];
+//        //s 的前 0 个与 p 的前 0 个可以匹配，s 的前 i 个与 p 的前 0 个不可匹配，默认为false，不用初始化
+//        dp[0][0] = true;
+//        for (int i = 2; i <= n; i += 2) {
+//            dp[0][i] = p.charAt(i - 2) == '*' && dp[0][i - 2];
+//        }
+//
+//        for (int i = 1; i <= m; i++) {
+//            for (int j = 1; j <= n; j++) {
+//                if (p.charAt(j - 1) != '*') {
+//                    if (p.charAt(j - 1) == s.charAt(i - 1) || p.charAt(j - 1) == '.') {     //情况一和二合并
+//                        dp[i][j] = dp[i - 1][j - 1];
+//                    }
+//                } else {
+//                    dp[i][j]=dp[i][j-2]||
+//                            (dp[i - 1][j]&&(s.charAt(i - 1) == p.charAt(j - 2) || s.charAt(j - 2) == '.'));
+//
+//
+//                }
+//            }
+//        }
+//        return dp[m][n];
+//    }
+//}
+
+//剑指 Offer 20. 表示数值的字符串
+class Solution20 {
+    public boolean isNumber(String s) {
+        char[] str = s.trim().toCharArray();
+        boolean numseen = false;
+        boolean dotseen = false;
+        boolean eseen = false;
+
+        for (int i = 0; i < str.length; i++) {
+            // '-'和'+'只能出现在开头或 e/E 之后
+            if (str[i] == '-' || str[i] == '+') {
+                if (i != 0 && str[i - 1] != 'e'  && str[i - 1] != 'E') {
+                    return false;
+                }
+            } else if (str[i] >= '0' && str[i] <= '9') {
+                numseen = true;
+            } else if (str[i] == '.') {
+                // '.' 之前不能出现 '.'
+                if (dotseen || eseen) {
+                    return false;
+                }
+                dotseen = true;
+            } else if (str[i] == 'e' || str[i] == 'E') {
+                //‘e’ 之前不能出现 e 并且 e之前必须是数字
+                if (eseen || !numseen) {
+                    return false;
+                }
+                eseen = true;
+                //最后一个字符必须是数字或'.',其他情况必须把 numseen 置为 false
+                numseen = false;
+            } else {
+                return false;
+            }
+        }
+        return numseen;
+    }
+}
