@@ -2073,3 +2073,24 @@ class Solution03 {
         return -1;
     }
 }
+
+//剑指 Offer 04. 二维数组中的查找
+class Solution04 {
+    public boolean findNumberIn2DArray(int[][] matrix, int target) {
+        if (matrix.length == 0) {
+            return false;
+        }
+        int i = 0;
+        int j = matrix[0].length - 1;
+        while (i <= matrix.length - 1 && j >= 0) {
+            if (matrix[i][j] == target) {
+                return true;
+            } else if (matrix[i][j] > target) {
+                j--;
+            } else {
+                i++;
+            }
+        }
+        return false;
+    }
+}
