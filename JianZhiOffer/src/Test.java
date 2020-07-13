@@ -2059,3 +2059,17 @@ class Solution20 {
         return numseen;
     }
 }
+
+//剑指 Offer 03. 数组中重复的数字
+class Solution03 {
+    public int findRepeatNumber(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int x : nums) {
+            if (set.contains(x)) {
+                return x;
+            }
+            set.add(x);
+        }
+        return -1;
+    }
+}
