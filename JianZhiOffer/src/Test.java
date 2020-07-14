@@ -2116,3 +2116,18 @@ class Solution05 {
         return stringBuilder.toString();
     }
 }
+
+//剑指 Offer 06. 从尾到头打印链表
+class Solution06 {
+    public int[] reversePrint(ListNode head) {
+        Stack<Integer> stack = new Stack<>();
+        for (ListNode node = head; node != null; node = node.next) {
+            stack.push(node.val);
+        }
+        int[] res = new int[stack.size()];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = stack.pop();
+        }
+        return res;
+    }
+}
