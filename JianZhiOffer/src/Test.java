@@ -2094,3 +2094,25 @@ class Solution04 {
         return false;
     }
 }
+
+//剑指 Offer 05. 替换空格
+class Solution05 {
+    public String replaceSpace(String s) {
+//        int num = 0;
+//        for (int i = 0; i < s.length(); i++) {
+//            if (s.charAt(i) == ' ') {
+//                num++;
+//            }
+//        }
+//        char[] chars = new char[s.length() + 2 * num];
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == ' ') {
+                stringBuilder.append("%20");
+            } else {
+                stringBuilder.append(s.charAt(i));
+            }
+        }
+        return stringBuilder.toString();
+    }
+}
