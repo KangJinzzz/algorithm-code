@@ -2131,3 +2131,35 @@ class Solution06 {
         return res;
     }
 }
+
+//剑指 Offer 07. 重建二叉树
+class Solution07 {
+    int index = 0;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder.length == 0 || inorder.length == 0) {
+            return null;
+        }
+        TreeNode head = null;
+        return buildTreeHelper(preorder, inorder, 0, inorder.length);
+    }
+
+    public TreeNode buildTreeHelper(int[] preorder, int[] inorder, int iLeft, int iRight) {
+        if (index >= preorder.length || iLeft >= iRight) {
+            return null;
+        }
+        int inorderIndex = getInorderIndex(inorder, preorder[index]);
+        TreeNode head = new TreeNode(preorder[index++]);
+        head.left = buildTreeHelper(preorder, inorder, iLeft, inorderIndex);
+        head.right = buildTreeHelper(preorder, inorder, inorderIndex + 1, iRight);
+        return head;
+    }
+    public int getInorderIndex(int[] inorder, int a) {
+        int ret = 0;
+        for (int i = 0; i < inorder.length; i++) {
+            if (inorder[i] == a) {
+                ret = i;
+            }
+        }
+        return ret;
+    }
+}
