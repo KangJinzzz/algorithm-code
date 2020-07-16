@@ -2210,3 +2210,21 @@ class Solution110 {
         return c;
     }
 }
+
+//剑指 Offer 10- II. 青蛙跳台阶问题
+class Solution110_2 {
+    public int numWays(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+        int n2 = 1;
+        int n1 = 1;
+        int sum = 0;
+        for (int i = 2; i <= n; i++) {
+            sum = (n1 + n2) % 1000000007;
+            n2 = n1;
+            n1 = sum;
+        }
+        return sum;
+    }
+}
