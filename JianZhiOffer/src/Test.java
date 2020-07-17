@@ -2228,3 +2228,23 @@ class Solution110_2 {
         return sum;
     }
 }
+
+//剑指 Offer 11. 旋转数组的最小数字
+class Solution111 {
+    public int minArray(int[] numbers) {
+        int i = 0;
+        int j = numbers.length - 1;
+        int mid = 0;
+        while (i < j) {
+            mid = (i + j) / 2;
+            if (numbers[mid] < numbers[j]) {
+                j = mid;
+            } else if (numbers[mid] > numbers[j]) {
+                i = mid + 1;
+            } else {
+                j--;
+            }
+        }
+        return numbers[i];
+    }
+}
