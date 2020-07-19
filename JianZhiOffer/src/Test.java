@@ -2342,3 +2342,20 @@ class Solution114 {
         return dp[n];
     }
 }
+
+//剑指 Offer 15. 二进制中1的个数
+class Solution115 {
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        int res = 0;
+        for (int i = 0; i < 32; i++) {
+            if (((n >> i) & 1) == 1) {
+                res++;
+            }
+        }
+        return res;
+    }
+}
