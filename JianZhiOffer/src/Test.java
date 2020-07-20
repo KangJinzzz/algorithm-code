@@ -2380,3 +2380,15 @@ class Solution116 {
         return res;
     }
 }
+
+//剑指 Offer 17. 打印从1到最大的n位数
+class Solution117 {
+    public int[] printNumbers(int n) {
+        int end = (int)Math.pow(10, n) - 1;
+        int[] res = new int[end];
+        for (int i = 1; i <= end ; i++) {
+            res[i - 1] = i;
+        }
+        return res;
+    }
+}
