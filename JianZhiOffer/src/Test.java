@@ -2415,3 +2415,43 @@ class Solution118 {
         return head;
     }
 }
+
+//剑指 Offer 20. 表示数值的字符串
+class Solution1120 {
+    public boolean isNumber(String s) {
+        if (s.length() == 0) {
+            return false;
+        }
+        s = s.trim();
+        boolean isE = false;
+        boolean isDot = false;
+        boolean isNum = false;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (ch == '+' || ch == '-') {
+                if (i != 0 && (s.charAt(i - 1) != 'E' && s.charAt(i - 1) != 'e')) {
+                    return false;
+                }
+            } else if (ch == 'e' || ch == 'E') {
+                //'e','E'之前必须没有 e 并且有数字
+                if (isE || !isNum) {
+                    return false;
+                }
+                isE = true;
+                isNum = false;
+            } else if (ch == '.') {
+                //'.'之前不能有 '.' 或 'e'
+                if (isDot || isE) {
+                    return false;
+                }
+                isDot = true;
+            } else if (ch >= '0' && ch <= '9') {
+                isNum = true;
+            } else {
+                return false;
+            }
+        }
+        //判断是否是以数字或'.'结尾的
+        return isNum;
+    }
+}
