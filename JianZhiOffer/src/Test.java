@@ -2392,3 +2392,26 @@ class Solution117 {
         return res;
     }
 }
+
+//剑指 Offer 18. 删除链表的节点
+class Solution118 {
+    public ListNode deleteNode(ListNode head, int val) {
+        if(head == null) {
+            return null;
+        }
+        if (head.val == val) {
+            return head.next;
+        }
+        ListNode prev = head;
+        ListNode cur = head.next;
+        while (cur != null) {
+            if (cur.val == val) {
+                prev.next = cur.next;
+                return head;
+            }
+            prev = prev.next;
+            cur = cur.next;
+        }
+        return head;
+    }
+}
