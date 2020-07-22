@@ -2475,3 +2475,22 @@ class Solution121 {
         return nums;
     }
 }
+
+//剑指 Offer 22. 链表中倒数第k个节点
+class Solution122 {
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        if (head == null) {
+            return null;
+        }
+        ListNode fast = head;
+        ListNode slow = head;
+        for (int i = 0; i < k; i++) {
+            fast = fast.next;
+        }
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+}
