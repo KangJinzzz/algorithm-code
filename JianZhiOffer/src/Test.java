@@ -2494,3 +2494,23 @@ class Solution122 {
         return slow;
     }
 }
+
+//剑指 Offer 24. 反转链表
+class Solution124 {
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode prev = null;
+        ListNode cur = head;
+        ListNode last = head.next;
+        while (cur != null) {
+            cur.next = prev;
+            if (last == null) break;
+            prev = cur;
+            cur = last;
+            last = last.next;
+        }
+        return cur;
+    }
+}
