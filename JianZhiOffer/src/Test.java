@@ -2581,3 +2581,24 @@ class Solution126 {
         return isSubStructureHelper(a.left, b.left) && isSubStructureHelper(a.right, b.right);
     }
 }
+
+//剑指 Offer 27. 二叉树的镜像
+class Solution127 {
+    public TreeNode mirrorTree(TreeNode root) {
+        if (root == null || root.left == null && root.right == null) {
+            return root;
+        }
+        TreeNode head = helper(root);
+        return head;
+    }
+
+    public TreeNode helper(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode head = new TreeNode(root.val);
+        head.left = helper(root.right);
+        head.right = helper(root.left);
+        return head;
+    }
+}
