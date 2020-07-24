@@ -2549,3 +2549,35 @@ class Solution {
         return head.next;
     }
 }
+
+//    剑指 Offer 26. 树的子结构
+class Solution126 {
+
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
+        if (A == null || B == null) {
+            return false;
+        }
+        boolean res = false;
+        if (A.val == B.val) {
+            res = isSubStructureHelper(A, B);
+        }
+        if (!res) {
+            res = isSubStructure(A.left, B);
+        }
+        if (!res) {
+            res = isSubStructure(A.right, B);
+        }
+        return res;
+    }
+
+    public boolean isSubStructureHelper(TreeNode a, TreeNode b) {
+
+        if (b == null) {
+            return true;
+        }
+        if (a == null || a.val != b.val) {
+            return false;
+        }
+        return isSubStructureHelper(a.left, b.left) && isSubStructureHelper(a.right, b.right);
+    }
+}
