@@ -2624,3 +2624,45 @@ class Solution128 {
         return helper(left.left, right.right) && helper(left.right, right.left);
     }
 }
+
+//    剑指 Offer 29. 顺时针打印矩阵
+class Solution129 {
+    public int[] spiralOrder(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            return new int[0];
+        }
+        int[] res = new int[matrix.length * matrix[0].length];
+        int index = 0;
+        int up = 0;
+        int down = matrix.length - 1;
+        int left = 0;
+        int right = matrix[0].length - 1;
+        while (up <= down && left <= right) {
+            if (up <= down && left <= right) {
+                for (int i = left; i <= right; i++) {
+                    res[index++] = matrix[up][i];
+                }
+                up++;
+            }
+            if (up <= down && left <= right) {
+                for (int i = up; i <= down; i++) {
+                    res[index++] = matrix[i][right];
+                }
+                right--;
+            }
+            if (up <= down && left <= right) {
+                for (int i = right; i >= left; i--) {
+                    res[index++] = matrix[down][i];
+                }
+                down--;
+            }
+            if (up <= down && left <= right) {
+                for (int i = down; i >= up; i--) {
+                    res[index++] = matrix[i][left];
+                }
+                left++;
+            }
+        }
+        return res;
+    }
+}
