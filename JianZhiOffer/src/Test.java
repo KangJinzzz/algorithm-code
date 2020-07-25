@@ -647,7 +647,7 @@ class Solution32_3 {
 }
 
 //面试题33. 二叉搜索树的后序遍历序列
-class Solution {
+class Solution33 {
     public boolean verifyPostorder(int[] postorder) {
         return helper(postorder, 0, postorder.length - 1);
     }
@@ -2600,5 +2600,27 @@ class Solution127 {
         head.left = helper(root.right);
         head.right = helper(root.left);
         return head;
+    }
+}
+
+//剑指 Offer 28. 对称的二叉树
+class Solution128 {
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null || root.left == null && root.right == null) {
+            return true;
+        }
+        return helper(root.left, root.right);
+    }
+    public boolean helper(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+        if (left.val != right.val) {
+            return false;
+        }
+        return helper(left.left, right.right) && helper(left.right, right.left);
     }
 }
