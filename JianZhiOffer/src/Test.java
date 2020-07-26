@@ -2666,3 +2666,41 @@ class Solution129 {
         return res;
     }
 }
+
+//剑指 Offer 30. 包含min函数的栈
+class MinStack130 {
+    Stack<Integer> min = new Stack<>();
+    Stack<Integer> stack = new Stack<>();
+    /** initialize your data structure here. */
+    public MinStack130() {
+
+    }
+
+    public void push(int x) {
+        if (stack.isEmpty()) {
+            stack.push(x);
+            min.push(x);
+            return;
+        }
+        stack.push(x);
+        int m = min.peek();
+        if (x < m) {
+            min.push(x);
+        } else {
+            min.push(m);
+        }
+    }
+
+    public void pop() {
+        stack.pop();
+        min.pop();
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int min() {
+        return min.peek();
+    }
+}
