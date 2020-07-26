@@ -2704,3 +2704,20 @@ class MinStack130 {
         return min.peek();
     }
 }
+
+//剑指 Offer 31. 栈的压入、弹出序列
+class Solution131 {
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        boolean res = false;
+        int index = 0;
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < pushed.length; i++) {
+            stack.push(pushed[i]);
+            while (!stack.isEmpty() && popped[index] == stack.peek()) {
+                stack.pop();
+                index++;
+            }
+        }
+        return stack.isEmpty();
+    }
+}
