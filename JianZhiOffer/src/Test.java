@@ -2750,7 +2750,7 @@ class Solution132 {
 }
 
 //剑指 Offer 32 - II. 从上到下打印二叉树 II
-class Solution132 {
+class Solution132_2 {
     public List<List<Integer>> levelOrder(TreeNode root) {
         if (root == null) {
             return new ArrayList<>();
@@ -2769,6 +2769,38 @@ class Solution132 {
                 }
                 if (node.right != null) {
                     queue.offer(node.right);
+                }
+            }
+            list.add(tmp);
+        }
+        return list;
+    }
+}
+
+
+class Solution132_3 {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> tmp = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                if (list.size() % 2 == 0) {
+                    tmp.add(node.val);
+                } else {
+                    tmp.add(0, node.val);
+                }
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
                 }
             }
             list.add(tmp);
