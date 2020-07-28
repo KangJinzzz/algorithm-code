@@ -2748,3 +2748,31 @@ class Solution132 {
         return res;
     }
 }
+
+//剑指 Offer 32 - II. 从上到下打印二叉树 II
+class Solution132 {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        List<List<Integer>> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> tmp = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                tmp.add(node.val);
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+            list.add(tmp);
+        }
+        return list;
+    }
+}
