@@ -2808,3 +2808,29 @@ class Solution132_3 {
         return list;
     }
 }
+
+//剑指 Offer 33. 二叉搜索树的后序遍历序列
+class Solution133 {
+    public boolean verifyPostorder(int[] postorder) {
+        return helper(postorder, 0, postorder.length - 1);
+    }
+
+    public boolean helper(int[] postorder, int i, int j) {
+        if (i >= j) {
+            return true;
+        }
+        int root = postorder[j];
+        int index = 0;
+        while (postorder[index] < root) {
+            index++;
+        }
+        for (int k = 0; k < j; k++) {
+            if (k < index) {
+                if (postorder[k] >= root) return false;
+            } else {
+                if (postorder[k] <= root) return false;
+            }
+        }
+        return helper(postorder, i, index - 1) && helper(postorder, index, j - 1);
+    }
+}
