@@ -2834,3 +2834,30 @@ class Solution133 {
         return helper(postorder, i, index - 1) && helper(postorder, index, j - 1);
     }
 }
+
+//剑指 Offer 34. 二叉树中和为某一值的路径
+class Solution134 {
+    List<List<Integer>> res = new ArrayList<>();
+    List<Integer> tmp = new ArrayList<>();
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        dfs(root, 0, sum);
+        return res;
+    }
+    public void dfs(TreeNode root, int curSum, int sum) {
+        if (root == null) {
+            return;
+        }
+        curSum += root.val;
+        tmp.add(root.val);
+        if (curSum == sum && root.left == null && root.right == null) {
+            List<Integer> list = new ArrayList<>(tmp);
+            res.add(list);
+        }
+        dfs(root.left, curSum, sum);
+        dfs(root.right, curSum, sum);
+        tmp.remove(tmp.size() - 1);
+    }
+}
