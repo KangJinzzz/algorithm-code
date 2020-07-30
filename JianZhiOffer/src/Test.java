@@ -1,4 +1,3 @@
-import java.beans.IntrospectionException;
 import java.util.*;
 
 public class Test {
@@ -2859,5 +2858,38 @@ class Solution134 {
         dfs(root.left, curSum, sum);
         dfs(root.right, curSum, sum);
         tmp.remove(tmp.size() - 1);
+    }
+}
+
+//剑指 Offer 35. 复杂链表的复制
+class Solution135 {
+    public Node copyRandomList(Node head) {
+        if (head == null) {
+            return null;
+        }
+        for (Node node = head; node != null; node = node.next.next) {
+            Node newNode = new Node(node.val);
+            newNode.next = node.next;
+            node.next = newNode;
+        }
+        for (Node node = head; node != null; node = node.next.next) {
+            if (node.random == null) {
+                node.next.random = null;
+                continue;
+            }
+            node.next.random = node.random.next;
+        }
+        Node newHead = head.next;
+        Node next = newHead;
+        for (Node node = head; node != null; node = node.next) {
+            if (next.next == null) {
+                node.next = null;
+                break;
+            }
+            node.next = next.next;
+            next.next = node.next.next;
+            next = next.next;
+        }
+        return newHead;
     }
 }
