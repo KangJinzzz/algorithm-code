@@ -2893,3 +2893,39 @@ class Solution135 {
         return newHead;
     }
 }
+
+//剑指 Offer 36. 二叉搜索树与双向链表
+//class Solution {
+//    Node head = null;
+//    Node prev = null;
+//    Node cur = null;
+//
+//    public Node treeToDoublyList(Node root) {
+//        if (root == null) {
+//            return null;
+//        }
+//        helper(root);
+//        head.left = cur;
+//        cur.right = head;
+//        return head;
+//    }
+//
+//    public void helper(Node root) {
+//        if (root == null) {
+//            return;
+//        }
+//        treeToDoublyList(root.left);
+//        if (head == null) {
+//            head = root;
+//            prev = root;
+//            cur = root;
+//        } else {
+//            cur = root;
+//            prev.right = root;
+//            root.left = prev;
+//            prev = root;
+//        }
+//        helper(root.right);
+//
+//    }
+//}
