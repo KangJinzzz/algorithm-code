@@ -3532,3 +3532,29 @@ class Solution373 {
     }
 }
 
+//1079. 活字印刷
+class Solution1079 {
+    public int numTilePossibilities(String tiles) {
+        if (tiles.length() == 0) {
+            return 0;
+        }
+        Set<String> set = new HashSet<>();
+        int[] used = new int[tiles.length()];
+        dfs(tiles, "", used, set);
+        return set.size();
+    }
+    public void dfs(String tiles, String curStr, int[] used, Set<String> set) {
+        if (!curStr.equals("")) {
+            set.add(curStr);
+        }
+        for (int i = 0; i < tiles.length(); i++) {
+            if (used[i] == 0) {
+                char ch = tiles.charAt(i);
+                used[i] = 1;
+                dfs(tiles, curStr + ch, used, set);
+                used[i] = 0;
+            }
+
+        }
+    }
+}
