@@ -2929,3 +2929,62 @@ class Solution135 {
 //
 //    }
 //}
+
+
+//    剑指 Offer 37. 序列化二叉树
+class Codec137 {
+
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        if (root == null) {
+            return "[]";
+        }
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node == null) {
+                builder.append("null,");
+            } else {
+                builder.append(node.val + ",");
+                queue.offer(node.left);
+                queue.offer(node.right);
+            }
+
+        }
+        builder.deleteCharAt(builder.length() - 1);
+        builder.append("]");
+        return builder.toString();
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        if (data.equals("[]")) {
+            return null;
+        }
+        data = data.substring(1, data.length() - 1);
+        String[] vals = data.split(",");
+        Queue<TreeNode> queue = new LinkedList<>();
+        TreeNode root = new TreeNode(Integer.parseInt(vals[0]));
+        queue.offer(root);
+        int index = 1;
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (!vals[index].equals("null")) {
+                TreeNode leftNode = new TreeNode(Integer.parseInt(vals[index]));
+                node.left = leftNode;
+                queue.offer(leftNode);
+            }
+            index++;
+            if (!vals[index].equals("null")) {
+                TreeNode rightNode = new TreeNode(Integer.parseInt(vals[index]));
+                node.right = rightNode;
+                queue.offer(rightNode);
+            }
+            index++;
+        }
+        return root;
+    }
+}
