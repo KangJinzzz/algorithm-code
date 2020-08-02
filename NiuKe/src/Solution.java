@@ -3046,3 +3046,57 @@ class Solution11 {
     }
 }
 
+
+class Main74 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String str = sc.nextLine();
+            char res = 0;
+            Map<Character, Integer> map = new HashMap<>();
+            for (int i = 0; i < str.length(); i++) {
+                char c = str.charAt(i);
+                int count = map.getOrDefault(c, 0);
+                map.put(c, count + 1);
+            }
+            for (int i = 0; i < str.length(); i++) {
+                char c = str.charAt(i);
+                if (map.get(str.charAt(i)) == 1) {
+                    res = c;
+                    break;
+                }
+            }
+            if (res == 0) {
+                System.out.println(-1);
+            } else {
+                System.out.println(res);
+            }
+        }
+    }
+}
+
+
+class Main75 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int res = -1;
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+            }
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int x : arr) {
+                int count = map.getOrDefault(x, 0);
+                if (count >= arr.length / 2) {
+                    res = x;
+                    break;
+                }
+                map.put(x, count + 1);
+            }
+            System.out.println(res);
+        }
+    }
+}
+
