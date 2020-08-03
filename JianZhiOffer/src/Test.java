@@ -2988,3 +2988,36 @@ class Codec137 {
         return root;
     }
 }
+
+//    剑指 Offer 38. 字符串的排列
+class Solution138 {
+    public String[] permutation(String s) {
+        if (s.length() == 0) {
+            return new String[0];
+        }
+        int[] used = new int[s.length()];
+        Set<String> set = new HashSet<>();
+        dfs(s, "", used, set);
+        String[] res = new String[set.size()];
+        int index = 0;
+        for (String str : set) {
+            res[index++] = str;
+        }
+        return res;
+    }
+
+    public void dfs(String s, String curStr, int[] used, Set<String> set) {
+        if (curStr.length() >= s.length()) {
+            set.add(curStr);
+            return;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            if (used[i] == 0) {
+                char c = s.charAt(i);
+                used[i] = 1;
+                dfs(s, curStr + c, used, set);
+                used[i] = 0;
+            }
+        }
+    }
+}
