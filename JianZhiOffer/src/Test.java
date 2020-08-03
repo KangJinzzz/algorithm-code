@@ -3021,3 +3021,20 @@ class Solution138 {
         }
     }
 }
+
+//    剑指 Offer 39. 数组中出现次数超过一半的数字
+class Solution139 {
+    public int majorityElement(int[] nums) {
+        int times = 0;
+        int votes = 0;
+        for (int x : nums) {
+            if (times == 0) {
+                votes = x;
+                times++;
+            } else {
+                times = times + (votes == x ? 1 : -1);
+            }
+        }
+        return votes;
+    }
+}
