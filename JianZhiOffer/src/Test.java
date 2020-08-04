@@ -3038,3 +3038,55 @@ class Solution139 {
         return votes;
     }
 }
+
+//    剑指 Offer 40. 最小的k个数
+class Solution140 {
+    public int[] getLeastNumbers(int[] arr, int k) {
+        if (arr.length == 0 || k == 0) {
+            return new int[0];
+        }
+        int left = 0;
+        int right = arr.length - 1;
+        int[] res = new int[k];
+        int index = partion(arr, left, right);
+        while (index != k) {
+            if (index > k) {
+                right = index - 1;
+                index = partion(arr, left, right);
+            } else if (index < k) {
+                left = index + 1;
+                index = partion(arr, left, right);
+            }
+        }
+        for (int i = 0; i < k; i++) {
+            res[i] = arr[i];
+        }
+        return res;
+    }
+
+    public int partion(int[] arr, int left, int right) {
+        if (left >= right) {
+            return left;
+        }
+        int i = left;
+        int j = right;
+        int pivot = arr[left];
+        while (i < j) {
+            while (i < j && arr[j] >= pivot) {
+                j--;
+            }
+            while (i < j && arr[i] <= pivot) {
+                i++;
+            }
+            swap(arr, i, j);
+        }
+        swap(arr, left, i);
+        return i;
+    }
+    public void swap(int[] arr, int i, int j) {
+        int t = arr[i];
+        arr[i] = arr[j];
+        arr[j] = t;
+    }
+}
+
