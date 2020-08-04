@@ -3090,3 +3090,31 @@ class Solution140 {
     }
 }
 
+//剑指 Offer 41. 数据流中的中位数
+class MedianFinder141 {
+
+    Queue<Integer> sHeap;
+    Queue<Integer> bHeap;
+    /** initialize your data structure here. */
+    public MedianFinder141() {
+        sHeap = new PriorityQueue<>();
+        bHeap = new PriorityQueue<>((x, y) -> (y - x));
+    }
+
+    public void addNum(int num) {
+        if (sHeap.size() == bHeap.size()) {
+            bHeap.offer(num);
+            sHeap.offer(bHeap.poll());
+        } else {
+            sHeap.offer(num);
+            bHeap.offer(sHeap.poll());
+        }
+    }
+
+    public double findMedian() {
+        if (sHeap.size() == bHeap.size()) {
+            return (sHeap.peek() + bHeap.peek()) / 2.0;
+        }
+        return sHeap.peek();
+    }
+}
