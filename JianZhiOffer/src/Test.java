@@ -3118,3 +3118,26 @@ class MedianFinder141 {
         return sHeap.peek();
     }
 }
+
+//剑指 Offer 42. 连续子数组的最大和
+class Solution142 {
+    //F(j): 以j结尾的最大和
+    //当F(j - 1) > 0,F(j) = F(j - 1) + nums[j]
+    //当F(j - 1) <= 0, F(j) = nums[j];
+    public int maxSubArray(int[] nums) {
+
+        int sum = 0;
+        int max = Integer.MIN_VALUE;
+        for (int x : nums) {
+            if (sum > 0) {
+                sum += x;
+            } else {
+                sum = x;
+            }
+            if (sum > max) {
+                max = sum;
+            }
+        }
+        return max;
+    }
+}
