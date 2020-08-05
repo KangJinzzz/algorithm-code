@@ -3141,3 +3141,24 @@ class Solution142 {
         return max;
     }
 }
+
+//剑指 Offer 43. 1～n整数中1出现的次数
+class Solution143 {
+    public int countDigitOne(int n) {
+        return f(n);
+    }
+    public int f(int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        String s = String.valueOf(n);
+        int high = s.charAt(0) - '0';
+        int pow = (int)Math.pow(10, s.length() - 1);
+        int low = n - high * pow;
+        if (high == 1) {
+            return low + 1 + f(pow - 1) + f(low);
+        } else {
+            return pow + f(pow - 1) * high + f(low);
+        }
+    }
+}
