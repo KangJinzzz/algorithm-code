@@ -3162,3 +3162,32 @@ class Solution143 {
         }
     }
 }
+
+//    剑指 Offer 44. 数字序列中某一位的数字
+//注意！！！：counth和start一定要用long
+class Solution144 {
+    public static int findNthDigit(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        //位数：当前数字有几位，1~9 有一位， 10~99 有2位....
+        int digit = 1;
+        //当前位数的数字的个数， 1~9 9个， 10~99 90 个，100~999 900 个
+        long count = 9;
+        //当前位数的数字的开始数字
+        long start = 1;
+        while (n > count * digit) {
+            //count * digit 为当前位的总位数
+            n -= count * digit;
+            digit++;
+            count = 10 * count;
+            start *= 10;
+        }
+        long num = start + (n - 1) / digit;
+        return String.valueOf(num).charAt((n - 1) % digit) - '0';
+    }
+    public static void main(String[] args) {
+        int n = findNthDigit(10000);
+        System.out.println(n);
+    }
+}
