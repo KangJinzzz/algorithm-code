@@ -3235,3 +3235,24 @@ class Solution145 {
         strs[j] = t;
     }
 }
+
+//剑指 Offer 46. 把数字翻译成字符串
+class Solution146 {
+    public int translateNum(int num) {
+        String str = String.valueOf(num);
+        int f2 = 1;
+        int f1 = 1;
+        int f = 1;
+        for (int i = 1; i < str.length(); i++) {
+            int n = Integer.parseInt(str.substring(i - 1, i + 1));
+            if (n >= 10 && n <= 25) {
+                f = f1 + f2;
+            } else {
+                f = f1;
+            }
+            f2 = f1;
+            f1 = f;
+        }
+        return f;
+    }
+}
