@@ -3191,3 +3191,47 @@ class Solution144 {
         System.out.println(n);
     }
 }
+
+//剑指 Offer 45. 把数组排成最小的数
+class Solution145 {
+    public String minNumber(int[] nums) {
+        if (nums.length == 0) {
+            return "";
+        }
+        String[] strs = new String[nums.length];
+        for (int i = 0; i < strs.length; i++) {
+            strs[i] = String.valueOf(nums[i]);
+        }
+        quickSort(strs, 0, strs.length - 1);
+        StringBuilder builder = new StringBuilder();
+        for (String str : strs) {
+            builder.append(str);
+        }
+        return builder.toString();
+    }
+    public void quickSort(String[] strs, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        String pivot = strs[left];
+        int i = left;
+        int j = right;
+        while (i < j) {
+            while (i < j && (strs[j] + pivot).compareTo(pivot + strs[j]) >= 0) {
+                j--;
+            }
+            while (i < j && (pivot + strs[i]).compareTo(strs[i] + pivot) >= 0) {
+                i++;
+            }
+            swap(strs, i, j);
+        }
+        swap(strs, left, i);
+        quickSort(strs, left, i - 1);
+        quickSort(strs, i + 1, right);
+    }
+    public void swap(String[] strs, int i, int j) {
+        String t = strs[i];
+        strs[i] = strs[j];
+        strs[j] = t;
+    }
+}
