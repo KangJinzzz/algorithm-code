@@ -3272,3 +3272,25 @@ class Solution147 {
         return max[grid.length][grid[0].length];
     }
 }
+
+//剑指 Offer 48. 最长不含重复字符的子字符串
+class Solution148 {
+    public int lengthOfLongestSubstring(String s) {
+        int length = 0;
+        int max = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            int j = map.getOrDefault(s.charAt(i), -1);
+            if (i - j > length) {
+                length++;
+            } else {
+                length = i - j;
+            }
+            map.put(s.charAt(i), i);
+            if (length > max) {
+                max = length;
+            }
+        }
+        return max;
+    }
+}
