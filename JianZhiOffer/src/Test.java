@@ -3256,3 +3256,19 @@ class Solution146 {
         return f;
     }
 }
+
+//剑指 Offer 47. 礼物的最大价值
+class Solution147 {
+    public int maxValue(int[][] grid) {
+        if (grid.length == 0) {
+            return 0;
+        }
+        int[][] max = new int[grid.length + 1][grid[0].length + 1];
+        for (int i = 1; i <= grid.length; i++) {
+            for (int j = 1; j <= grid[0].length; j++) {
+                max[i][j] = Math.max(max[i - 1][j], max[i][j - 1]) + grid[i - 1][j - 1];
+            }
+        }
+        return max[grid.length][grid[0].length];
+    }
+}
