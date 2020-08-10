@@ -3331,3 +3331,49 @@ class Solution150 {
         return ' ';
     }
 }
+
+//剑指 Offer 51. 数组中的逆序对
+class Solution151 {
+    int count = 0;
+    public int reversePairs(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        mergeSort(nums, 0, nums.length);
+        return count;
+    }
+
+    public void mergeSort(int[] arr, int left, int right) {
+        if (left >= right - 1) {
+            return;
+        }
+        int mid = (left + right) / 2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid, right);
+        merge(arr, left, mid, right);
+    }
+
+    public void merge(int[] arr, int left, int mid, int right) {
+        int i = left;
+        int j = mid;
+        int[] tmp = new int[right - left];
+        int index = 0;
+        while (i < mid && j < right) {
+            if (arr[i] <= arr[j]) {
+                tmp[index++] = arr[i++];
+            } else {
+                tmp[index++] = arr[j++];
+                count += (mid - i);
+            }
+        }
+        while (i < mid) {
+            tmp[index++] = arr[i++];
+        }
+        while (j < right) {
+            tmp[index++] = arr[j++];
+        }
+        for (int k = 0; k < tmp.length; k++) {
+            arr[left++] = tmp[k];
+        }
+    }
+}
