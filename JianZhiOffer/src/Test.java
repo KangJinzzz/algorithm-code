@@ -3312,3 +3312,22 @@ class Solution149 {
     }
 
 }
+
+
+//剑指 Offer 50. 第一个只出现一次的字符
+class Solution150 {
+    public char firstUniqChar(String s) {
+        char[] chars = s.toCharArray();
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : chars) {
+            int count = map.getOrDefault(c, 0);
+            map.put(c, count + 1);
+        }
+        for (char c : chars) {
+            if (map.get(c) == 1) {
+                return c;
+            }
+        }
+        return ' ';
+    }
+}
