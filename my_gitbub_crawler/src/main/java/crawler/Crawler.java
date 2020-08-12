@@ -135,7 +135,8 @@ public class Crawler {
         if (!response.isSuccessful()) {
             System.out.println("获取项目信息失败：" + project.getUrl());
         }
-        praseProInfo(response.body().string(), project);
+        String jsonString = response.body().string();
+        praseProInfo(jsonString, project);
     }
 
 
@@ -157,6 +158,7 @@ public class Crawler {
      * @param project       将对应的 starCount, forkCount, openIssueCount 设置到 project 中
      */
     private void praseProInfo(String jsonString, Project project) {
+        //gson的用法
         Type type = new TypeToken<HashMap<String, Object>>(){}.getType();
         HashMap<String, Object> hashMap = gson.fromJson(jsonString, type);
         Double starCount = (Double)hashMap.get("stargazers_count");
