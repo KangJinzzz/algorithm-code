@@ -3379,7 +3379,7 @@ class Solution151 {
 }
 
 //    剑指 Offer 52. 两个链表的第一个公共节点
-public class Solution152 {
+class Solution152 {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) {
             return null;
@@ -3391,5 +3391,42 @@ public class Solution152 {
             nodeB = (nodeB == null) ? headA : nodeB.next;
         }
         return nodeA;
+    }
+}
+
+//剑指 Offer 53 - I. 在排序数组中查找数字 I
+class Solution153 {
+    public int search(int[] nums, int target) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        int left = 0;
+        int right = nums.length - 1;
+        int mid = 0;
+        while (left <= right) {
+            mid = (left + right) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else if (nums[mid] > target) {
+                right = mid - 1;
+            } else {
+                break;
+            }
+        }
+        if (nums[mid] != target) {
+            return 0;
+        }
+        int count = 1;
+        int i = mid - 1;
+        int j = mid + 1;
+        while (i >= 0 && nums[i] == target) {
+            i--;
+            count++;
+        }
+        while (j <= nums.length - 1 && nums[j] == target) {
+            j++;
+            count++;
+        }
+        return count;
     }
 }
