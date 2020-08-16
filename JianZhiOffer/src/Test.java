@@ -3448,3 +3448,30 @@ class Solution153_2 {
         return left;
     }
 }
+
+
+//剑指 Offer 54. 二叉搜索树的第k大节点
+class Solution154 {
+    int count = 0;
+    int res = 0;
+    public int kthLargest(TreeNode root, int k) {
+        if (root == null) {
+            return -1;
+        }
+        inorder(root, k);
+        return res;
+    }
+    public void inorder(TreeNode root, int k) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.right, k);
+        count++;
+        if (count == k) {
+            res = root.val;
+            return;
+        }
+        inorder(root.left, k);
+    }
+
+}
