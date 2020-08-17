@@ -3486,3 +3486,26 @@ class Solution155_1 {
         return 1 + Math.max(maxDepth(root.right), maxDepth(root.left));
     }
 }
+
+//剑指 Offer 55 - II. 平衡二叉树
+class Solution155_2 {
+    public boolean isBalanced(TreeNode root) {
+        if (root == null || root.left == null && root.right == null) {
+            return true;
+        }
+        int leftDepth = maxDepth(root.left);
+        int rightDepth = maxDepth(root.right);
+        if (leftDepth - rightDepth > 1 || rightDepth - leftDepth > 1) {
+            return false;
+        }
+        return isBalanced(root.left) && isBalanced(root.right);
+
+    }
+
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+    }
+}
