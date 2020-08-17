@@ -3475,3 +3475,14 @@ class Solution154 {
     }
 
 }
+
+//剑指 Offer 55 - I. 二叉树的深度
+class Solution155_1 {
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        return 1 + Math.max(maxDepth(root.right), maxDepth(root.left));
+    }
+}
