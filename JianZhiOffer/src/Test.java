@@ -3509,3 +3509,30 @@ class Solution155_2 {
         return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
     }
 }
+
+//剑指 Offer 56 - I. 数组中数字出现的次数
+class Solution156_1 {
+    public int[] singleNumbers(int[] nums) {
+        int xor = 0;
+        int[] res = new int[2];
+        for (int x : nums) {
+            xor ^= x;   //得到这两个出现一次数次异或的结果
+        }
+        int index = 0;
+        //找xor第一位为 1 的位
+        for (int i = 0; i < 32; i++) {
+            if (((xor >> i) & 1) == 1) {
+                index = i;
+                break;
+            }
+        }
+        for (int x : nums) {
+            if (((x >> index) & 1) == 1) {
+                res[0] ^= x;
+            } else {
+                res[1] ^= x;
+            }
+        }
+        return res;
+    }
+}
