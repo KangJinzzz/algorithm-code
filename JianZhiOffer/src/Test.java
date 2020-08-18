@@ -3536,3 +3536,22 @@ class Solution156_1 {
         return res;
     }
 }
+
+//剑指 Offer 56 - II. 数组中数字出现的次数 II
+class Solution156_2 {
+    public int singleNumber(int[] nums) {
+        int[] count = new int[32];
+        for (int x : nums) {
+            for (int i = 0; i < 32; i++) {
+                if ((x >> i & 1) == 1) {
+                    count[i]++;
+                }
+            }
+        }
+        int res = 0;
+        for (int i = 0; i < 32; i++) {
+            res += (count[i] % 3 << i);
+        }
+        return res;
+    }
+}
