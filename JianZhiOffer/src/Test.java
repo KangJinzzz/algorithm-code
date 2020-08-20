@@ -3576,3 +3576,31 @@ class Solution157 {
         return res;
     }
 }
+
+//剑指 Offer 57 - II. 和为s的连续正数序列
+class Solution157_2 {
+    public int[][] findContinuousSequence(int target) {
+        List<int[]> list = new ArrayList<>();
+        int left = 1;
+        int right = 2;
+        int sum = 3;
+        while (left <= (target) / 2) {
+            if (sum < target) {
+                right++;
+                sum += right;
+            } else if (sum > target) {
+                sum -= left;
+                left++;
+            } else {
+                int[] tmp = new int[right - left + 1];
+                for (int i = 0; i < tmp.length; i++) {
+                    tmp[i] = left + i;
+                }
+                list.add(tmp);
+                sum -= left;
+                left++;
+            }
+        }
+        return list.toArray(new int[list.size()][]);
+    }
+}
