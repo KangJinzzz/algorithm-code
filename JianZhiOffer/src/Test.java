@@ -3604,3 +3604,24 @@ class Solution157_2 {
         return list.toArray(new int[list.size()][]);
     }
 }
+
+//剑指 Offer 58 - I. 翻转单词顺序
+class Solution158_1 {
+    public String reverseWords(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+        s = s.trim();
+        StringBuilder builder = new StringBuilder(s);
+        String[] strs = builder.reverse().toString().split(" ");
+        StringBuilder res = new StringBuilder();
+        for (String str : strs) {
+            StringBuilder builder2 = new StringBuilder(str);
+            if (!str.equals("")) {
+                res.append(builder2.reverse()).append(" ");
+            }
+
+        }
+        return res.toString().trim();
+    }
+}
