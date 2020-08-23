@@ -3634,3 +3634,33 @@ class Solution158_2 {
         return builder.append(s.substring(0, n)).toString();
     }
 }
+
+//剑指 Offer 59 - I. 滑动窗口的最大值
+class Solution159_1 {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums.length == 0 || k <= 0) {
+            return new int[0];
+        }
+        int[] res = new int[nums.length - k + 1];
+        Deque<Integer> deque = new LinkedList<>();
+        //未形成窗口时
+        for (int i = 0; i < k; i++) {
+            while (!deque.isEmpty() && deque.peekLast() < nums[i]) {
+                deque.removeLast();
+            }
+            deque.addLast(nums[i]);
+        }
+        res[0] = deque.peekFirst();
+        for (int i = k; i < nums.length; i++) {
+            if (nums[i - k] == deque.peekFirst()) {
+                deque.removeFirst();
+            }
+            while (!deque.isEmpty() && deque.peekLast() < nums[i]) {
+                deque.removeLast();
+            }
+            deque.addLast(nums[i]);
+            res[i - k + 1] = deque.peekFirst();
+        }
+        return res;
+    }
+}
