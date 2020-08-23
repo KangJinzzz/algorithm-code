@@ -3664,3 +3664,40 @@ class Solution159_1 {
         return res;
     }
 }
+
+//剑指 Offer 59 - II. 队列的最大值
+class MaxQueue159_2 {
+    Queue<Integer> queue = new LinkedList<>();
+    Deque<Integer> deque = new LinkedList<>();
+    public MaxQueue159_2() {
+
+    }
+
+    public int max_value() {
+        if (deque.isEmpty()) {
+            return -1;
+        }
+        return deque.peekFirst();
+    }
+
+    public void push_back(int value) {
+        queue.add(value);
+
+        if (!deque.isEmpty()) {
+            while (!deque.isEmpty() && deque.peekLast() < value) {
+                deque.removeLast();
+            }
+        }
+        deque.add(value);
+    }
+
+    public int pop_front() {
+        if (queue.isEmpty()) {
+            return -1;
+        }
+        if (queue.peek().equals(deque.peekFirst())) {
+            deque.removeFirst();
+        }
+        return queue.poll();
+    }
+}
