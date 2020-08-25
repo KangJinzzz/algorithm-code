@@ -3701,3 +3701,34 @@ class MaxQueue159_2 {
         return queue.poll();
     }
 }
+
+
+
+class Test250 {
+    static Map<Integer, Character> map = new HashMap<>();
+    static int count = 0;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            char c = 'A';
+            for (int i = 1; i <= 26; i++) {
+                map.put(i, c++);
+            }
+            StringBuilder builder = new StringBuilder();
+            if (n == 0) {
+                System.out.println("A");
+                continue;
+            }
+            int wei = 1;
+            while (n > 0) {
+                char ch = map.get(n % 26);
+                builder.append(ch);
+                n /= 26;
+            }
+            System.out.print(builder.reverse().toString() + "   ");
+        }
+
+    }
+
+}
