@@ -3732,3 +3732,39 @@ class Test250 {
     }
 
 }
+
+//剑指 Offer 60. n个骰子的点数
+class Solution160 {
+    //状态：F(i, j):掷完第 i 个骰子，点数之和为 j 出现的次数
+    //状态转移方程：掷完第 i 个骰子，点数之和为 j 的情况：
+    //            1）第 i 个骰子点数为 1 -> F(i - 1, j - 1)
+    //            2）第 i 个骰子点数为 2 -> F(i - 1, j - 2)
+    //            .....
+    //            6）第 i 个骰子点数为 6 -> F(i - 1, j - 6)
+    //          因此转移方程为：
+    //          for (int k = 1; k <= 6; k++) {
+    //              F(i, j) += F(i - 1, j - k)
+    //          }
+    public double[] twoSum(int n) {
+        int[][] dp = new int[n + 1][6 * n + 1];
+        //第一枚骰子只能出现一次 1,2,3,4,5,6
+        for (int i = 1; i <= 6; i++) {
+            dp[1][i] = 1;
+        }
+        for(int i = 2; i <= n; i++) {
+            for (int j = i; j <= 6 * n; j++) {  //i枚骰子最小点数为i，最大点数为i * 6
+                for (int k = 1; k <= 6; k++) {
+                    if (k <= j) {
+                        dp[i][j] += dp[i - 1][j - k];
+                    }
+                }
+            }
+        }
+        double sum = Math.pow(6, n);
+        double[] res = new double[6 * n - n + 1];
+        for (int i = n; i <= 6 * n; i++) {
+            res[i - n] = (double)dp[n][i] / sum;
+        }
+        return res;
+    }
+}
