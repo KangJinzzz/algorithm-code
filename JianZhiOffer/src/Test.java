@@ -3768,3 +3768,30 @@ class Solution160 {
         return res;
     }
 }
+
+//剑指 Offer 61. 扑克牌中的顺子
+class Solution161 {
+
+    public static void main(String[] args) {
+        int[] arr = new int[] {4, 7, 5, 9, 2};
+        boolean f = isStraight(arr);
+    }
+    public static boolean isStraight(int[] nums) {
+        int max = 0;
+        int min = Integer.MAX_VALUE;
+        Set<Integer> set = new HashSet<>();
+        for (int x : nums) {
+            if (set.contains(x) && x != 0) {
+                return false;
+            }
+            set.add(x);
+            if (x > max) {
+                max = x;
+            }
+            if (x < min && x != 0) {
+                min = x;
+            }
+        }
+        return max - min < 5;
+    }
+}
