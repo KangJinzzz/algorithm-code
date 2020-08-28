@@ -3810,3 +3810,21 @@ class Solution162 {
         return pos;
     }
 }
+
+//剑指 Offer 63. 股票的最大利润
+class Solution163 {
+    //状态：F(i):前i天的最大利润, i = 0, 1, 2.....
+    //转移方程：F(i) = max(F(i - 1), prices[i] - min), min为前i天前的价格最低值
+    public int maxProfit(int[] prices) {
+        if (prices.length == 0) {
+            return 0;
+        }
+        int max = 0;
+        int min = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            max = Math.max(max, prices[i] - min);
+            min = Math.min(min, prices[i]);
+        }
+        return max;
+    }
+}
