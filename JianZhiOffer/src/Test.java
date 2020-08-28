@@ -3795,3 +3795,18 @@ class Solution161 {
         return max - min < 5;
     }
 }
+
+//剑指 Offer 62. 圆圈中最后剩下的数字
+class Solution162 {
+    //从只剩一个元素往前递推得到递推公式：
+    //公式：f(n,m)=[f(n−1,m)+m]%n
+    public int lastRemaining(int n, int m) {
+        //只剩一个元素时，f(1, m) = 0;
+        int pos = 0;
+        //从剩2个元素开始往前递推
+        for (int i = 2; i <= n; i++) {
+            pos = (pos + m) % i;
+        }
+        return pos;
+    }
+}
