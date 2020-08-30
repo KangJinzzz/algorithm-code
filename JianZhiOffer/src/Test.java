@@ -3836,3 +3836,18 @@ class Solution164 {
         return n;
     }
 }
+
+//剑指 Offer 65. 不用加减乘除做加法
+class Solution165 {
+    public int add(int a, int b) {
+        int xor = 0;
+        int and = 0;
+        while (a != 0) {
+            xor = a ^ b;
+            and = (a & b) << 1;
+            a = and;
+            b = xor;
+        }
+        return b;
+    }
+}
