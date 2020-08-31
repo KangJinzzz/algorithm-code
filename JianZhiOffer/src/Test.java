@@ -3909,3 +3909,18 @@ class Solution167 {
         return flag == 1 ? res : -res;
     }
 }
+
+//剑指 Offer 68 - I. 二叉搜索树的最近公共祖先
+class Solution168_1 {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root.left == null && root.right == null) {
+            return root;
+        }
+        if (q.val < root.val && p.val < root.val) {
+            return lowestCommonAncestor(root.left, p, q);
+        } else if (q.val > root.val && p.val > root.val) {
+            return lowestCommonAncestor(root.right, p, q);
+        }
+        return root;
+    }
+}
