@@ -1,3 +1,4 @@
+import java.beans.IntrospectionException;
 import java.util.*;
 
 public class Test {
@@ -3877,5 +3878,34 @@ class Solution166 {
         for (int x : b) {
             System.out.print(x + " ");
         }
+    }
+}
+
+//剑指 Offer 67. 把字符串转换成整数
+class Solution167 {
+    public int strToInt(String str) {
+        str = str.trim();
+        if (str.length() == 0) {
+            return 0;
+        }
+        int res = 0;
+        int i = 0;
+        int border = Integer.MAX_VALUE / 10;
+        int flag = 1;
+        if (str.charAt(i) == '-') {
+            flag = -1;
+            i++;
+        } else if (str.charAt(i) == '+') {
+            i++;
+        }
+        while (i < str.length() && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+            int c = str.charAt(i) - '0';
+            if (res > border || res == border && c > 7) {
+                return flag == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+            res = res * 10 + c;
+            i++;
+        }
+        return flag == 1 ? res : -res;
     }
 }
