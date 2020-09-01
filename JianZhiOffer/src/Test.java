@@ -3924,3 +3924,27 @@ class Solution168_1 {
         return root;
     }
 }
+
+//剑指 Offer 68 - II. 二叉树的最近公共祖先
+class Solution168_2 {
+    TreeNode loc = null;
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return null;
+        }
+        findNode(root, p, q);
+        return loc;
+    }
+    public boolean findNode(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return false;
+        }
+        int mid = (root == q || root == p) ? 1 : 0;
+        int left = findNode(root.left, p, q) ? 1 : 0;
+        int right = findNode(root.right, p, q) ? 1 : 0;
+        if (mid + left + right >= 2)  {
+            loc = root;
+        }
+        return left + right + mid >= 1;
+    }
+}
