@@ -5,7 +5,7 @@ public class Main {
 
 }
 
-public class Solution1 {
+class Solution1 {
     public int Fibonacci(int n) {
         if (n == 0) {
             return 0;
@@ -22,5 +22,24 @@ public class Solution1 {
             b = c;
         }
         return c;
+    }
+}
+
+
+class Solution2 {
+    // 状态：F(n):还剩n阶台阶的跳法数
+    // 转移方程：跳1阶，还剩n - 1阶，F(n - 1)
+    //          跳2阶，还剩n - 2阶，F(n - 2)
+    // ....
+    //          跳n阶，还剩n - n阶，F(0)
+    //  F(n) = F(n - 1) + F(n - 2) + ... + F(0)
+    //  F(n - 1) = F(n - 2) + f(n - 3) + .. +F(0)
+    //  F(n) = 2 * F(n - 1)
+    public int JumpFloorII(int target) {
+        int ways = 1;
+        for (int i = 2; i <= target; i++) {
+            ways *= 2;
+        }
+        return ways;
     }
 }
