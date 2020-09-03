@@ -43,3 +43,22 @@ class Solution2 {
         return ways;
     }
 }
+
+class Solution3 {
+    // 状态：F(i):以第 i 个数字结尾的最大连续和
+    // 转移方程：F(i - 1) > 0: F(i) = arr[i] + F(i - 1)
+    //          F(i - 1) <= 0: F(i) = arr[i];
+    public int FindGreatestSumOfSubArray(int[] array) {
+        int sum = 0;
+        int max = Integer.MIN_VALUE;
+        for (int x : array) {
+            if (sum < 0) {
+                sum = x;
+            } else {
+                sum += x;
+            }
+            max = sum > max ? sum : max;
+        }
+        return max;
+    }
+}
