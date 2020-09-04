@@ -1,5 +1,7 @@
 package dp;
 
+import java.util.Set;
+
 public class Main {
 
 
@@ -60,5 +62,24 @@ class Solution3 {
             max = sum > max ? sum : max;
         }
         return max;
+    }
+}
+
+
+class Solution4 {
+    // 状态：F(i):前i个字符是否可以被分割
+    // 转移方程：true：F(j) && s.substring(j, i), j = 0, 1, 2, ..., i - 1
+    //         否则为：false
+    public boolean wordBreak(String s, Set<String> dict) {
+        boolean[] canBreak = new boolean[s.length() + 1];
+        canBreak[0] = true;
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (canBreak[j] && dict.contains(s.substring(j, i))) {
+                    canBreak[i] = true;
+                }
+            }
+        }
+        return canBreak[s.length()];
     }
 }
