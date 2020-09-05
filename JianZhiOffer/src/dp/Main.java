@@ -106,3 +106,32 @@ class Solution5 {
         return min[0];
     }
 }
+
+
+class Solution6 {
+    // 状态：F(i, j):走到（i，j）的方法数
+    // 转移方程：F（i，j）= F（i - 1, j) + F(i, j - 1)
+    /**
+     *
+     * @param m int整型
+     * @param n int整型
+     * @return int整型
+     */
+    public int uniquePaths (int m, int n) {
+        int[][] ways = new int[m][n];
+        // 初始化
+        ways[0][0] = 1;
+        for (int i = 1; i < m; i++) {
+            ways[i][0] = 1;
+        }
+        for (int j = 1; j < n; j++) {
+            ways[0][j] = 1;
+        }
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                ways[i][j] = ways[i - 1][j] + ways[i][j - 1];
+            }
+        }
+        return ways[m - 1][n - 1];
+    }
+}
