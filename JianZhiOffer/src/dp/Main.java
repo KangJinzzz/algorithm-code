@@ -1,5 +1,7 @@
 package dp;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Main {
@@ -81,5 +83,26 @@ class Solution4 {
             }
         }
         return canBreak[s.length()];
+    }
+}
+
+class Solution5 {
+    // 状态：F(i, j):从 i + 1 行到 (i, j) 的最短路径
+    // 转移方程：F(i, j) = min(F(i + 1, j), F(i + 1, j + 1)) + triangle[i][j];
+    // 因为只需保存要求当前行的下一行，只需一维数组
+    public int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
+        int len = triangle.get(triangle.size() - 1).size();
+        int[] min = new int[len];
+        //初始化
+        for (int i = 0; i < len; i++) {
+            min[i] = triangle.get(triangle.size() - 1).get(i);
+        }
+        for (int i = triangle.size() - 2; i >= 0; i--) {
+            int col = triangle.get(i).size();
+            for (int j = 0; j < col; j++) {
+                min[j] = Math.min(min[j], min[j + 1]) + triangle.get(i).get(j);
+            }
+        }
+        return min[0];
     }
 }
