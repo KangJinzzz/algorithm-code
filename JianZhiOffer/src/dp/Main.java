@@ -135,3 +135,45 @@ class Solution6 {
         return ways[m - 1][n - 1];
     }
 }
+
+
+class Solution7 {
+    /**
+     *
+     * @param obstacleGrid int整型二维数组
+     * @return int整型
+     */
+    public int uniquePathsWithObstacles (int[][] obstacleGrid) {
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        if (m == 0) {
+            return 0;
+        }
+        if (obstacleGrid[0][0] == 1) {
+            return 0;
+        }
+        int[][] ways = new int[m][n];
+        ways[0][0] = 1;
+        for (int i = 1; i < m; i++) {
+            if (obstacleGrid[i][0] == 1) {
+                break;
+            }
+            ways[i][0] = 1;
+        }
+        for (int j = 1; j < n; j++) {
+            if (obstacleGrid[0][j] == 1) {
+                break;
+            }
+            ways[0][j] = 1;
+        }
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (obstacleGrid[i][j] == 1) {
+                    continue;
+                }
+                ways[i][j] = ways[i - 1][j] + ways[i][j - 1];
+            }
+        }
+        return ways[m - 1][n - 1];
+    }
+}
