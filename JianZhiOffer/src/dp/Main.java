@@ -208,3 +208,34 @@ class Solution8 {
         return min[m - 1][n - 1];
     }
 }
+
+class Main9 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int n = sc.nextInt();
+            int v = sc.nextInt();
+            int[][] goods = new int[n][2];
+            for (int i = 0; i < n; i++) {
+                goods[i][0] = sc.nextInt();
+                goods[i][1] = sc.nextInt();
+            }
+            int max = dp(goods, v);
+            System.out.println(max);
+        }
+    }
+    //状态：F(i, j):背包大小为j时，前i间物品可获得的最大价值
+    public static int dp(int[][] goods, int v) {
+        int[][] maxVal = new int[goods.length + 1][v + 1];
+        for (int i = 1; i <= goods.length; i++) {
+            for (int j = 1; j <= v; j++) {
+                if (goods[i - 1][1] > j) {
+                    maxVal[i][j] = maxVal[i - 1][j];
+                } else {
+                    maxVal[i][j] = Math.max(maxVal[i - 1][j], goods[i - 1][0] + maxVal[i - 2][j - goods[i - 1][1]]);
+                }
+            }
+        }
+        return maxVal[goods.length][v];
+    }
+}
