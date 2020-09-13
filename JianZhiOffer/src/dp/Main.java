@@ -239,3 +239,37 @@ class Main9 {
         return maxVal[goods.length][v];
     }
 }
+
+
+class Solution10 {
+    /**
+     *
+     * @param s string字符串
+     * @return int整型
+     */
+    public int minCut (String s) {
+        int[] mat = new int[s.length() + 1];
+        for (int i = 0; i < mat.length; i++) {
+            mat[i] = i - 1;
+        }
+        for (int i = 1; i < mat.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (isPair(s, j, i - 1)) {
+                    mat[i] = Math.min(mat[i], mat[j] + 1);
+                }
+            }
+        }
+        return mat[mat.length - 1];
+    }
+
+    public boolean isPair(String str, int left, int right) {
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
