@@ -47,3 +47,54 @@ class Solution2 {
         }
     }
 }
+
+//130. 被围绕的区域
+class Solution3 {
+    int[][] position = new int[][] {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    public void solve(char[][] board) {
+        if (board.length == 0) {
+            return;
+        }
+        int row = board.length;
+        int col = board[0].length;
+        int[][] flag = new int[row][col];
+        for (int i = 0; i < col; i++) {
+            if (board[0][i] == 'O') {
+                dfs(board, 0, i);
+            }
+            if (board[row - 1][i] == 'O') {
+                dfs(board, row - 1, i);
+            }
+        }
+        for (int i = 1; i < row - 1; i++) {
+            if (board[i][0] == 'O') {
+                dfs(board, i, 0);
+            }
+            if (board[i][col - 1] == 'O') {
+                dfs(board, i, col - 1);
+            }
+        }
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (board[i][j] == '1') {
+                    board[i][j] = 'O';
+                } else {
+                    board[i][j] = 'X';
+                }
+            }
+        }
+    }
+
+    public void dfs(char[][] board, int x, int y) {
+        if (x < 0 || x >= board.length || y < 0 || y >= board[0].length) {
+            return;
+        }
+        if (board[x][y] != 'O') {
+            return;
+        }
+        board[x][y] = '1';
+        for (int i = 0; i < 4; i++) {
+            dfs(board, x + position[i][0], y + position[i][1]);
+        }
+    }
+}
