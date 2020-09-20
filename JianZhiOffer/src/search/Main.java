@@ -98,3 +98,36 @@ class Solution3 {
         }
     }
 }
+
+//39. 组合总和
+class Solution9 {
+    List<List<Integer>> solutions = new ArrayList<>();
+    List<Integer> solution = new ArrayList<>();
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        if (candidates.length == 0) {
+            return solutions;
+        }
+        int curSum = 0;
+        dfs(candidates, target, curSum, 0);
+        return solutions;
+    }
+
+    public void dfs(int[] candidates, int target, int curSum, int preIndex) {
+        if (curSum >= target) {
+            if (curSum == target) {
+                List<Integer> tmp = new ArrayList<>(solution);
+                solutions.add(tmp);
+            }
+            return;
+        }
+        for (int i = preIndex; i < candidates.length; i++) {
+            if (candidates[i] > target) {
+                continue;
+            }
+            solution.add(candidates[i]);
+            dfs(candidates, target, curSum + candidates[i], i);
+            solution.remove(solution.size() - 1);
+        }
+    }
+
+}
