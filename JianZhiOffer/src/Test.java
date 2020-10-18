@@ -3948,3 +3948,18 @@ class Solution168_2 {
         return left + right + mid >= 1;
     }
 }
+
+//1480. 一维数组的动态和
+class Solution10_18 {
+    public int[] runningSum(int[] nums) {
+        int[] res = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            if (i == 0) {
+                res[i] = nums[i];
+            } else {
+                res[i] = res[i - 1] + nums[i];
+            }
+        }
+        return res;
+    }
+}
