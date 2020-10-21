@@ -3558,3 +3558,26 @@ class Solution1079 {
         }
     }
 }
+
+
+//110. 平衡二叉树
+class Solution110_2 {
+    public boolean isBalanced(TreeNode root) {
+        if (root == null || root.left == null && root.right == null) {
+            return true;
+        }
+        int leftHigh = maxDeep(root.left);
+        int rightHigh = maxDeep(root.right);
+        if (leftHigh - rightHigh >= 2 || rightHigh - leftHigh >= 2) {
+            return false;
+        }
+        return isBalanced(root.left) && isBalanced(root.right);
+    }
+
+    public int maxDeep(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.max(maxDeep(root.left), maxDeep(root.right));
+    }
+}
