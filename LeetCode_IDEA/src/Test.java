@@ -3581,3 +3581,49 @@ class Solution110_2 {
         return 1 + Math.max(maxDeep(root.left), maxDeep(root.right));
     }
 }
+
+
+class soution10_22 {
+    //    581.最短无序连续子数组
+    public int findUnsortedSubarray(int[] nums) {
+        int left = 0;
+        int right = 0;
+        int min = 0;
+        int max = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i + 1]) {
+                left = i;
+                break;
+            }
+        }
+        for (int i = nums.length - 1; i > 0; i--) {
+            if (nums[i] < nums[i - 1]) {
+                right = i;
+                break;
+            }
+        }
+        min = nums[left];
+        max = nums[left];
+        for (; left <= right; left++) {
+            if (nums[left] < min) {
+                min = nums[left];
+            }
+            if (nums[left] > max) {
+                max = nums[left];
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > min) {
+                left = i;
+                break;
+            }
+        }
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if (nums[i] < max) {
+                right = i;
+                break;
+            }
+        }
+        return right - left + 1;
+    }
+}
