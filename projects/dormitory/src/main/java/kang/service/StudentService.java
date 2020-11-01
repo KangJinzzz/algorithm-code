@@ -32,4 +32,12 @@ public class StudentService {
     public int updateByPrimaryKey(Student student) {
         return studentMapper.updateByPrimaryKey(student);
     }
+
+    public List<Student> selectByName(String name) {
+        return studentMapper.selectByName(name);
+    }
+
+    public List<Student> selectByPrimaryKey2(int id) {
+        return studentMapper.selectByPrimaryKey2(id);
+    }
 }

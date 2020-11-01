@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class StudentController {
 //    }
 
     @RequestMapping("/find")
-    public String find1(Model model) {
+    public String find(Model model) {
         List<Student> students = studentService.selectAll();
         model.addAttribute("studentList", students);
         return "find";
@@ -74,5 +75,19 @@ public class StudentController {
         student.setDormId(Integer.valueOf(dormId));
         studentService.updateByPrimaryKey(student);
         return "redirect:/find";
+    }
+
+    @RequestMapping(value = "/findName", method = RequestMethod.POST)
+    public String findName(String name, Model model) {
+        List<Student> students = studentService.selectByName(name);
+        model.addAttribute("studentList", students);
+        return "find";
+    }
+
+    @RequestMapping(value = "/findId", method = RequestMethod.POST)
+    public String findId(String id, Model model) {
+        List<Student> students = studentService.selectByPrimaryKey2(Integer.parseInt(id));
+        model.addAttribute("studentList", students);
+        return "find";
     }
 }
